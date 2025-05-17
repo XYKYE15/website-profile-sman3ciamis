@@ -1,0 +1,8 @@
+{
+  "carouselItems": [
+    { "id": 1, "img": "/hero.jpg", "title": "Design 1" },
+    { "id": 2, "img": "/hero.jpg", "title": "Design 2" },
+    { "id": 3, "img": "/hero.jpg", "title": "Design 3" },
+    { "id": 4, "img": "/hero.jpg", "title": "Design 4" }
+  ]
+}
