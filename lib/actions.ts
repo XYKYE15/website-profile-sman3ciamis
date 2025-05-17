@@ -6,7 +6,6 @@ import { prisma } from "@/lib/prisma";
 import { getImagesById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
 import { getImagesTeacherById } from "@/lib/data";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 // Upload News
@@ -34,13 +33,11 @@ export const uploadNews = async (prevState: unknown, formData: FormData) => {
         image: url,
       },
     });
-    redirect("/admin/news");
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload berita" };
   }
+  redirect("/admin/news");
 };
 
 // Update News
@@ -83,13 +80,11 @@ export const updateNews = async (
         id,
       },
     });
-
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Update error:", error);
     return { message: "Gagal mengupdate berita" };
   }
+  redirect("/admin/news");
 };
 
 // Delete News
@@ -104,12 +99,11 @@ export const deleteNews = async (id: string) => {
         id,
       },
     });
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Delete error:", error);
     return { message: "Gagal menghapus berita" };
   }
+  redirect("/admin/news");
 };
 
 // Upload Achievement
@@ -140,13 +134,11 @@ export const uploadAchievement = async (
         image: url,
       },
     });
-
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload prestasi" };
   }
+  redirect("/admin/achievement");
 };
 
 // Update Achievement
@@ -189,13 +181,11 @@ export const updateAchievement = async (
         id,
       },
     });
-
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Update error:", error);
     return { message: "Gagal mengupdate prestasi" };
   }
+  redirect("/admin/achievement");
 };
 
 // Delete Achievement
@@ -210,19 +200,15 @@ export const deleteAchievement = async (id: string) => {
         id,
       },
     });
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Delete error:", error);
     return { message: "Gagal menghapus prestasi" };
   }
+  redirect("/admin/achievement");
 };
 
 //Upload Teacher
-export const uploadTeacher = async (
-  prevState: unknown,
-  formData: FormData
-) => {
+export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
   const validatedFields = UploadSchema.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
@@ -246,15 +232,12 @@ export const uploadTeacher = async (
         image: url,
       },
     });
-
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload data guru" };
   }
+  redirect("/admin/teacher");
 };
-
 
 // Update Teacher
 export const updateTeacher = async (
@@ -296,16 +279,14 @@ export const updateTeacher = async (
         id,
       },
     });
-
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Update error:", error);
-    return { message: "Gagal mengupdate prestasi" };
+    return { message: "Gagal mengupdate data guru" };
   }
+  redirect("/admin/teacher");
 };
 
-// Delete Achievement
+// Delete Teacher
 export const deleteTeacher = async (id: string) => {
   const data = await getImagesTeacherById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -317,10 +298,9 @@ export const deleteTeacher = async (id: string) => {
         id,
       },
     });
-    revalidatePath("/");
-    return { success: true };
   } catch (error) {
     console.error("Delete error:", error);
-    return { message: "Gagal menghapus prestasi" };
+    return { message: "Gagal menghapus data guru" };
   }
+  redirect("/admin/teacher");
 };
