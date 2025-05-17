@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Daftar Data Kursus - LPK CTI Ciamis",
+    title: "SMAN 3 Ciamis | Manajemen Berita",
 };
 
 const AdminNews = () => {
