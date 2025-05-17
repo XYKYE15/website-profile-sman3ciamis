@@ -1,6 +1,11 @@
 import SideBar from "@/components/admin/sidebar/SideBar";
 import CardNews from "@/components/CreateNews/card/card";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Daftar Data Kursus - LPK CTI Ciamis",
+};
 
 const AdminNews = () => {
   return (
