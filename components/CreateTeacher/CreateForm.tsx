@@ -27,7 +27,7 @@ const CreateForm = () => {
           className="py-2 px-4 rounded-sm border border-blue-900 w-full bg-white"
           defaultValue=""
         >
-          <option value="" disabled>
+          <option value="description" disabled>
             Pilih Jabatan
           </option>
           <option value="Kepala Sekolah">Kepala Sekolah</option>

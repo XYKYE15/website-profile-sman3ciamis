@@ -1,7 +1,7 @@
 "use server";
 
 import { put, del } from "@vercel/blob";
-import { UploadSchema, EditSchema } from "@/lib/schemas/Schema";
+import { UploadSchema, EditSchema, UploadTeacherSchema } from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
 import { getImagesById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
@@ -10,9 +10,19 @@ import { redirect } from "next/navigation";
 
 // Upload News
 export const uploadNews = async (prevState: unknown, formData: FormData) => {
-  const validatedFields = UploadSchema.safeParse(Object.fromEntries(formData));
+  const rawData = {
+    title: formData.get("title"),
+    description: formData.get("description"),
+    image: formData.get("image"),
+  };
+
+  const validatedFields = UploadSchema.safeParse(rawData);
 
   if (!validatedFields.success) {
+    console.error(
+      "Validation error:",
+      validatedFields.error.flatten().fieldErrors
+    ); // Tambahan
     return {
       error: validatedFields.error.flatten().fieldErrors,
     };
@@ -37,6 +47,7 @@ export const uploadNews = async (prevState: unknown, formData: FormData) => {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload berita" };
   }
+
   redirect("/admin/news");
 };
 
@@ -209,7 +220,7 @@ export const deleteAchievement = async (id: string) => {
 
 //Upload Teacher
 export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
-  const validatedFields = UploadSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = UploadTeacherSchema.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
     return {

@@ -1,78 +1,61 @@
-function Pagination() {
+import Link from "next/link";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  basePath: string; // e.g., "/news" or "/achievement"
+}
+
+function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+
   return (
     <div>
-      <ul className="flex justify-center gap-1 text-blue-900">
-        <li>
-          <a
-            href="#"
-            className="grid size-8 place-content-center rounded border border-gray-200 transition-colors hover:bg-gray-50 rtl:rotate-180"
+      <ul className="flex justify-center gap-1 text-blue-900 items-center">
+        {/* Prev button */}
+        <li className="flex items-center gap-1">
+          <Link
+            href={`${basePath}?page=${currentPage > 1 ? currentPage - 1 : 1}`}
+            className="flex items-center gap-1 rounded border border-gray-200 px-3 py-1 transition-colors hover:bg-gray-50"
             aria-label="Previous page"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-8"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+            <IoChevronBack className="text-xl" />
+            <span className="text-sm">Prev</span>
+          </Link>
+        </li>
+
+        {/* Page numbers */}
+        {pages.map((page) => (
+          <li key={page}>
+            <Link
+              href={`${basePath}?page=${page}`}
+              className={
+                page === currentPage
+                  ? "block size-8 rounded border border-indigo-600 bg-blue-500 text-center text-lg/8 font-medium text-white"
+                  : "block size-8 rounded border border-gray-200 text-center text-lg/8 font-medium transition-colors hover:bg-gray-50"
+              }
             >
-              <path
-                fillRule="evenodd"
-                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </a>
-        </li>
+              {page}
+            </Link>
+          </li>
+        ))}
 
-        <li>
-          <a
-            href="#"
-            className="block size-8 rounded border border-gray-200 text-center text-lg/8 font-medium transition-colors hover:bg-gray-50"
-          >
-            1
-          </a>
-        </li>
-
-        <li className="block size-8 rounded border border-indigo-600 bg-blue-500 text-center text-lg/8 font-medium text-white">
-          2
-        </li>
-
-        <li>
-          <a
-            href="#"
-            className="block size-8 rounded border border-gray-200 text-center text-lg/8 font-medium transition-colors hover:bg-gray-50"
-          >
-            3
-          </a>
-        </li>
-
-        <li>
-          <a
-            href="#"
-            className="block size-8 rounded border border-gray-200 text-center text-lg/8 font-medium transition-colors hover:bg-gray-50"
-          >
-            4
-          </a>
-        </li>
-
-        <li>
-          <a
-            href="#"
-            className="grid size-8 place-content-center rounded border border-gray-200 transition-colors hover:bg-gray-50 rtl:rotate-180"
+        {/* Next button */}
+        <li className="flex items-center gap-1">
+          <Link
+            href={`${basePath}?page=${
+              currentPage < totalPages ? currentPage + 1 : totalPages
+            }`}
+            className="flex items-center gap-1 rounded border border-gray-200 px-3 py-1 transition-colors hover:bg-gray-50"
             aria-label="Next page"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-8"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </a>
+            <span className="text-sm">Next</span>
+            <IoChevronForward className="text-xl" />
+          </Link>
         </li>
       </ul>
     </div>

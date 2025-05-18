@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 const Details = async ({ params }: { params: { id: string } }) => {
   const data = await getImagesById(params.id);
   if (!data) return notFound();
-
   return (
     <div className="flex flex-col pt-30 md:flex-row justify-center">
       <div className="md:mx-10 mx-5">
@@ -32,8 +31,9 @@ const Details = async ({ params }: { params: { id: string } }) => {
       <div className="mx-5 md:my-18 text-center md:w-85 p-5">
         <SideEkskul />
         <div className="bg-white w-65 border-t-5 border-blue-500 rounded-b-xl shadow-2xl mb-7 mx-auto">
-          <h3 className="text-blue-900 text-xl font-semibold p-2">Berita</h3>
+          <h3 className="text-blue-900 text-xl font-semibold">Berita</h3>
         </div>
+        <SideNews />
         <SideNews />
         <SideNews />
       </div>
