@@ -20,6 +20,7 @@ const CreateForm = () => {
           <p className="text-sm text-red-500 mt-2">{state?.error?.title}</p>
         </div>
       </div>
+
       <div className="mb-4 pt-2">
         <select
           name="description"
@@ -34,12 +35,19 @@ const CreateForm = () => {
           <option value="Tenaga Pendidik">Tenaga Pendidik</option>
           <option value="Tata Usaha">Tata Usaha</option>
         </select>
-        <div aria-live="polite" aria-atomic="true">
-          <p className="text-sm text-red-500 mt-2">
-            {state?.error?.description}
-          </p>
-        </div>
+        <p className="text-sm text-red-500 mt-2">{state?.error?.description}</p>
       </div>
+
+      <div className="mb-4 pt-2">
+        <input
+          type="text"
+          name="note"
+          className="py-2 px-4 rounded-sm border border-blue-900 w-full"
+          placeholder="Keterangan Jabatan (opsional)"
+        />
+        <p className="text-sm text-red-500 mt-2">{state?.error?.note}</p>
+      </div>  
+
       <div className="mb-4 ">
         <h1 className="text-sm text-red-400 mb-2">Note: Gambar Maksimal 4MB</h1>
         <input

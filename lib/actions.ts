@@ -217,7 +217,7 @@ export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
     };
   }
 
-  const { title, description, image } = validatedFields.data;
+  const { title, description, note, image } = validatedFields.data;
 
   try {
     const { url } = await put(image.name, image, {
@@ -229,6 +229,7 @@ export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
       data: {
         title,
         description,
+        note,
         image: url,
       },
     });

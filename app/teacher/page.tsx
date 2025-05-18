@@ -51,6 +51,7 @@ async function PageTeacher() {
                     key={teacher.id}
                     name={teacher.title}
                     position={teacher.description}
+                    note={teacher.note}
                     imageUrl={teacher.image}
                   />
                 ))}

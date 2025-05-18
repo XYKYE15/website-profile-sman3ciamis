@@ -3,6 +3,7 @@ import { z } from "zod";
 export const UploadSchema = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
+  note: z.string().min(1, { message: "Catatan wajib diisi." }),
   image: z
     .instanceof(File)
     .refine((file) => file.size > 0, {

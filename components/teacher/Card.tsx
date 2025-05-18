@@ -37,9 +37,15 @@ export default async function TeacherTable() {
               </td>
               <td className="px-4 py-3 text-sm w-100 text-gray-700 ">
                 <div className="line-clamp-5 overflow-y-auto">
-                  {item.description}
+                  <p className="font-medium">{item.description}</p>
+                  {item.note && (
+                    <p className="text-xs text-gray-500 italic">
+                      ({item.note})
+                    </p>
+                  )}
                 </div>
               </td>
+
               <td className="px-4 py-5 text-sm text-center space-x-2">
                 <div>
                   <EditButton id={item.id} />
