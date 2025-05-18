@@ -30,9 +30,10 @@ model Achievement {
 
 model Teacher {
   id          String   @id @default(cuid())
-  title       String
-  description String
+  title       String   // Nama guru
+  description String   // Jabatan (dipilih dari select)
+  note        String?  // Keterangan jabatan (diisi manual, opsional)
   image       String
   createdAt   DateTime @default(now())
-    updateAt    DateTime @updatedAt
+  updateAt    DateTime @updatedAt
 }
