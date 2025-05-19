@@ -268,7 +268,7 @@ export const updateTeacher = async (
   const data = await getImagesTeacherById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
 
-  const { title, description, image } = validatedFields.data;
+  const { title,note, description, image } = validatedFields.data;
   let imagePath = data.image;
 
   try {
@@ -285,6 +285,7 @@ export const updateTeacher = async (
       data: {
         title,
         description,
+        note,
         image: imagePath,
       },
       where: {

@@ -4,7 +4,7 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  basePath: string; // e.g., "/news" or "/achievement"
+  basePath: string;
 }
 
 function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {

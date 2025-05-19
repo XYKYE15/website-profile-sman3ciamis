@@ -20,7 +20,7 @@ function SideNewsLink() {
           href={"/"}
           className="bg-blue-500 p-3 w-30 ml-5 rounded-lg text-white font-semibold hadow-lg hover:shadow-sm hover:bg-blue-400"
         >
-          <h2>Paskibra</h2>
+          <h2>paskibra</h2>
         </Link>
         <Link
           href={"/"}

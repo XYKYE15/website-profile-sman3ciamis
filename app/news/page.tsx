@@ -14,7 +14,7 @@ export default async function PageNews({ searchParams }: PageNewsProps) {
   const page = parseInt(searchParams?.page ?? "1", 10); // default page 1
   const perPage = 3;
 
-  const allNews = await getImages(); // ambil semua data (misalnya urut berdasarkan createdAt)
+  const allNews = await getImages(); 
   const totalPages = Math.ceil(allNews.length / perPage);
   const paginatedNews = allNews.slice((page - 1) * perPage, page * perPage);
 
