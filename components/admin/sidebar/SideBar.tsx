@@ -8,9 +8,9 @@ function SideBar() {
       </h1>
       <div>
         <LinkSideBar />
-        <div className="flex items-center justify-center pt-70">
-        <button>Log Out</button>
-      </div>
+        <div className="flex items-center justify-center py-20">
+          <button>Log Out</button>
+        </div>
       </div>
     </div>
   );

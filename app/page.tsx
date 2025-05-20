@@ -6,8 +6,8 @@ export default function Home() {
     <div className="max-h-screen-2xl">
       <Hero />
       <div className=" min-h-screen w-full">
-      <PageHome />
+        <PageHome />
       </div>
-      </div>
+    </div>
   );
 }

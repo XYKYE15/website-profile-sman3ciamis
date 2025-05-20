@@ -9,7 +9,7 @@ const fontRoboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "SMAN 3 Ciamis",
+  title: "",
   description: "Profile SMAN 3 Ciamis",
   icons: {
     icon: "/favicon.png",
