@@ -1,7 +1,7 @@
 "use server";
 
 import { put, del } from "@vercel/blob";
-import { UploadSchema, EditSchema, UploadTeacherSchema } from "@/lib/schemas/Schema";
+import { EditFormAchievement, UploadFormAchievement, UploadFormNews, EditFormNews, UploadFormTeacher, EditFormTeacher } from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
 import { getImagesById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
@@ -16,7 +16,7 @@ export const uploadNews = async (prevState: unknown, formData: FormData) => {
     image: formData.get("image"),
   };
 
-  const validatedFields = UploadSchema.safeParse(rawData);
+  const validatedFields = UploadFormNews.safeParse(rawData);
 
   if (!validatedFields.success) {
     console.error(
@@ -47,7 +47,6 @@ export const uploadNews = async (prevState: unknown, formData: FormData) => {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload berita" };
   }
-
   redirect("/admin/news");
 };
 
@@ -57,7 +56,7 @@ export const updateNews = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = EditSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = EditFormNews.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
     return {
@@ -122,7 +121,7 @@ export const uploadAchievement = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = UploadSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = UploadFormAchievement.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
     return {
@@ -158,7 +157,7 @@ export const updateAchievement = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = EditSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = EditFormAchievement.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
     return {
@@ -220,7 +219,7 @@ export const deleteAchievement = async (id: string) => {
 
 //Upload Teacher
 export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
-  const validatedFields = UploadTeacherSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = UploadFormTeacher.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
     return {
@@ -257,7 +256,7 @@ export const updateTeacher = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = EditSchema.safeParse(Object.fromEntries(formData));
+  const validatedFields = EditFormTeacher.safeParse(Object.fromEntries(formData));
 
   if (!validatedFields.success) {
     return {

@@ -14,7 +14,7 @@ export default async function PageNews({ searchParams }: PageNewsProps) {
   const page = parseInt(searchParams?.page ?? "1", 10); // default page 1
   const perPage = 3;
 
-  const allNews = await getImages(); 
+  const allNews = await getImages();
   const totalPages = Math.ceil(allNews.length / perPage);
   const paginatedNews = allNews.slice((page - 1) * perPage, page * perPage);
 
@@ -29,7 +29,11 @@ export default async function PageNews({ searchParams }: PageNewsProps) {
           <CardNews key={item.id} data={item} />
         ))}
 
-        <Pagination currentPage={page} totalPages={totalPages} basePath="/news" />
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          basePath="/news"
+        />
       </div>
 
       <div className="mx-5 text-center md:w-85 p-5">
