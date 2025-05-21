@@ -5,7 +5,7 @@ import Contact from "../../components/footer/Contact";
 
 const PageHome = () => {
   return (
-    <div className="w-full py-10 flex flex-col gap-20">
+    <div className="w-full py-10 flex flex-col gap-20 bg-gray-100">
       <h1 className="text-2xl font-semibold text-blue-900 text-center mt-10">
         Berita Terbaru
       </h1>
