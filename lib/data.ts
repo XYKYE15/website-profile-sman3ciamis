@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 
-
 // mengambil data berita
 export const getImages = async () => {
   try {
@@ -18,7 +17,6 @@ export const getImages = async () => {
     }
   }
 };
-
 
 // mengambil data berita berdasarkan id
 export const getImagesById = async (id: string) => {
@@ -56,7 +54,6 @@ export const getImagesAchievement = async () => {
   }
 };
 
-
 // mengambil data prestasi berdasarkan id
 export const getImagesAchievementById = async (id: string) => {
   try {
@@ -74,7 +71,6 @@ export const getImagesAchievementById = async (id: string) => {
     }
   }
 };
-
 
 // mengambil data guru
 export const getImagesTeacher = async () => {
@@ -112,7 +108,7 @@ export const getImagesTeacherById = async (id: string) => {
   }
 };
 
-// mengambil semua data guru 
+// mengambil semua data guru
 export async function getAllTeachers() {
   return await prisma.teacher.findMany();
 }

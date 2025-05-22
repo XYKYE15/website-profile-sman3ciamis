@@ -23,6 +23,7 @@ export default async function PageAchievement({
 
   return (
     <div className="flex flex-col md:flex-row justify-center py-30">
+      
       <div className="mx-10">
         <h1 className="md:text-2xl text-lg text-blue-900 font-semibold mb-7 text-center ">
           Prestasi SMAN 3 Ciamis

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Image from "next/image";
+import { GoggleButton } from "./SocialButton";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -23,7 +24,7 @@ const AuthLayout = ({ children, title, showOr = false }: AuthLayoutProps) => {
               className="mr-1"
               priority
             />
-            <h1 className="text-3xl font-bold mb-2 flex items-center flex-col">SMAN 3 <span className="text-3xl">CIAMIS</span></h1>
+            <h1 className="text-3xl font-bold mb-2 flex items-center flex-col">SMAN 3 CIAMIS</h1>
           </div>
 
           <p className="text-xl mb-8">{title}</p>
@@ -31,12 +32,13 @@ const AuthLayout = ({ children, title, showOr = false }: AuthLayoutProps) => {
           {children}
 
           {showOr && (
-            <div className="flex items-center my-6">
+            <div className="flex gap-2 items-center my-6">
               <div className="flex-grow border-t border-gray-700"></div>
               <span className="px-4 text-gray-400">or</span>
               <div className="flex-grow border-t border-gray-700"></div>
             </div>
           )}
+          <GoggleButton />
         </div>
       </div>
 

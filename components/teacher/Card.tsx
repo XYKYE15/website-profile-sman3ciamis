@@ -5,7 +5,7 @@ import { EditButton, DeleteButton } from "../CreateTeacher/Button/button";
 export default async function TeacherTable() {
   const images = await getImagesTeacher();
   return (
-    <div className="overflow-x-auto bg-white rounded-md shadow p-6">
+    <div className="overflow-x-auto bg-white rounded-md shadow p-6 h-110">
       <h1 className="text-lg  font-bold mb-5">Data Guru</h1>
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-blue-600 text-white">

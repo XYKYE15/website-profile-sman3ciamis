@@ -4,7 +4,7 @@ import { getImagesAchievement } from "@/lib/data";
 export default async function CardAchievement() {
   const images = await  getImagesAchievement();
   return (
-    <div className="overflow-x-auto bg-white rounded-md shadow p-6">
+    <div className="overflow-x-auto bg-white rounded-md shadow p-6 h-110">
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-blue-600 text-white">
           <tr className="">

@@ -3,7 +3,7 @@ import LoginForm from "@/components/auth/LoginForm";
 
 const LoginPage = () => {
   return (
-    <AuthLayout title="Login" showOr={true}>
+    <AuthLayout title="" showOr={true}>
       <LoginForm />
     </AuthLayout>
   );

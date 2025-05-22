@@ -49,7 +49,7 @@ export const signUpCredentials = async (
     console.error("Registration error:", error);
     return { message: "Gagal mendaftar" };
   }
-  redirect("/auth/login");
+  redirect("/login");
 };
 
 // Login Form Credentials action

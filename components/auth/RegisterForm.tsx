@@ -116,7 +116,7 @@ const RegisterForm = () => {
         </div>
       </div>
       <RegisterButton />
-      <div className="mt-6 text-center text-sm text-gray-100">
+      <div className="mt-1 text-center text-sm text-gray-100">
         Sudah punya akun?
         <Link
           href="/login"

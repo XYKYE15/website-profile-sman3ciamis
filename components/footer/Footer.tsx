@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { TfiReload } from "react-icons/tfi";
 import { FaEye } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaYoutube } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -36,20 +39,23 @@ function Footer() {
               <div className="md:border-3 border-3 border-blue-500 mt-5 rounded-2xl md:h-65 md:w-95 w-60 h-60 mx-auto flex flex-col justify-center gap-5">
                 <Link
                   href={"/"}
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center"
+                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
                 >
+                  <AiFillInstagram size={22}/>
                   Instagram
                 </Link>
                 <Link
                   href={"/"}
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center"
+                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
                 >
+                  <FaYoutube size={22}/>
                   Youtube
                 </Link>
                 <Link
                   href={"/"}
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center"
+                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
                 >
+                  <FaTiktok size={22}/>
                   Tiktok
                 </Link>
               </div>
