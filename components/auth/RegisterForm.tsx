@@ -1,0 +1,131 @@
+"use client";
+
+import { useActionState } from "react";
+import Link from "next/link";
+import { IoLogoGoogle } from "react-icons/io";
+import { signUpCredentials } from "@/lib/actions";
+
+const RegisterForm = () => {
+  const [state, formAction] = useActionState(signUpCredentials, null);
+  return (
+    <form action={formAction} method="POST" className="space-y-4">
+      <h1 className="text-4xl font-bold mb-2">SMAN 3 Ciamis</h1>
+      <button
+        type="button"
+        className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 px-4 rounded-md mb-6 hover:bg-gray-200 transition"
+      >
+        <IoLogoGoogle />
+        Sign up with Google
+      </button>
+
+      <div className="space-y-4">
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-400 mb-1"
+          >
+            Nama Lengkap
+          </label>
+          <input
+            name="name"
+            type="text"
+            autoComplete="username"
+            required
+            className="w-full bg-gray-100 border border-gray-700 text-blue-900 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="John Doe"
+          />
+          <div aria-live="polite" aria-atomic="true">
+            <span className="text-sm text-red-500 mt-2">
+              {state?.error?.name}
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-400 mb-1"
+          >
+            Email
+          </label>
+          <input
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className="w-full bg-gray-100 border border-gray-700 text-blue-900 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="email@example.com"
+          />
+          <div aria-live="polite" aria-atomic="true">
+            <span className="text-sm text-red-500 mt-2">
+              {state?.error?.email}
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-400 mb-1"
+          >
+            Password
+          </label>
+          <input
+            name="password"
+            type="password"
+            autoComplete="new-password"
+            required
+            className="w-full bg-gray-100 border border-gray-700 text-blue-900 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="••••••••"
+          />
+          <div aria-live="polite" aria-atomic="true">
+            <span className="text-sm text-red-500 mt-2">
+              {state?.error?.password}
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor="ConfirmPassword"
+            className="block text-sm font-medium text-gray-400 mb-1"
+          >
+            Konfirmasi Password
+          </label>
+          <input
+            name="ConfirmPassword"
+            type="password"
+            required
+            className="w-full bg-gray-100 border border-gray-700 text-blue-900 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="••••••••"
+          />
+          <div aria-live="polite" aria-atomic="true">
+            <span className="text-sm text-red-500 mt-2">
+              {state?.error?.ConfirmPassword}
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition"
+        >
+          Register
+        </button>
+      </div>
+
+      <div className="mt-6 text-center text-sm text-gray-100">
+        Already have an account?
+        <Link
+          href="/auth/login"
+          className="text-blue-900 pl-1"
+          aria-label="Log in"
+        >
+          Log in
+        </Link>
+      </div>
+    </form>
+  );
+};
+
+export default RegisterForm;

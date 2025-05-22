@@ -1,12 +1,50 @@
 "use server";
 
 import { put, del } from "@vercel/blob";
-import { EditFormAchievement, UploadFormAchievement, UploadFormNews, EditFormNews, UploadFormTeacher, EditFormTeacher } from "@/lib/schemas/Schema";
+import {
+  EditFormAchievement,
+  UploadFormAchievement,
+  UploadFormNews,
+  EditFormNews,
+  UploadFormTeacher,
+  EditFormTeacher,
+} from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
 import { getImagesById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
 import { getImagesTeacherById } from "@/lib/data";
 import { redirect } from "next/navigation";
+import { RegisterForm } from "@/lib/schemas/auth";
+import { hashSync } from "bcrypt-ts";
+
+// Register Form
+export const signUpCredentials = async (prevState: unknown, formData: FormData) => {
+  const validatedFields = RegisterForm.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { name, email, password } = validatedFields.data;
+  const hashedPassword = hashSync(password, 10);
+  try {
+    await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
+  } catch (error) {
+    console.error("Registration error:", error);
+    return { message: "Gagal mendaftar" };
+  }
+  redirect("/auth/login");
+};
 
 // Upload News
 export const uploadNews = async (prevState: unknown, formData: FormData) => {
@@ -121,7 +159,9 @@ export const uploadAchievement = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = UploadFormAchievement.safeParse(Object.fromEntries(formData));
+  const validatedFields = UploadFormAchievement.safeParse(
+    Object.fromEntries(formData)
+  );
 
   if (!validatedFields.success) {
     return {
@@ -157,7 +197,9 @@ export const updateAchievement = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = EditFormAchievement.safeParse(Object.fromEntries(formData));
+  const validatedFields = EditFormAchievement.safeParse(
+    Object.fromEntries(formData)
+  );
 
   if (!validatedFields.success) {
     return {
@@ -219,7 +261,9 @@ export const deleteAchievement = async (id: string) => {
 
 //Upload Teacher
 export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
-  const validatedFields = UploadFormTeacher.safeParse(Object.fromEntries(formData));
+  const validatedFields = UploadFormTeacher.safeParse(
+    Object.fromEntries(formData)
+  );
 
   if (!validatedFields.success) {
     return {
@@ -256,7 +300,9 @@ export const updateTeacher = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = EditFormTeacher.safeParse(Object.fromEntries(formData));
+  const validatedFields = EditFormTeacher.safeParse(
+    Object.fromEntries(formData)
+  );
 
   if (!validatedFields.success) {
     return {
@@ -267,7 +313,7 @@ export const updateTeacher = async (
   const data = await getImagesTeacherById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
 
-  const { title,note, description, image } = validatedFields.data;
+  const { title, note, description, image } = validatedFields.data;
   let imagePath = data.image;
 
   try {

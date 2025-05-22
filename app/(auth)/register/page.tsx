@@ -1,8 +1,16 @@
-const PageRegister = () => {
+import AuthLayout from "@/components/auth/AuthLayout";
+import RegisterForm from "@/components/auth/RegisterForm";
+
+
+const RegisterPage = () => {
   return (
-      <div className="p-6 space-y-4 bg-blue-500">
-        <h1 className="text-2xl font-bold text-black">Buat Akun</h1>
-      </div>
+    <AuthLayout 
+      title="Join the largest space community"
+      showOr={true}
+    >
+      <RegisterForm />
+    </AuthLayout>
   );
 };
-export default PageRegister;
+
+export default RegisterPage;
