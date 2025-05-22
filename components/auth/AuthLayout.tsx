@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Image from "next/image";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -13,7 +14,18 @@ const AuthLayout = ({ children, title, showOr = false }: AuthLayoutProps) => {
       {/* Left Side - Form */}
       <div className="w-full md:w-1/2 flex flex-col justify-center p-8 sm:p-12 lg:p-20">
         <div className="max-w-md mx-auto w-full">
-          <h1 className="text-4xl font-bold mb-2">SMAN 3 Ciamis</h1>
+          <div className="flex items-center justify-center mb-6">
+            <Image
+              src="/assets/logoSmantic.png"
+              width={70}
+              height={70}
+              alt="Flowbite Logo"
+              className="mr-1"
+              priority
+            />
+            <h1 className="text-3xl font-bold mb-2 flex items-center flex-col">SMAN 3 <span className="text-3xl">CIAMIS</span></h1>
+          </div>
+
           <p className="text-xl mb-8">{title}</p>
 
           {children}
@@ -33,13 +45,13 @@ const AuthLayout = ({ children, title, showOr = false }: AuthLayoutProps) => {
         {/* Background Image dengan Overlay */}
         <div className="absolute inset-0 z-0">
           {/* Gunakan div dengan background-image */}
-          <div 
+          <div
             className="w-full h-full"
             style={{
               backgroundImage: "url('/hero.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              backgroundRepeat: "no-repeat"
+              backgroundRepeat: "no-repeat",
             }}
           ></div>
           {/* Overlay gelap untuk kontras teks */}
@@ -50,9 +62,9 @@ const AuthLayout = ({ children, title, showOr = false }: AuthLayoutProps) => {
         <div className="relative z-10 max-w-md text-center">
           <h2 className="text-4xl font-bold mb-4">SMA NEGRI 3 CIAMIS</h2>
           <p className="text-xl text-gray-300 mb-8">
-            &quot;Membentuk Generasi yang Berkarakter, Berprestasi, dan Berwawasan Global&quot;
+            &quot;Membentuk Generasi yang Berkarakter, Berprestasi, dan
+            Berwawasan Global&quot;
           </p>
-          
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ const LinkSideBar = () => {
       <ul className="flex flex-col items-center gap-4 w-full">
         <li>
           <Link
-            href="#"
+            href="/admin"
             className="block w-60 text-center py-3 rounded-xl bg-white text-blue-900 font-semibold text-lg shadow-md
           hover:bg-blue-100 transition-colors duration-200"
           >

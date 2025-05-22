@@ -16,7 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        Email: {},
+        email: {},
         password: {},
       },
 
@@ -35,7 +35,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           },
         });
 
-        if(!user || !user.password) {
+        if (!user || !user.password) {
           throw new Error("Pengguna tidak ditemukan");
         }
 
@@ -43,8 +43,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!passwordMatch) return null;
 
         return user;
-        
       },
     }),
   ],
+  // callback
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const ProtectedRoutes = ["/admin", "/user"];
+
+      if (!isLoggedIn && ProtectedRoutes.includes(nextUrl.pathname)) {
+        return Response.redirect(new URL("/login", nextUrl));
+      }
+      if (isLoggedIn && nextUrl.pathname.startsWith("/login")) {
+        return Response.redirect(new URL("/admin", nextUrl));
+      }
+      return true;
+    },
+    jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
+    },
+
+    session({ session, token }) {
+      session.user.id = token.sub;
+      session.user.role = token.role;
+      return session;
+    },
+  },
 });

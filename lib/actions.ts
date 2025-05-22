@@ -70,7 +70,7 @@ export const signInCredentials = async (
   const { email, password } = validatedFields.data;
 
   try {
-    await signIn("credentials", {email, password, redirectTo: "/admin/dashboard"});
+    await signIn("credentials", {email, password, redirectTo: "/admin"});
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
