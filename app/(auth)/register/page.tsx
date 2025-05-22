@@ -5,7 +5,7 @@ import RegisterForm from "@/components/auth/RegisterForm";
 const RegisterPage = () => {
   return (
     <AuthLayout 
-      title="Join the largest space community"
+      title="Register Akun Baru"
       showOr={true}
     >
       <RegisterForm />

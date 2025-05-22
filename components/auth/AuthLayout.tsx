@@ -48,9 +48,9 @@ const AuthLayout = ({ children, title, showOr = false }: AuthLayoutProps) => {
 
         {/* Konten */}
         <div className="relative z-10 max-w-md text-center">
-          <h2 className="text-4xl font-bold mb-4">Largest Space Community</h2>
+          <h2 className="text-4xl font-bold mb-4">SMA NEGRI 3 CIAMIS</h2>
           <p className="text-xl text-gray-300 mb-8">
-            Go anywhere you want in a Galaxy full of wonders!
+            &quot;Membentuk Generasi yang Berkarakter, Berprestasi, dan Berwawasan Global&quot;
           </p>
           
         </div>

@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 
 export default function LayoutWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isPrivateLayout = pathname.startsWith("/admin") || pathname.startsWith("/register");
+  const isPrivateLayout = pathname.startsWith("/admin") || pathname.startsWith("/register") ||  pathname.startsWith("/login");
 
   return (
     <>

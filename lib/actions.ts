@@ -14,11 +14,17 @@ import { getImagesById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
 import { getImagesTeacherById } from "@/lib/data";
 import { redirect } from "next/navigation";
-import { RegisterForm } from "@/lib/schemas/auth";
+import { RegisterForm, LoginForm } from "@/lib/schemas/Schema";
 import { hashSync } from "bcrypt-ts";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
+
 
 // Register Form
-export const signUpCredentials = async (prevState: unknown, formData: FormData) => {
+export const signUpCredentials = async (
+  prevState: unknown,
+  formData: FormData
+) => {
   const validatedFields = RegisterForm.safeParse(
     Object.fromEntries(formData.entries())
   );
@@ -44,6 +50,38 @@ export const signUpCredentials = async (prevState: unknown, formData: FormData) 
     return { message: "Gagal mendaftar" };
   }
   redirect("/auth/login");
+};
+
+// Login Form Credentials action
+export const signInCredentials = async (
+  prevState: unknown,
+  formData: FormData
+) => {
+  const validatedFields = LoginForm.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email, password } = validatedFields.data;
+
+  try {
+    await signIn("credentials", {email, password, redirectTo: "/admin/dashboard"});
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+          case "CredentialsSignin":
+          return { message: "Email atau password salah" };
+          default: 
+          return { message: "Gagal masuk" };
+      }
+    }
+    throw error;
+  }
 };
 
 // Upload News

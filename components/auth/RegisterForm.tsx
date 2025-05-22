@@ -4,14 +4,23 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { IoLogoGoogle } from "react-icons/io";
 import { signUpCredentials } from "@/lib/actions";
+import { RegisterButton } from "./button";
 
 const RegisterForm = () => {
   const [state, formAction] = useActionState(signUpCredentials, null);
   return (
-    <form action={formAction} method="POST" className="space-y-4">
-      <h1 className="text-4xl font-bold mb-2">SMAN 3 Ciamis</h1>
+    <form action={formAction} className="space-y-4">
+      {state?.message ? (
+        <div
+          className="p-4 text-sm text-red-900 rounded-lg bg-red-200"
+          role="alert"
+        >
+          <span className="font-medium">{state?.message}</span>
+        </div>
+      ) : null}
+
       <button
-        type="button"
+        type="submit"
         className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 px-4 rounded-md mb-6 hover:bg-gray-200 transition"
       >
         <IoLogoGoogle />
@@ -105,19 +114,12 @@ const RegisterForm = () => {
             </span>
           </div>
         </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition"
-        >
-          Register
-        </button>
       </div>
-
+      <RegisterButton />
       <div className="mt-6 text-center text-sm text-gray-100">
-        Already have an account?
+        Sudah punya akun?
         <Link
-          href="/auth/login"
+          href="/login"
           className="text-blue-900 pl-1"
           aria-label="Log in"
         >
