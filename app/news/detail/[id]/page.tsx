@@ -1,10 +1,11 @@
 import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
-import SideNews from "@/components/achievement/sideNews/SideNews";
+import SideAchievement from "@/components/sideAchievement/SideAchievement";
 import Image from "next/image";
-import { getImagesById } from "@/lib/data";
+import { getImagesAchievement, getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 const Details = async ({ params }: { params: { id: string } }) => {
+  const allAchievement = await getImagesAchievement();
   const data = await getImagesById(params.id);
   if (!data) return notFound();
   return (
@@ -31,11 +32,11 @@ const Details = async ({ params }: { params: { id: string } }) => {
       <div className="mx-5 md:my-18 text-center md:w-85 p-5">
         <SideEkskul />
         <div className="bg-white w-65 border-t-5 border-blue-500 rounded-b-xl shadow-2xl mb-7 mx-auto">
-          <h3 className="text-blue-900 text-xl font-semibold">Berita</h3>
+          <h3 className="text-blue-900 text-xl font-semibold">Prestasi</h3>
         </div>
-        <SideNews />
-        <SideNews />
-        <SideNews />
+        {allAchievement.slice(0, 2).map((item) => (
+          <SideAchievement key={item.id} data={item} />
+        ))}
       </div>
     </div>
   );

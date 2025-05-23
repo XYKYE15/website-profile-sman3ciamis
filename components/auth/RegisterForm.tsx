@@ -2,7 +2,6 @@
 
 import { useActionState } from "react";
 import Link from "next/link";
-import { IoLogoGoogle } from "react-icons/io";
 import { signUpCredentials } from "@/lib/actions";
 import { RegisterButton } from "./button";
 
@@ -18,14 +17,6 @@ const RegisterForm = () => {
           <span className="font-medium">{state?.message}</span>
         </div>
       ) : null}
-
-      <button
-        type="submit"
-        className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 px-4 rounded-md mb-6 hover:bg-gray-200 transition"
-      >
-        <IoLogoGoogle />
-        Sign up with Google
-      </button>
 
       <div className="space-y-4">
         <div>

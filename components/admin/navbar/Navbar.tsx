@@ -21,14 +21,14 @@ const navbar = async () => {
             </div>
             <button
               type="button"
-              className="text-sm ring-2 bg-gray-100 rounded-full"
+              className="text-sm ring-2 bg-gray-100 rounded-full cursor-pointer"
             >
               <Image
                 src={session.user.image || "/assets/user-avatar.svg"}
                 alt="avatar"
                 width={64}
                 height={64}
-                className="w-10  h-10"
+                className="w-10  h-10 rounded-full"
               />
             </button>
           </div>

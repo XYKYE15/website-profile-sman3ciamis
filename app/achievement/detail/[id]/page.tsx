@@ -1,8 +1,8 @@
-import { getImagesAchievementById } from "@/lib/data";
+import { getImages, getImagesAchievementById } from "@/lib/data";
 import { notFound } from "next/navigation";
 import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
-import SideNews from "@/components/achievement/sideNews/SideNews";
 import Image from "next/image";
+import SideNews from "@/components/sideNews/SideNews";
 
 interface Props {
   params: {
@@ -12,6 +12,7 @@ interface Props {
 
 export default async function Details({ params }: Props) {
   const data = await getImagesAchievementById(params.id);
+  const allNews = await getImages();
 
   if (!data) return notFound();
 
@@ -41,8 +42,9 @@ export default async function Details({ params }: Props) {
         <div className="bg-white w-65 border-t-5 border-blue-500 rounded-b-xl shadow-2xl mb-7 mx-auto">
           <h3 className="text-blue-900 text-xl font-semibold p-2">Berita</h3>
         </div>
-        <SideNews />
-        <SideNews />
+        {allNews.slice(0, 2).map((item) => (
+          <SideNews key={item.id} data={item} />
+        ))}
       </div>
     </div>
   );
