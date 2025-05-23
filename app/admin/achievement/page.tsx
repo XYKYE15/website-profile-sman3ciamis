@@ -3,7 +3,7 @@ import CardAchievement from "@/components/CreateAchievement/card/card";
 import Navbar from "@/components/admin/navbar/Navbar";
 import Link from "next/link";
 
-const AdminNews = () => {
+const AdminAchievement = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Navbar/>
@@ -27,4 +27,4 @@ const AdminNews = () => {
   );
 };
 
-export default AdminNews;
+export default AdminAchievement;

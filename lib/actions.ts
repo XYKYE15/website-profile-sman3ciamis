@@ -7,10 +7,11 @@ import {
   UploadFormNews,
   EditFormNews,
   UploadFormTeacher,
+  UploadFormGallery,
   EditFormTeacher,
 } from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
-import { getImagesById } from "@/lib/data";
+import { getImagesById, getImagesGalleryById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
 import { getImagesTeacherById } from "@/lib/data";
 import { redirect } from "next/navigation";
@@ -18,7 +19,6 @@ import { RegisterForm, LoginForm } from "@/lib/schemas/Schema";
 import { hashSync } from "bcrypt-ts";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-
 
 // Register Form
 export const signUpCredentials = async (
@@ -70,13 +70,13 @@ export const signInCredentials = async (
   const { email, password } = validatedFields.data;
 
   try {
-    await signIn("credentials", {email, password, redirectTo: "/admin"});
+    await signIn("credentials", { email, password, redirectTo: "/admin" });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
-          case "CredentialsSignin":
+        case "CredentialsSignin":
           return { message: "Email atau password salah" };
-          default: 
+        default:
           return { message: "Gagal masuk" };
       }
     }
@@ -399,4 +399,55 @@ export const deleteTeacher = async (id: string) => {
     return { message: "Gagal menghapus data guru" };
   }
   redirect("/admin/teacher");
+};
+
+//Upload Gallery
+export const uploadGallery = async (prevState: unknown, formData: FormData) => {
+  const validatedFields = UploadFormGallery.safeParse(
+    Object.fromEntries(formData)
+  );
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { image } = validatedFields.data;
+
+  try {
+    const { url } = await put(image.name, image, {
+      access: "public",
+      multipart: true,
+    });
+
+    await prisma.gallery.create({
+      data: {
+        image: url,
+      },
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    return { message: "Gagal mengupload data guru" };
+  }
+  redirect("/admin/gallery");
+};
+
+// Delete Gallery
+export const deleteGallery = async (id: string) => {
+  const data = await getImagesGalleryById(id);
+  if (!data) return { message: "Tidak ada data ditemukan" };
+
+  try {
+    await del(data.image);
+    await prisma.gallery.delete({
+      where: {
+        id,
+      },
+    });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return { message: "Gagal menghapus data guru" };
+  }
+  redirect("/admin/gallery");
 };

@@ -90,3 +90,10 @@ model Teacher {
   createdAt   DateTime @default(now())
   updateAt    DateTime @updatedAt
 }
+
+model Gallery {
+  id          String   @id @default(cuid())
+  image       String
+  createdAt   DateTime @default(now())
+  updateAt    DateTime @updatedAt
+}

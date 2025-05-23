@@ -1,6 +1,6 @@
 import { getImagesTeacher } from "@/lib/data";
 import Image from "next/image";
-import { EditButton, DeleteButton } from "../CreateTeacher/Button/button";
+import { EditButton, DeleteButton } from "../Button/button";
 
 export default async function TeacherTable() {
   const images = await getImagesTeacher();

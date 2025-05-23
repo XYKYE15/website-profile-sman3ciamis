@@ -47,7 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         // Batasi hanya role admin
         if (user.role !== "admin") {
-          return null; // login gagal
+          throw new Error("Akses ditolak");
         }
 
         return user; // hanya admin yang lolos

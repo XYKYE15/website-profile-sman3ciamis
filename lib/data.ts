@@ -112,3 +112,40 @@ export const getImagesTeacherById = async (id: string) => {
 export async function getAllTeachers() {
   return await prisma.teacher.findMany();
 }
+
+
+// mengambil data Gallery
+export const getImagesGallery = async () => {
+  try {
+    const result = await prisma.gallery.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Gagal mengambil data: " + error.message);
+    } else {
+      throw new Error("Gagal mengambil data.");
+    }
+  }
+};
+
+// mengambil data Gallery berdasarkan id
+export const getImagesGalleryById = async (id: string) => {
+  try {
+    const result = await prisma.gallery.findUnique({
+      where: {
+        id,
+      },
+    });
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Gagal mengambil data: " + error.message);
+    } else {
+      throw new Error("Gagal mengambil data.");
+    }
+  }
+};

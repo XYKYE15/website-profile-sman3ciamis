@@ -3,14 +3,14 @@
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
 import Link from "next/link";
-import { deleteTeacher } from "@/lib/actions";
+import { deleteGallery } from "@/lib/actions";
 
 // Tombol Submit (untuk Simpan dan Ubah)
 export const SubmitButton = ({ label }: { label: string }) => {
   const { pending } = useFormStatus();
 
   const isSaving = label === "Simpan";
-  const buttonText = pending ? (isSaving ? "Menyimpan..." : "Mengubah...") : label;
+  const buttonText = pending ? (isSaving ? "Menyimpan..." : "simpan") : label;
 
   return (
     <button
@@ -32,8 +32,8 @@ export const SubmitButton = ({ label }: { label: string }) => {
 export const EditButton = ({ id }: { id: string }) => {
   return (
     <Link
-      href={`/admin/teacher/edit/${id}`}
-      className="w-full block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+      href={`/admin/gallery/edit/${id}`}
+      className="w-23 block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       Edit
     </Link>
@@ -41,17 +41,17 @@ export const EditButton = ({ id }: { id: string }) => {
 };
 
 // Tombol Delete (menggunakan server action)
-export const DeleteButton = ({ id } : { id: string }) => {
-  const deleteTeacherWithId = deleteTeacher.bind(null, id);
+export const DeleteButton = ({ id }: { id: string }) => {
+  const deleteNewsWithId = deleteGallery.bind(null, id);
 
   return (
-    <form action={deleteTeacherWithId}>
+    <form action={deleteNewsWithId}>
       <DeleteBtn />
     </form>
   );
 };
 
-// Tombol Hapus
+// Tombol Hapus (internal)
 const DeleteBtn = () => {
   const { pending } = useFormStatus();
 

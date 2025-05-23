@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { IoLogOut } from "react-icons/io5";
+import { signOut, auth } from "@/auth";
 
-const LinkSideBar = () => {
+const LinkSideBar = async () => {
+  const session = await auth();
   return (
-    <div className="pt-6 max-w-xs mx-auto">
+    <div className="pt-6 max-w-xs flex items-center justify-center gap-45 flex-col">
       <ul className="flex flex-col items-center gap-4 w-full">
         <li>
           <Link
@@ -33,7 +36,7 @@ const LinkSideBar = () => {
         </li>
         <li>
           <Link
-            href="#"
+            href="/admin/gallery"
             className="block w-60 text-center py-3 rounded-xl bg-white text-blue-900 font-semibold text-lg shadow-md
           hover:bg-blue-100 transition-colors duration-200"
           >
@@ -59,6 +62,29 @@ const LinkSideBar = () => {
           </Link>
         </li>
       </ul>
+      {session ? (
+          <form
+            action={async () => {
+              "use server";
+              await signOut({ redirectTo: "/login" });
+            }}
+          >
+            <button
+              type="submit"
+              className="bg-red-400 text-white w-full px-5 py-2 rounded-md hover:bg-red-500 flex"
+            >
+              <IoLogOut size={25}/>
+              Keluar
+            </button>
+          </form>
+        ) : (
+          <Link
+            href="/login"
+            className="bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-500"
+          >
+            Masuk
+          </Link>
+        )}
     </div>
   );
 };

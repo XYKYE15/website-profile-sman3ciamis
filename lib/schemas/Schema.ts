@@ -117,3 +117,17 @@ export const EditFormTeacher = z.object({
     })
     .optional(),
 });
+
+export const UploadFormGallery = z.object({
+  image: z
+    .instanceof(File)
+    .refine((file) => file.size > 0, {
+      message: "Gambar tidak boleh kosong",
+    })
+    .refine((file) => file.size === 0 || file.type.startsWith("image/"), {
+      message: "Tipe file harus gambar",
+    })
+    .refine((file) => file.size < 4000000, {
+      message: "Gambar tidak boleh lebih dari 4MB",
+    }),
+});

@@ -1,33 +1,33 @@
 import SideBar from "@/components/admin/sidebar/SideBar";
-import Navbar from "@/components/admin/navbar/Navbar";
-import TeacherTable from "@/components/CreateTeacher/Card/Card";
+import CardGalleryAdmin from "@/components/CreateGallery/Card/Card";
+import Navbar from "@/components/navbar/Navbar";
 import Link from "next/link";
 
-const AdminTeacherPage = () => {
+const AdminGallery = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Navbar/>
+      <Navbar />
       <SideBar />
 
       <main className="flex-1 p-8 mt-25">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold text-gray-800">
-            Manajemen Tenaga Pendidikan
+            Manajemen Gallery
           </h1>
           <Link
-            href="/admin/teacher/create"
+            href="/admin/gallery/create"
             className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md shadow transition-all"
           >
-            + Tambah Data 
+            + Tambah Gallery
           </Link>
         </div>
 
         <div className="bg-white p-6 rounded-md shadow">
-          <TeacherTable />
+            <CardGalleryAdmin/>
         </div>
       </main>
     </div>
   );
 };
 
-export default AdminTeacherPage;
+export default AdminGallery;
