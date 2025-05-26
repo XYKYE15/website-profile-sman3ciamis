@@ -13,7 +13,7 @@ const EkskulCard = () => {
         className="w-30 h-30 rounded-lg bg-gray-200"
       />
       <div className=" flex flex-col p-2 w-full">
-        <h2>PMR</h2>
+        <h2 className="font-semibold">PMR</h2>
         <div className="flex justify-center gap-2 mt-1 mr-15">
           <div className="bg-blue-500 w-10 h-10 flex items-center justify-center rounded-lg text-white">
             <FaTiktok size={22} />

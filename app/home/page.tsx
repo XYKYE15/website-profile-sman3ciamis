@@ -2,7 +2,7 @@ import Other from "@/components/home/other/Other";
 import CardSlider from "../../components/home/slider/CardSlider";
 import Contact from "../../components/footer/Contact";
 import CardNewsHome from "@/components/home/card/Card";
-import { News } from "@/lib/generated/prisma";
+import { News, Achievement } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 const PageHome = async () => {
@@ -10,6 +10,14 @@ const PageHome = async () => {
     orderBy: { createdAt: "desc" }, // misalnya urut berdasarkan terbaru
     take: 3, // ambil 3 berita terbaru
   });
+
+  
+  const achievementList: Achievement[] = await prisma.achievement.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 5, // ambil 5 prestasi terbaru, bisa disesuaikan
+  });
+
+
   return (
     <div className="w-full py-10 flex flex-col gap-20 bg-gray-100">
       <h1 className="text-2xl font-semibold text-blue-900 text-center mt-10">
@@ -23,7 +31,8 @@ const PageHome = async () => {
       <div className="my-30 md:my-20">
         <Other />
       </div>
-      <CardSlider />
+
+      <CardSlider data={achievementList} />
       <Contact />
     </div>
   );

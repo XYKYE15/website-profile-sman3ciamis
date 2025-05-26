@@ -11,7 +11,7 @@ const CardNewsHome = ({ data }: { data: News }) => {
           width={300}
           height={300}
           alt={data.title}
-          className="object-cover object-center w-full h-full rounded-2xl"
+          className="object-center w-full h-full rounded-2xl"
         />
       </div>
       <div className="flex flex-col gap-5">

@@ -23,11 +23,11 @@ export default async function Details({ params }: Props) {
           {data.title}
         </h1>
         <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-77 shadow-lg border border-blue-500 ">
-          <div className="border-2 border-blue-500 md:w-full md:h-100">
+          <div className="border-2 border-blue-500 md:w-full md:h-150">
             <Image
               src={data.image}
               width={300}
-              height={200}
+              height={300}
               alt="card image"
               className="md:w-full md:h-full h-50"
             />
