@@ -12,7 +12,7 @@ interface PageGalleryProps {
 
 async function PageGallery({ searchParams }: PageGalleryProps) {
   const page = parseInt(searchParams?.page ?? "1", 10); // default page 1
-  const perPage = 6;
+  const perPage = 12;
 
   const allNews = await getImages();
   const allGallery = await getImagesGallery();
@@ -28,8 +28,8 @@ async function PageGallery({ searchParams }: PageGalleryProps) {
         <h1 className="md:text-2xl text-lg text-blue-900 font-semibold mb-10 text-center ">
           Foto Random SMAN 3 Ciamis
         </h1>
-        <div className="bg-white md:p-10 p-5  rounded-2xl md:w-211 w-auto mb-5 shadow-lg border  border-blue-500">
-          <div className="grid grid-cols-3 md:gap-4 gap-2">
+        <div className="bg-white md:p-10 p-2  rounded-2xl md:w-210 w-auto mb-5 shadow-lg border  border-blue-500">
+          <div className="grid grid-cols-3  gap-2">
             {paginatedGallery.map((item) => (
               <div key={item.id} className="flex justify-center">
                 <Gallery imageUrl={item.image} />

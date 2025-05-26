@@ -16,7 +16,7 @@ const Other = () => {
         </Link>
 
         <Link
-          href={"#"}
+          href={"/ekskul"}
           className="bg-white hover:bg-gray-50  py-6 px-20 rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center mr-5"
         >
           <IoFootballSharp size={30} />
