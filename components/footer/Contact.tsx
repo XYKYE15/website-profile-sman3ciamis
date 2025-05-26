@@ -5,7 +5,7 @@ function contact() {
   return (
     <div className="md:my-40">
       <div className="flex items-center justify-center md:shadow-xl text-xl md:h-80 border-t-20 border-b-20 border-blue-500">
-      <div className="grid md:grid-cols-2 grid-cols-1 mx-auto gap-5 md:gap-1 text-center md:w-300 md:h-120 h-200 md:rounded-3xl text-blue-900 md:bg-white">
+      <div className="grid md:grid-cols-2 grid-cols-1 mx-auto gap-5 md:gap-1 text-center md:w-300 md:h-120 h-200 md:rounded-3xl text-blue-900 bg-white">
         <div className=" flex flex-col py-5 md:pl-30 items-center justify-center">
           <h1 className="text-2xl font-semibold md:py-3 mb-4">SMAN 3 CIAMIS</h1>
           <div className="md:w-100 w-60 mx-auto border-b-2 p-2 md:text-2xl text-lg font-semibold min-w-full md:min-w-0">

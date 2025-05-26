@@ -1,8 +1,7 @@
 import TeacherImage from "@/components/teacherImage/Teacher";
-import { prisma } from "@/lib/prisma"; // sesuaikan dengan path prisma client kamu
+import { prisma } from "@/lib/prisma"; 
 import { Metadata } from "next";
 
-// Optional SEO
 export const metadata: Metadata = {
   title: "Tenaga Kependidikan",
 };

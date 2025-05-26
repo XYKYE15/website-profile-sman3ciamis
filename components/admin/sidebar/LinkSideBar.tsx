@@ -71,7 +71,7 @@ const LinkSideBar = async () => {
           >
             <button
               type="submit"
-              className="bg-red-400 text-white w-full px-5 py-2 rounded-md hover:bg-red-500 flex"
+              className="max-w-screen-lg bg-red-400 text-white w-full px-5 py-2 rounded-md hover:bg-red-500 flex"
             >
               <IoLogOut size={25}/>
               Keluar

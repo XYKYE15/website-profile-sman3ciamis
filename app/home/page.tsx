@@ -1,25 +1,31 @@
-import Card from "@/components/home/card/Card";
 import Other from "@/components/home/other/Other";
 import CardSlider from "../../components/home/slider/CardSlider";
 import Contact from "../../components/footer/Contact";
+import CardNewsHome from "@/components/home/card/Card";
+import { News } from "@/lib/generated/prisma";
+import { prisma } from "@/lib/prisma";
 
-const PageHome = () => {
+const PageHome = async () => {
+  const newsList: News[] = await prisma.news.findMany({
+    orderBy: { createdAt: "desc" }, // misalnya urut berdasarkan terbaru
+    take: 3, // ambil 3 berita terbaru
+  });
   return (
     <div className="w-full py-10 flex flex-col gap-20 bg-gray-100">
       <h1 className="text-2xl font-semibold text-blue-900 text-center mt-10">
         Berita Terbaru
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 mx-auto gap-15 md:gap-0">
-        <Card />
-        <Card />
-        <Card />
+        {newsList.map((news) => (
+          <CardNewsHome key={news.id} data={news} />
+        ))}
       </div>
       <div className="my-30 md:my-20">
         <Other />
       </div>
-      <CardSlider/>
-      <Contact/>
-      </div>
+      <CardSlider />
+      <Contact />
+    </div>
   );
 };
 export default PageHome;

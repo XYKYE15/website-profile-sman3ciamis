@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { BiChevronsLeft, BiChevronsRight } from "react-icons/bi";
 
 interface PaginationProps {
   currentPage: number;
@@ -8,9 +9,7 @@ interface PaginationProps {
 }
 
 function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
-  if (totalPages <= 1) {
-    return null;
-  }
+  if (totalPages <= 1) return null;
 
   const pages = [];
   for (let i = 1; i <= totalPages; i++) {
@@ -20,15 +19,29 @@ function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
   return (
     <div>
       <ul className="flex justify-center gap-1 text-blue-900 items-center">
+        {/* First page button (hidden if already on first page) */}
+        {currentPage > 1 && (
+          <li>
+            <Link
+              href={`${basePath}?page=1`}
+              className="flex items-center gap-1 rounded border border-gray-200 px-2 py-1 transition-colors hover:bg-gray-50"
+              aria-label="First page"
+            >
+              <BiChevronsLeft className="text-xl" />
+              <span className="">AWAL</span>
+            </Link>
+          </li>
+        )}
+
         {/* Prev button */}
-        <li className="flex items-center gap-1">
+        <li>
           <Link
             href={`${basePath}?page=${currentPage > 1 ? currentPage - 1 : 1}`}
             className="flex items-center gap-1 rounded border border-gray-200 px-3 py-1 transition-colors hover:bg-gray-50"
             aria-label="Previous page"
           >
             <IoChevronBack className="text-xl" />
-            <span className="text-sm">Prev</span>
+            <span className="text-sm">Kembali</span>
           </Link>
         </li>
 
@@ -49,7 +62,7 @@ function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
         ))}
 
         {/* Next button */}
-        <li className="flex items-center gap-1">
+        <li>
           <Link
             href={`${basePath}?page=${
               currentPage < totalPages ? currentPage + 1 : totalPages
@@ -57,10 +70,24 @@ function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
             className="flex items-center gap-1 rounded border border-gray-200 px-3 py-1 transition-colors hover:bg-gray-50"
             aria-label="Next page"
           >
-            <span className="text-sm">Next</span>
+            <span className="text-sm">Lanjut</span>
             <IoChevronForward className="text-xl" />
           </Link>
         </li>
+
+        {/* Last page button (hidden if already on last page) */}
+        {currentPage < totalPages && (
+          <li>
+            <Link
+              href={`${basePath}?page=${totalPages}`}
+              className="flex items-center gap-1 rounded border border-gray-200 px-2 py-1 transition-colors hover:bg-gray-50"
+              aria-label="Last page"
+            >
+              <span className="">AKHIR</span>
+              <BiChevronsRight className="text-xl" />
+            </Link>
+          </li>
+        )}
       </ul>
     </div>
   );
