@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import { uploadAchievement } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
+import { SubmitButton } from "@/components/CreateEkskul/button/button";
 
 const CreateForm = () => {
   const [state, formAction] = useActionState(uploadAchievement, null);
