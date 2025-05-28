@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { object, string } from "zod";
 
-
 // Form Register Pengguna
 export const RegisterForm = object({
   name: string().min(1, "nama wajib diisi"),
@@ -42,6 +41,7 @@ export const UploadFormAchievement = z.object({
     }),
 });
 
+// edit form Prestasi
 export const EditFormAchievement = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
@@ -56,6 +56,7 @@ export const EditFormAchievement = z.object({
     .optional(),
 });
 
+//Upload Berita
 export const UploadFormNews = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
@@ -72,6 +73,7 @@ export const UploadFormNews = z.object({
     }),
 });
 
+//Edit Berita
 export const EditFormNews = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
@@ -86,6 +88,7 @@ export const EditFormNews = z.object({
     .optional(),
 });
 
+//Upload Data guru
 export const UploadFormTeacher = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
@@ -103,6 +106,7 @@ export const UploadFormTeacher = z.object({
     }),
 });
 
+//Edit Data Guru
 export const EditFormTeacher = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
@@ -118,6 +122,7 @@ export const EditFormTeacher = z.object({
     .optional(),
 });
 
+//Upload Data Gallery
 export const UploadFormGallery = z.object({
   image: z
     .instanceof(File)
@@ -130,4 +135,18 @@ export const UploadFormGallery = z.object({
     .refine((file) => file.size < 4000000, {
       message: "Gambar tidak boleh lebih dari 4MB",
     }),
+});
+
+export const UploadFormEkskul = z.object({
+  name: z.string().min(1, { message: "Nama ekskul wajib diisi" }),
+  instagram: z.string().optional(),
+  tiktok: z.string().optional(),
+  image: z.instanceof(File),
+});
+
+export const EditFormEkskul = z.object({
+  name: z.string().min(1, { message: "Nama ekskul wajib diisi" }),
+  instagram: z.string().optional(),
+  tiktok: z.string().optional(),
+  image: z.union([z.instanceof(File), z.string()]), 
 });

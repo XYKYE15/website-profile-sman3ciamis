@@ -97,3 +97,13 @@ model Gallery {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
+
+model Ekskul {
+  id        String   @id @default(cuid())
+  name      String
+  image     String
+  instagram String?
+  tiktok    String?
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}

@@ -12,7 +12,7 @@ const AdminEkskul = () => {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold text-gray-800">Manajemen Ekskul</h1>
           <Link
-            href="/admin/achievement/create"
+            href="/admin/ek"
             className="bg-blue-500 hover:bg-blue-500 text-white px-5 py-2 rounded-md shadow transition-all"
           >
             + Tambah Ekskul

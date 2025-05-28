@@ -149,3 +149,7 @@ export const getImagesGalleryById = async (id: string) => {
     }
   }
 };
+
+export async function getImagesEkskulById(id: string) {
+  return await prisma.ekskul.findUnique({ where: { id } });
+}

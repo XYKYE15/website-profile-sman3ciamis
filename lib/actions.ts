@@ -9,9 +9,11 @@ import {
   UploadFormTeacher,
   UploadFormGallery,
   EditFormTeacher,
+  UploadFormEkskul,
+  EditFormEkskul,
 } from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
-import { getImagesById, getImagesGalleryById } from "@/lib/data";
+import { getImagesById, getImagesEkskulById, getImagesGalleryById } from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
 import { getImagesTeacherById } from "@/lib/data";
 import { redirect } from "next/navigation";
@@ -19,6 +21,7 @@ import { RegisterForm, LoginForm } from "@/lib/schemas/Schema";
 import { hashSync } from "bcrypt-ts";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+
 
 // Register Form
 export const signUpCredentials = async (
@@ -451,3 +454,96 @@ export const deleteGallery = async (id: string) => {
   }
   redirect("/admin/gallery");
 };
+
+// Upload data ekskul
+export const uploadEkskul = async (prevState: unknown, formData: FormData) => {
+  const validatedFields = UploadFormEkskul.safeParse(Object.fromEntries(formData));
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  const { name, instagram, tiktok, image } = validatedFields.data;
+
+  try {
+    const { url } = await put(image.name, image, {
+      access: "public",
+      multipart: true,
+    });
+
+    await prisma.ekskul.create({
+      data: {
+        name,
+        instagram,
+        tiktok,
+        image: url,
+      },
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    return { message: "Gagal mengupload ekskul" };
+  }
+
+  redirect("/admin/ekskul");
+};
+
+//Update Data Ekskul
+export const updateEkskul = async (
+  id: string,
+  prevState: unknown,
+  formData: FormData
+) => {
+  const validatedFields = EditFormEkskul.safeParse(Object.fromEntries(formData));
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  const data = await getImagesEkskulById(id);
+  if (!data) return { message: "Data tidak ditemukan" };
+
+  const { name, instagram, tiktok, image } = validatedFields.data;
+  let imagePath = data.image;
+
+  try {
+    if (image instanceof File && image.size > 0) {
+      await del(data.image);
+      const { url } = await put(image.name, image, {
+        access: "public",
+        multipart: true,
+      });
+      imagePath = url;
+    }
+
+    await prisma.ekskul.update({
+      where: { id },
+      data: {
+        name,
+        instagram,
+        tiktok,
+        image: imagePath,
+      },
+    });
+  } catch (error) {
+    console.error("Update error:", error);
+    return { message: "Gagal mengupdate ekskul" };
+  }
+
+  redirect("/admin/ekskul");
+};
+
+//Delete Data Ekskul
+export const deleteEkskul = async (id: string) => {
+  const data = await getImagesEkskulById(id);
+  if (!data) return { message: "Data tidak ditemukan" };
+
+  try {
+    await del(data.image);
+    await prisma.ekskul.delete({ where: { id } });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return { message: "Gagal menghapus ekskul" };
+  }
+
+  redirect("/admin/ekskul");
+};
+
+
