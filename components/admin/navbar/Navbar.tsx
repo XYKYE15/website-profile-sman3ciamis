@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { auth } from "@/auth";
 
-const navbar = async () => {
+const Navbar = async () => {
   const session = await auth();
   return (
     <div className="fixed top-0 w-full bg-blue-500 z-50 py-4 mx-70">
-      <div className="md:max-w-screen-xl flex items-center justify-end mx-1 md:p-1 p-3 items-cente w-285">
+      <div className="md:max-w-screen-xl flex items-center justify-end mx-1 md:p-1 p-3 w-285">
         {session && (
           <div className="flex gap-3 items-center">
             <div className="flex flex-col justify-center -space-y-1">
@@ -18,7 +18,7 @@ const navbar = async () => {
             </div>
             <button
               type="button"
-              className="text-sm bg-gray-100 rounded-full cursor-pointer"
+              className="text-sm bg-gray-100 rounded-full"
             >
               <Image
                 src={session.user.image || "/assets/user-avatar.svg"}
@@ -35,4 +35,4 @@ const navbar = async () => {
   );
 };
 
-export default navbar;
+export default Navbar;

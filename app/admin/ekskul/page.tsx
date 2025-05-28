@@ -18,7 +18,6 @@ const AdminEkskul = () => {
             + Tambah Ekskul
           </Link>
         </div>
-
         <div className="bg-white p-6 rounded-md shadow">
           <CardEkskul />
         </div>

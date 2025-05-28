@@ -12,10 +12,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   pages: {
     signIn: "/login",
+    error: "/login",
   },
 
   providers: [
-    Google,
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "text" },
@@ -33,6 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             id: true,
             name: true,
             email: true,
+            image: true,
             password: true,
             role: true,
           },
@@ -45,25 +50,43 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const passwordMatch = compareSync(password, user.password);
         if (!passwordMatch) return null;
 
-        // Batasi hanya role admin
         if (user.role !== "admin") {
           throw new Error("Akses ditolak");
         }
 
-        return user; // hanya admin yang lolos
+        return user;
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) token.role = user.role;
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email! },
+          select: { role: true },
+        });
+
+        if (!dbUser || dbUser.role !== "admin") {
+          return false;
+        }
+      }
+      return true;
+    },
+
+    async jwt({ token, user, profile }) {
+      if (user) {
+        token.role = user.role;
+         token.image = user.image ?? profile?.picture;
+      }
+
       return token;
     },
 
     async session({ session, token }) {
       session.user.id = token.sub;
       session.user.role = token.role;
+      session.user.image = token.image as string;
       return session;
     },
 
@@ -72,21 +95,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const pathname = nextUrl.pathname;
       const isAdminRoute = pathname.startsWith("/admin");
 
-      // Belum login & akses admin → redirect login
       if (!isLoggedIn && isAdminRoute) {
         return Response.redirect(new URL("/login", nextUrl));
       }
 
-      // Login tapi bukan admin → redirect ke /
       if (isAdminRoute && auth?.user?.role !== "admin") {
         return Response.redirect(new URL("/", nextUrl));
       }
 
-      //Sudah login dan coba akses /login atau /register → redirect ke admin
-      if (
-        isLoggedIn &&
-        (pathname.startsWith("/login") || pathname.startsWith("/register"))
-      ) {
+      if (isLoggedIn && pathname.startsWith("/login")) {
         return Response.redirect(new URL("/admin", nextUrl));
       }
 

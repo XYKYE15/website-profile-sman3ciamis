@@ -1,6 +1,5 @@
 import { getImagesGallery } from "@/lib/data";
 import Image from "next/image";
-import React from "react";
 import { DeleteButton } from "../button/button";
 
 
