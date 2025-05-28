@@ -13,7 +13,7 @@ function Hero() {
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative flex flex-col  justify-center items-center h-full text-center">
           <h1 className="text-8xl font-extrabold leading-tight flex flex-col mb-3 uppercase">
-            SMAN 3 Ciamis{" "}
+            SMAN 3 Ciamis
             <span className="text-lg text-gray-100">
               &quot;Membentuk Generasi yang Berkarakter, Berprestasi, dan
               Berwawasan Global&quot;
