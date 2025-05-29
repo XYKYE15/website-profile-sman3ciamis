@@ -12,6 +12,7 @@ import {
   UploadFormEkskul,
   EditFormEkskul,
   UploadFormSettings,
+  EditFormSettings,
 } from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
 import {
@@ -619,19 +620,99 @@ export const uploadSetting = async (prevState: unknown, formData: FormData) => {
   redirect("/admin/settings");
 };
 
+export async function updateSettings(
+  id: string,
+  prevState: unknown,
+  formData: FormData
+) {
+  const rawData = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    phone: formData.get("phone"),
+    email: formData.get("email"),
+    gmapsLink: formData.get("gmapsLink"),
+    instagram: formData.get("instagram"),
+    youtube: formData.get("youtube"),
+    tiktok: formData.get("tiktok"),
+    videoUrl: formData.get("videoUrl"),
+    sejarah: formData.get("sejarah"),
+    visi: formData.get("visi"),
+    misi: formData.get("misi"),
+    tujuan: formData.get("tujuan"),
+    imageHero: formData.get("imageHero"),
+  };
 
-// // Delete Setting
-// export const deleteSetting = async (id: string) => {
-//   const data = await getSettingById(id);
-//   if (!data) return { message: "Data tidak ditemukan" };
+  const parsed = EditFormSettings.safeParse(rawData);
 
-//   try {
-//     if (data.imageHero) await del(data.imageHero);
-//     await prisma.setting.delete({ where: { id } });
-//   } catch (error) {
-//     console.error("Delete error:", error);
-//     return { message: "Gagal menghapus pengaturan" };
-//   }
+  if (!parsed.success) {
+    const error = parsed.error.flatten().fieldErrors;
+    return { error };
+  }
 
-//   redirect("/admin/settings");
-// };
+  const {
+    name,
+    description,
+    phone,
+    email,
+    gmapsLink,
+    instagram,
+    youtube,
+    tiktok,
+    videoUrl,
+    sejarah,
+    visi,
+    misi,
+    tujuan,
+    imageHero,
+  } = parsed.data;
+
+  try {
+    let imageUrl: string | undefined;
+
+    if (imageHero instanceof File && imageHero.size > 0) {
+      const blob = await put(imageHero.name, imageHero, {
+        access: "public",
+      });
+      imageUrl = blob.url;
+    } else if (typeof imageHero === "string") {
+      imageUrl = imageHero; // Pakai URL lama
+    }
+
+    await prisma.setting.update({
+      where: { id },
+      data: {
+        name,
+        description,
+        phone,
+        email,
+        gmapsLink,
+        instagram,
+        youtube,
+        tiktok,
+        videoUrl,
+        sejarah,
+        visi,
+        misi,
+        tujuan,
+        ...(imageUrl && { imageHero: imageUrl }),
+      },
+    });
+
+    return { success: true };
+  } catch (err) {
+    console.error(err);
+    return { error: { message: "Gagal mengupdate data pengaturan." } };
+  }
+    redirect("/admin/settings");
+}
+
+export const deleteAllSettings = async () => {
+  try {
+    await prisma.setting.deleteMany();
+  } catch (error) {
+    console.error("Delete all settings error:", error);
+    return { error: "Gagal menghapus semua settings" };
+  }
+
+  redirect("/admin/settings");
+};

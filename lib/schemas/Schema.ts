@@ -183,7 +183,12 @@ export const UploadFormSettings = z.object({
 
   phone: z.string().min(1, { message: "Nomor telepon wajib diisi" }),
   email: z.string().email({ message: "Format email tidak valid" }),
-  gmapsLink: z.string().url({ message: "Link Google Maps tidak valid" }),
+  gmapsLink: z
+    .string()
+    .url({ message: "Link Google Maps tidak valid" })
+    .refine((val) => val.includes("maps/embed"), {
+      message: "Gunakan link embed Google Maps (yang mengandung 'maps/embed')",
+    }),
 
   instagram: z.string().url({ message: "Link Instagram tidak valid" }),
   youtube: z.string().url({ message: "Link YouTube tidak valid" }),
@@ -197,12 +202,17 @@ export const UploadFormSettings = z.object({
   tujuan: z.string().min(1, { message: "Tujuan wajib diisi" }),
 });
 
-export const UpdateFormSettings = z.object({
+export const EditFormSettings = z.object({
   name: z.string().min(1, { message: "Judul hero wajib diisi" }),
   description: z.string().min(1, { message: "Deskripsi hero wajib diisi" }),
   phone: z.string().min(1, { message: "Nomor telepon wajib diisi" }),
   email: z.string().email({ message: "Email tidak valid" }),
-  gmapsLink: z.string().url({ message: "Link Google Maps tidak valid" }),
+  gmapsLink: z
+    .string()
+    .url({ message: "Link Google Maps tidak valid" })
+    .refine((val) => val.includes("maps/embed"), {
+      message: "Gunakan link embed Google Maps (yang mengandung 'maps/embed')",
+    }),
   instagram: z.string().url({ message: "Link Instagram tidak valid" }),
   youtube: z.string().url({ message: "Link YouTube tidak valid" }),
   tiktok: z.string().url({ message: "Link TikTok tidak valid" }),

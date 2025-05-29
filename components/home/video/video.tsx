@@ -2,9 +2,11 @@
 
 import React from "react";
 
-const VideoSection = () => {
-  const videoUrl = "https://www.youtube.com/embed/example"; // Ganti dengan URL asli dari backend jika tersedia
+type VideoSectionProps = {
+  videoUrl: string;
+};
 
+const VideoSection = ({ videoUrl }: VideoSectionProps) => {
   return (
     <section className="w-full bg-white py-10 px-4 md:px-8 lg:px-16">
       <div className="max-w-5xl mx-auto">
@@ -12,7 +14,8 @@ const VideoSection = () => {
           Video Profil Sekolah
         </h2>
         <p className="text-center text-gray-600 mb-8">
-          Saksikan video profil sekolah kami untuk mengenal lebih dekat visi, misi, dan berbagai kegiatan menarik di sekolah.
+          Saksikan video profil sekolah kami untuk mengenal lebih dekat visi,
+          misi, dan berbagai kegiatan menarik di sekolah.
         </p>
         <div className="aspect-video w-full rounded-xl overflow-hidden shadow-lg">
           <iframe

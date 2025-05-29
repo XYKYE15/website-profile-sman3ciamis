@@ -169,3 +169,54 @@ export const getImagesEkskul = async () => {
 export async function getImagesEkskulById(id: string) {
   return await prisma.ekskul.findUnique({ where: { id } });
 }
+
+// mengambil data settings
+export const getSettings = async () => {
+  try {
+    const result = await prisma.setting.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Gagal mengambil data settings: " + error.message);
+    } else {
+      throw new Error("Gagal mengambil data settings.");
+    }
+  }
+};
+
+// mengambil data settings berdasarkan id
+export const getSettingsById = async (id: string) => {
+  try {
+    const result = await prisma.setting.findUnique({
+      where: {
+        id,
+      },
+    });
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Gagal mengambil data setting: " + error.message);
+    } else {
+      throw new Error("Gagal mengambil data setting.");
+    }
+  }
+};
+
+export async function getHero() {
+  const hero = await prisma.setting.findFirst(); 
+  return hero;
+}
+
+export async function getHeroData() {
+  const data = await prisma.setting.findFirst();
+  if (!data) {
+    throw new Error("Data hero tidak ditemukan");
+  }
+  return {
+    videoUrl: data.videoUrl,
+  };
+}
