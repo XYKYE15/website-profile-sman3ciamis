@@ -12,7 +12,7 @@ function Footer() {
   return (
     <footer className="">
       <div className="bg-blue-500 shadow-lg py-5">
-        <div className=" md:max-w-screen-xl py-5 mx-auto bg-white rounded-lg shadow-2xl w-100  md:w-full">
+        <div className=" md:max-w-screen-xl py-5 mx-auto bg-white md:rounded-lg shadow-2xl">
           <div className="grid md:grid-cols-3 grid-cols-1 mx-auto gap-10 md:gap-0">
             <div className="md:border-3 border-3 border-blue-500 h-90 w-85 md:min-w-100 rounded-2xl flex flex-col items-center py-10  mx-auto">
               <Link href="/" className="flex justify-center items-center">
@@ -28,7 +28,7 @@ function Footer() {
                   SMAN 3<span>Ciamis</span>
                 </h2>
               </Link>
-              <div className="md:w-90 mx-auto border-b-3 border-blue-900 p-2 md:text-lg mt-5 md:10 text-lg text-center w-70 md:min-w-0">
+              <div className="md:w-90 mx-auto border-b-3 border-blue-900 p-2 md:text-lg mt-5 text-lg text-center w-75">
                 <h3 className="text-blue-900 font-medium">
                   Jl. Bojonghuni No.87, Maleber, Kec. Ciamis, Kabupaten Ciamis,
                   Jawa Barat 46214

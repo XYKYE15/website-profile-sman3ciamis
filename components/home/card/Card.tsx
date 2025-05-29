@@ -4,7 +4,7 @@ import type { News } from "@/lib/generated/prisma";
 
 const CardNewsHome = ({ data }: { data: News }) => {
   return (
-    <div className="max-w-screen-lg w-auto mx-5">
+    <div className="">
       <div className="h-[250px]  w-auto relative mb-3 overflow-hidden px-4">
         <Image
           src={data.image}

@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontRoboto.className} antialiased`}>
+      <body className={`${fontRoboto.className} antialiased bg-amber-600`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

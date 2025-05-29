@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function Hero() {
   return (
-    <div className="relative h-screen text-white overflow-hidden">
+    <div className="relative h-screen text-white overflow-hidden w-full">
       <div className="absolute inset-0 border-b-10 border-blue-500">
         <Image
           src="/hero.jpg"

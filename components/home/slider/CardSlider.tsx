@@ -40,7 +40,7 @@ const CardSlider = ({ data }: { data: Achievement[] }) => {
               href={`/achievement/detail/${item.id}`}
               className="flex justify-center rounded-2xl shadow-xl hover:shadow-sm"
             >
-              <div className="w-115">
+              <div className="w-full">
                 <Image
                   src={item.image || "/images/achievement.jpg"}
                   alt={item.title}

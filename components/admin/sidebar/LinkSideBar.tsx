@@ -5,7 +5,7 @@ import { signOut, auth } from "@/auth";
 const LinkSideBar = async () => {
   const session = await auth();
   return (
-    <div className="pt-6 max-w-xs flex items-center justify-center gap-45 flex-col">
+    <div className="pt-6 max-w-xs flex items-center justify-center gap-30 flex-col">
       <ul className="flex flex-col items-center gap-4 w-full">
         <li>
           <Link
@@ -59,6 +59,15 @@ const LinkSideBar = async () => {
           hover:bg-blue-100 transition-colors duration-200"
           >
             Tenaga Pendidikan
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/admin/settings"
+            className="block w-60 text-center py-3 rounded-xl bg-white text-blue-900 font-semibold text-lg shadow-md
+          hover:bg-blue-100 transition-colors duration-200"
+          >
+            Pengaturan
           </Link>
         </li>
       </ul>

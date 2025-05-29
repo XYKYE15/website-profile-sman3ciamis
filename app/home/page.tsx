@@ -19,7 +19,7 @@ const PageHome = async () => {
 
 
   return (
-    <div className="w-full py-10 flex flex-col gap-20 bg-gray-100">
+    <div className="w-full mx-auto py-10 flex flex-col gap-20 bg-gray-100">
       <h1 className="text-2xl font-semibold text-blue-900 text-center mt-10">
         Berita Terbaru
       </h1>
