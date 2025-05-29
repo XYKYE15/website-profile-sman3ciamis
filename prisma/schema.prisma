@@ -83,27 +83,48 @@ model Achievement {
 
 model Teacher {
   id          String   @id @default(cuid())
-  title       String 
-  description String 
-  note        String? 
+  title       String
+  description String
+  note        String?
   image       String
   createdAt   DateTime @default(now())
   updateAt    DateTime @updatedAt
 }
 
 model Gallery {
-  id          String   @id @default(cuid())
-  image       String
-  createdAt   DateTime @default(now())
-  updateAt    DateTime @updatedAt
+  id        String   @id @default(cuid())
+  image     String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
 
 model Ekskul {
   id        String   @id @default(cuid())
   name      String
-  image  String
+  image     String
   instagram String?
   tiktok    String?
   createdAt DateTime @default(now())
-  updateAt    DateTime @updatedAt
+  updateAt  DateTime @updatedAt
 }
+
+model Setting {
+  id            String   @id @default(cuid())
+  name          String
+  description   String
+  phone         String
+  email         String
+  gmapsLink     String
+  instagram     String
+  youtube       String
+  tiktok        String
+  videoUrl      String?
+  imageHero     String?
+  sejarah       String
+  visi          String
+  misi          String
+  tujuan        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+

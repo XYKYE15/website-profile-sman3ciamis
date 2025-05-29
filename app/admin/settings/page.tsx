@@ -15,7 +15,7 @@ const AdminSettings = () => {
             Pengaturan
           </h1>
           <Link
-            href="/admin/teacher/create"
+            href="/admin/settings/create"
             className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md shadow transition-all"
           >
             + Tambah Data

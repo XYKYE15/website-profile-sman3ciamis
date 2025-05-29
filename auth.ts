@@ -60,8 +60,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile}) {
       if (account?.provider === "google") {
+        console.log(profile)
+        console.log(account)
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
           select: { role: true },

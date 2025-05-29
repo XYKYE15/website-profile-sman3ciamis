@@ -107,3 +107,23 @@ model Ekskul {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
+
+model Setting {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  phone       String
+  email       String
+  gmapsLink   String
+  instagram   String
+  youtube     String
+  tiktok      String
+  videoUrl    String?
+  imageHero   String?
+  sejarah     String
+  visi        String
+  misi        String
+  tujuan      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

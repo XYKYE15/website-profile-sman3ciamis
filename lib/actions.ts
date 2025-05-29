@@ -11,9 +11,14 @@ import {
   EditFormTeacher,
   UploadFormEkskul,
   EditFormEkskul,
+  UploadFormSettings,
 } from "@/lib/schemas/Schema";
 import { prisma } from "@/lib/prisma";
-import { getImagesById, getImagesEkskulById, getImagesGalleryById } from "@/lib/data";
+import {
+  getImagesById,
+  getImagesEkskulById,
+  getImagesGalleryById,
+} from "@/lib/data";
 import { getImagesAchievementById } from "@/lib/data";
 import { getImagesTeacherById } from "@/lib/data";
 import { redirect } from "next/navigation";
@@ -21,7 +26,7 @@ import { RegisterForm, LoginForm } from "@/lib/schemas/Schema";
 import { hashSync } from "bcrypt-ts";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
-
+// import { revalidatePath } from "next/cache";
 
 // Register Form
 export const signUpCredentials = async (
@@ -457,7 +462,9 @@ export const deleteGallery = async (id: string) => {
 
 // Upload data ekskul
 export const uploadEkskul = async (prevState: unknown, formData: FormData) => {
-  const validatedFields = UploadFormEkskul.safeParse(Object.fromEntries(formData));
+  const validatedFields = UploadFormEkskul.safeParse(
+    Object.fromEntries(formData)
+  );
   if (!validatedFields.success) {
     return { error: validatedFields.error.flatten().fieldErrors };
   }
@@ -492,7 +499,9 @@ export const updateEkskul = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const validatedFields = EditFormEkskul.safeParse(Object.fromEntries(formData));
+  const validatedFields = EditFormEkskul.safeParse(
+    Object.fromEntries(formData)
+  );
   if (!validatedFields.success) {
     return { error: validatedFields.error.flatten().fieldErrors };
   }
@@ -546,4 +555,83 @@ export const deleteEkskul = async (id: string) => {
   redirect("/admin/ekskul");
 };
 
+// Upload Setting
+export const uploadSetting = async (prevState: unknown, formData: FormData) => {
+  const validatedFields = UploadFormSettings.safeParse(
+    Object.fromEntries(formData)
+  );
 
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  const {
+    name,
+    description,
+    phone,
+    email,
+    gmapsLink,
+    instagram,
+    youtube,
+    tiktok,
+    videoUrl,
+    sejarah,
+    visi,
+    misi,
+    tujuan,
+    imageHero,
+  } = validatedFields.data;
+
+  let imageHeroUrl: string | null = null;
+
+  try {
+    if (imageHero instanceof File && imageHero.size > 0) {
+      const { url } = await put(imageHero.name, imageHero, {
+        access: "public",
+        multipart: true,
+      });
+      imageHeroUrl = url;
+    }
+
+    await prisma.setting.create({
+      data: {
+        name,
+        description,
+        phone,
+        email,
+        gmapsLink,
+        instagram,
+        youtube,
+        tiktok,
+        videoUrl: videoUrl ?? null,
+        sejarah,
+        visi,
+        misi,
+        tujuan,
+        imageHero: imageHeroUrl,
+      },
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    return { message: "Gagal mengupload pengaturan" };
+  }
+
+  redirect("/admin/settings");
+};
+
+
+// // Delete Setting
+// export const deleteSetting = async (id: string) => {
+//   const data = await getSettingById(id);
+//   if (!data) return { message: "Data tidak ditemukan" };
+
+//   try {
+//     if (data.imageHero) await del(data.imageHero);
+//     await prisma.setting.delete({ where: { id } });
+//   } catch (error) {
+//     console.error("Delete error:", error);
+//     return { message: "Gagal menghapus pengaturan" };
+//   }
+
+//   redirect("/admin/settings");
+// };

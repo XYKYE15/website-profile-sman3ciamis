@@ -4,6 +4,7 @@ import Contact from "../../components/footer/Contact";
 import CardNewsHome from "@/components/home/card/Card";
 import { News, Achievement } from "@/lib/generated/prisma";
 import { prisma } from "@/lib/prisma";
+import VideoSection from "@/components/home/video/video";
 
 const PageHome = async () => {
   const newsList: News[] = await prisma.news.findMany({
@@ -33,6 +34,7 @@ const PageHome = async () => {
       </div>
 
       <CardSlider data={achievementList} />
+      <VideoSection/>
       <Contact />
     </div>
   );
