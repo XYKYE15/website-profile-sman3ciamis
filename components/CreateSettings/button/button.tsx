@@ -41,7 +41,7 @@ export const EditButtonSettings = ({
   return (
     <Link
       href={`/admin/settings/edit/${id}`}
-      className="w-25 block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-yellow-500 hover:bg-yellow-400 transition duration-150"
+      className="w-25 block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       {label}
     </Link>

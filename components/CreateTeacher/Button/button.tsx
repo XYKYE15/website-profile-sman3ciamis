@@ -33,7 +33,7 @@ export const EditButton = ({ id }: { id: string }) => {
   return (
     <Link
       href={`/admin/teacher/edit/${id}`}
-      className="w-full block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+      className="w-25 block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       Edit
     </Link>
@@ -60,7 +60,7 @@ const DeleteBtn = () => {
       type="submit"
       disabled={pending}
       className={clsx(
-        "w-full py-2.5 px-6 text-base font-medium rounded-sm mt-5 transition duration-150",
+        "w-full py-2.5 px-6 text-base font-medium rounded-sm transition duration-150",
         {
           "bg-red-500 hover:bg-red-400 text-white": !pending,
           "bg-red-300 text-white cursor-progress opacity-50": pending,

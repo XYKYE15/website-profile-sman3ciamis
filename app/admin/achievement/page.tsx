@@ -6,20 +6,25 @@ import Link from "next/link";
 const AdminAchievement = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Navbar/>
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Sidebar */}
       <SideBar />
-      <main className="flex-1 p-8 overflow-hidden mt-25">
-        <div className="flex items-center justify-between mb-6">
+
+      {/* Main Content */}
+      <main className="flex-1 px-8 py-6 mt-20">
+        <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Manajemen Prestasi</h1>
           <Link
             href="/admin/achievement/create"
-            className="bg-blue-500 hover:bg-blue-500 text-white px-5 py-2 rounded-md shadow transition-all"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-lg shadow transition"
           >
             + Tambah Prestasi
           </Link>
         </div>
 
-        <div className="bg-white p-6 rounded-md shadow">
+        <div className="bg-white p-6 rounded-xl shadow-md">
           <CardAchievement />
         </div>
       </main>

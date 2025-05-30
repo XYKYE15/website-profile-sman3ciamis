@@ -220,3 +220,54 @@ export async function getHeroData() {
     videoUrl: data.videoUrl,
   };
 }
+
+export async function getStatistics() {
+  const jumlahGuru = await prisma.teacher.count();
+  const jumlahGaleri = await prisma.gallery.count();
+  const jumlahBerita = await prisma.news.count();
+  const jumlahPrestasi = await prisma.achievement.count();
+  const jumlahEkskul = await prisma.ekskul.count();
+  const jumlahSetting = await prisma.setting.count();
+
+  return {
+    jumlahGuru,
+    jumlahGaleri,
+    jumlahBerita,
+    jumlahPrestasi,
+    jumlahEkskul,
+    jumlahSetting,
+  };
+}
+
+export async function getSejarahSetting() {
+  return await prisma.setting.findFirst({
+    select: {
+      sejarah: true,
+      imageHero: true,
+    },
+  });
+}
+
+export async function getVisiMisiTujuan() {
+  return await prisma.setting.findFirst({
+    select: {
+      visi: true,
+      misi: true,
+      tujuan: true,
+      imageHero: true,
+    },
+  });
+}
+
+
+export async function getSocialMediaLinks() {
+  return await prisma.setting.findFirst({
+    select: {
+      instagram: true,
+      youtube: true,
+      tiktok: true,
+      phone: true,
+      email: true,
+    },
+  });
+}
