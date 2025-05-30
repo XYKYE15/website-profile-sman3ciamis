@@ -43,7 +43,7 @@ export default function SideLinkClient({
 
   return (
     <>
-      <div className="flex justify-center mb-5 w-full max-w-xl mx-auto relative">
+      <div className="flex justify-center items-center mb-5 w-full max-w-xl mx-auto relative">
         {useSlider ? (
           <Swiper
             modules={[Navigation]}
@@ -52,13 +52,13 @@ export default function SideLinkClient({
             navigation
           >
             {groupedEkskul.map((group, index) => (
-              <SwiperSlide key={index} className="md:mx-2 mx-10">
-                <div className="grid grid-cols-2 gap-1 w-80">
+              <SwiperSlide key={index}>
+                <div className="grid grid-cols-2 gap-1 md:px-10  px-15">
                   {group.map((ekskul) => (
                     <button
                       key={ekskul.id}
                       onClick={() => setSelectedEkskul(ekskul)}
-                      className="bg-blue-500 mx-3 px-5 py-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
+                      className="bg-blue-500   py-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
                     >
                       <h2>{ekskul.name}</h2>
                     </button>
