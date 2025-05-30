@@ -28,7 +28,7 @@ async function PageTeacher() {
           Tenaga Kependidikan
         </h1>
       </div>
-      <div className="bg-white shadow-2xl md:w-300 w-full md:rounded-xl p-5">
+      <div className="bg-white shadow-2xl md:w-300 w-113 rounded-xl p-5 border border-blue-500">
         <div className="flex flex-col items-center justify-center gap-5">
           {jabatanSections.map((section) => (
             <div key={section.title} className="pt-6 pb-3">

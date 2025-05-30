@@ -15,13 +15,13 @@ const Details = async ({ params }: { params: { id: string } }) => {
           {data.title}
         </h1>
         <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500 ">
-          <div className="border-2 border-blue-500 md:w-full md:h-150">
+          <div className="border-2 border-blue-500 md:w-full w-100 md:h-150 ">
             <Image
               src={data.image}
               width={300}
               height={300}
               alt="card image"
-              className="md:w-full md:h-full object-center h-50"
+              className="w-full md:h-full object-center h-50"
             />
           </div>
           <div className="md:w-auto prose prose-sm md:prose-base max-w-none whitespace-pre-line font-medium">

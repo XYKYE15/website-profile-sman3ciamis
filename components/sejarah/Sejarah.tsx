@@ -6,19 +6,19 @@ const Sejarah = async () => {
   const setting = await getSejarahSetting();
 
   return (
-    <div className="bg-white my-5 mx-auto md:w-250 p-5 rounded-xl flex flex-col items-center justify-center">
+    <div className="bg-white my-5 mx-auto md:w-250 p-5 rounded-xl flex flex-col items-center justify-center border border-blue-500">
       <div className="mb-10 shadow-2xl h-80 rounded-2xl">
         <Image
           src={setting?.imageHero || "/hero.jpg"}
           width={300}
           height={200}
           alt="card image"
-          className="w-full h-full rounded-2xl object-cover"
+          className="w-full h-full rounded-2xl object-cover border border-blue-500"
         />
       </div>
 
       <div className="border border-blue-500 rounded-2xl w-200 p-2">
-        <p className="text-justify leading-relaxed text-base text-blue-900 whitespace-pre-line">
+        <p className=" leading-relaxed text-base text-blue-900 whitespace-pre-line text-center">
           {setting?.sejarah || "Sejarah belum tersedia."}
         </p>
       </div>
