@@ -1,7 +1,7 @@
 "use client";
 
 import { Ekskul } from "@/lib/generated/prisma";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoLogoInstagram, IoLogoTiktok, IoClose } from "react-icons/io5";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -23,6 +23,21 @@ export default function SideLinkClient({
 }) {
   const [selectedEkskul, setSelectedEkskul] = useState<Ekskul | null>(null);
 
+  // ✅ Mencegah scroll dengan class overflow-hidden pada <html>
+  useEffect(() => {
+    const html = document.documentElement;
+
+    if (selectedEkskul) {
+      html.classList.add("overflow-hidden");
+    } else {
+      html.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      html.classList.remove("overflow-hidden");
+    };
+  }, [selectedEkskul]);
+
   const useSlider = ekskulList.length > 4;
   const groupedEkskul = useSlider ? chunkArray(ekskulList, 4) : [];
 
@@ -34,16 +49,16 @@ export default function SideLinkClient({
             modules={[Navigation]}
             spaceBetween={20}
             slidesPerView={1}
-            navigation 
+            navigation
           >
             {groupedEkskul.map((group, index) => (
-              <SwiperSlide key={index}>
-                <div className="grid grid-cols-2 gap-1">
+              <SwiperSlide key={index} className="md:mx-2 mx-10">
+                <div className="grid grid-cols-2 gap-1 w-80">
                   {group.map((ekskul) => (
                     <button
                       key={ekskul.id}
                       onClick={() => setSelectedEkskul(ekskul)}
-                      className="bg-blue-500 p-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
+                      className="bg-blue-500 mx-3 px-5 py-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
                     >
                       <h2>{ekskul.name}</h2>
                     </button>
@@ -108,7 +123,7 @@ export default function SideLinkClient({
                   <IoLogoTiktok /> TikTok
                 </a>
               )}
-              {!(selectedEkskul.instagram || selectedEkskul.tiktok) && (
+              {!selectedEkskul.instagram && !selectedEkskul.tiktok && (
                 <p className="text-center text-sm text-gray-500">
                   Tidak ada media sosial tersedia.
                 </p>

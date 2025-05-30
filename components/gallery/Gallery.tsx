@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 
 interface TeacherImageProps {
@@ -10,6 +10,19 @@ interface TeacherImageProps {
 
 function Gallery({ imageUrl }: TeacherImageProps) {
   const [isZoomed, setIsZoomed] = useState(false);
+
+  // Mencegah scroll saat modal zoom aktif
+  useEffect(() => {
+    if (isZoomed) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isZoomed]);
 
   return (
     <>
