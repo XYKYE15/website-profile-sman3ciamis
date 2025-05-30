@@ -271,3 +271,10 @@ export async function getSocialMediaLinks() {
     },
   });
 }
+
+
+export async function getEkskul() {
+  return await prisma.ekskul.findMany({
+    orderBy: { name: "asc" }, // opsional
+  });
+}

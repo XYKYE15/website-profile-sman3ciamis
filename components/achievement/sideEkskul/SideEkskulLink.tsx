@@ -1,36 +1,122 @@
-import Link from "next/link";
+"use client";
 
-function SideNewsLink() {
-  return (
-    <div className="flex md:flex-row justify-center mb-5">
-      <div className="grid grid-cols-2 gap-1 mx-auto">
-        <Link
-          href={"/"}
-          className="bg-blue-500 p-3 min-w-35 rounded-lg text-white font-semibold hadow-lg hover:shadow-sm hover:bg-blue-400"
-        >
-          <h2>Sciene Club</h2>
-        </Link>
-        <Link
-          href={"/"}
-          className="bg-blue-500 p-3 min-w-35 rounded-lg text-white font-semibold hadow-lg hover:shadow-sm hover:bg-blue-400"
-        >
-          <h2>Basket Club</h2>
-        </Link>
-        <Link
-          href={"/"}
-          className="bg-blue-500 p-3 w-30 ml-5 rounded-lg text-white font-semibold hadow-lg hover:shadow-sm hover:bg-blue-400"
-        >
-          <h2>paskibra</h2>
-        </Link>
-        <Link
-          href={"/"}
-          className="bg-blue-500 p-3 w-30 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
-        >
-          <h2>PMR</h2>
-        </Link>
-      </div>
-    </div>
-  );
+import { Ekskul } from "@/lib/generated/prisma";
+import { useState } from "react";
+import { IoLogoInstagram, IoLogoTiktok, IoClose } from "react-icons/io5";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
+function chunkArray<T>(arr: T[], size: number): T[][] {
+  const result = [];
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
+  }
+  return result;
 }
 
-export default SideNewsLink;
+export default function SideLinkClient({
+  ekskulList,
+}: {
+  ekskulList: Ekskul[];
+}) {
+  const [selectedEkskul, setSelectedEkskul] = useState<Ekskul | null>(null);
+
+  const useSlider = ekskulList.length > 4;
+  const groupedEkskul = useSlider ? chunkArray(ekskulList, 4) : [];
+
+  return (
+    <>
+      <div className="flex justify-center mb-5 w-full max-w-xl mx-auto relative">
+        {useSlider ? (
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={20}
+            slidesPerView={1}
+            navigation 
+          >
+            {groupedEkskul.map((group, index) => (
+              <SwiperSlide key={index}>
+                <div className="grid grid-cols-2 gap-1">
+                  {group.map((ekskul) => (
+                    <button
+                      key={ekskul.id}
+                      onClick={() => setSelectedEkskul(ekskul)}
+                      className="bg-blue-500 p-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
+                    >
+                      <h2>{ekskul.name}</h2>
+                    </button>
+                  ))}
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 w-full max-w-xl">
+            {ekskulList.map((ekskul) => (
+              <button
+                key={ekskul.id}
+                onClick={() => setSelectedEkskul(ekskul)}
+                className="bg-blue-500 p-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
+              >
+                <h2>{ekskul.name}</h2>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {selectedEkskul && (
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.50)" }}
+          onClick={() => setSelectedEkskul(null)}
+        >
+          <div
+            className="bg-white p-6 rounded-lg shadow-xl w-80 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-2 text-blue-500 text-xl"
+              onClick={() => setSelectedEkskul(null)}
+              aria-label="Close modal"
+            >
+              <IoClose />
+            </button>
+            <h3 className="text-xl font-semibold mb-4 text-center">
+              {selectedEkskul.name}
+            </h3>
+            <div className="flex flex-col gap-3">
+              {selectedEkskul.instagram && (
+                <a
+                  href={selectedEkskul.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-400"
+                >
+                  <IoLogoInstagram /> Instagram
+                </a>
+              )}
+              {selectedEkskul.tiktok && (
+                <a
+                  href={selectedEkskul.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800"
+                >
+                  <IoLogoTiktok /> TikTok
+                </a>
+              )}
+              {!(selectedEkskul.instagram || selectedEkskul.tiktok) && (
+                <p className="text-center text-sm text-gray-500">
+                  Tidak ada media sosial tersedia.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

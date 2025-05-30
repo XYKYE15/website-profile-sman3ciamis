@@ -1,12 +1,15 @@
-import SideNewsLink from "./SideEkskulLink";
+import SideLinkClient from "./SideEkskulLink";
+import { getEkskul } from "@/lib/data";
 
-function SideEkskul() {
+async function SideEkskul() {
+  const ekskulList = await getEkskul(); // Fetch data dari database
+
   return (
     <div className="min-h-35 mt-10 flex flex-col items-center">
       <div className="bg-white py-2 w-80 border-t-5 border-blue-500 rounded-b-xl shadow-2xl mb-2">
         <h3 className="text-blue-900 text-xl font-semibold">Ekstrakurikuler</h3>
       </div>
-      <SideNewsLink />
+      <SideLinkClient ekskulList={ekskulList} />
     </div>
   );
 }

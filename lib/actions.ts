@@ -472,6 +472,12 @@ export const updateEkskul = async (
   redirect("/admin/ekskul");
 };
 
+export async function deleteEkskul(id: string) {
+  await prisma.ekskul.delete({
+    where: { id },
+  });
+}
+
 export const uploadSettings = async (
   prevState: unknown,
   formData: FormData
