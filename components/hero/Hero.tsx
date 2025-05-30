@@ -19,7 +19,7 @@ export default async function Hero() {
           alt="hero image"
           priority
         />
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-30"></div>
         <div className="relative flex flex-col justify-center items-center h-full text-center px-4">
           <h1 className="text-8xl font-extrabold leading-tight flex flex-col mb-3 uppercase">
             {data.name || ""}

@@ -16,7 +16,7 @@ const CardNewsHome = ({ data }: { data: News }) => {
       </div>
       <div className="flex flex-col gap-5">
         <div className="text-xl font-medium text-center">
-          <h1 className="line-clamp-2">{data.title}</h1>
+          <h1 className="line-clamp-1">{data.title}</h1>
         </div>
         <div className="px-20 py-2.5 md:px-10  mx-auto centerfont-semibold text-white rounded-sm bg-blue-500 hover:bg-blue-400 transition duration-150 shadow-lg">
           <Link href={`/news/detail/${data.id}`}>Cek Selengkapnya</Link>

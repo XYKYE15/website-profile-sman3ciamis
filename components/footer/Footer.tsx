@@ -1,19 +1,25 @@
-// app/components/Footer.tsx (atau lokasi kamu simpan)
+// components/footer/Footer.tsx
+"use client";
+
 import Link from "next/link";
 import { TfiReload } from "react-icons/tfi";
-import { FaEye, FaYoutube } from "react-icons/fa";
+import { FaEye, FaYoutube, FaTiktok } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
-import { FaTiktok } from "react-icons/fa";
 import Image from "next/image";
 import { MdEmail } from "react-icons/md";
-import { getSocialMediaLinks } from "@/lib/data";
 
-export default async function Footer() {
-  const setting = await getSocialMediaLinks();
+type SettingType = {
+  phone: string;
+  email: string;
+  instagram: string;
+  youtube: string;
+  tiktok: string;
+};
 
+export default function Footer({ setting }: { setting: SettingType }) {
   return (
-    <footer className="">
+    <footer>
       <div className="bg-blue-500 shadow-lg py-5">
         <div className="md:max-w-screen-xl py-5 mx-auto bg-white md:rounded-lg shadow-2xl">
           <div className="grid md:grid-cols-3 grid-cols-1 mx-auto gap-10 md:gap-0">
@@ -24,7 +30,7 @@ export default async function Footer() {
                   src="/assets/logoSmantic.png"
                   width={75}
                   height={75}
-                  alt="Flowbite Logo"
+                  alt="Logo"
                   className="mr-1"
                   priority
                 />
@@ -57,14 +63,14 @@ export default async function Footer() {
               </h2>
               <div className="border-3 border-blue-500 mt-5 rounded-2xl h-65 w-75 md:w-95 mx-auto flex flex-col justify-center gap-5">
                 <Link
-                  href={"/sejarah"}
+                  href="/sejarah"
                   className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
                 >
                   <TfiReload />
                   <span>Sejarah</span>
                 </Link>
                 <Link
-                  href={"/visimisi"}
+                  href="/visimisi"
                   className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
                 >
                   <FaEye />

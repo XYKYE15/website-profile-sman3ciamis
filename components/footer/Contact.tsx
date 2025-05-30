@@ -25,14 +25,14 @@ const Contact = async () => {
                 Jl. Bojonghuni No.87, Maleber, Kec. Ciamis, Kabupaten Ciamis, Jawa Barat 46214
               </h3>
             </div>
-            <div className="mx-auto md:w-100 mt-5 min-w-full md:min-w-0 md:ml-25 ml-12">
+            <div className="mx-auto md:w-100 mt-5 min-w-full md:min-w-0 md:ml-10 ml-10">
               <p className="flex items-center gap-2">
                 <FaPhone />
-                <span>{setting.phone}</span>
+                <span className="text-lg md:text-2xl">{setting.phone}</span>
               </p>
               <p className="flex items-center gap-2">
                 <MdEmail />
-                <span>{setting.email}</span>
+                <span className="text-lg md:text-2xl break-words">{setting.email}</span>
               </p>
             </div>
           </div>
