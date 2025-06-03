@@ -40,9 +40,15 @@ const PageHome = async () => {
 
   return (
     <div className="w-full mx-auto py-10 flex flex-col gap-20 bg-gray-100">
-      <h1 className="text-2xl font-semibold text-blue-900 text-center mt-10">
+      <h1
+        className="text-2xl font-semibold text-blue-900 text-center mt-10"
+        data-aos="fade-down"
+        data-aos-duration="1000"
+        data-aos-delay="100"
+      >
         Berita Terbaru
       </h1>
+
       <div className="grid grid-cols-1 md:grid-cols-3 mx-auto gap-15 md:gap-0">
         {newsList.map((news) => (
           <CardNewsHome key={news.id} data={news} />
@@ -58,7 +64,9 @@ const PageHome = async () => {
       {embedUrl ? (
         <VideoSection videoUrl={embedUrl} />
       ) : (
-        <p className="text-center text-gray-500">Video profil belum tersedia.</p>
+        <p className="text-center text-gray-500">
+          Video profil belum tersedia.
+        </p>
       )}
 
       <Contact />

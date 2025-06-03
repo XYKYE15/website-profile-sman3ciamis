@@ -5,11 +5,13 @@ import { FaUserGroup } from "react-icons/fa6";
 
 const Other = () => {
   return (
-    <div className=" w-full md:bg-blue-500 flex justify-center items-center md:shadow-xl h-5 text-xl">
+    <div className="w-full md:bg-blue-500 flex justify-center items-center md:shadow-xl h-5 text-xl">
       <div className="grid md:grid-cols-3 grid-cols-2 gap-3">
         <Link
           href={"/gallery"}
-          className="bg-white hover:bg-gray-50 py-5 px-20  rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center mx-5"
+          className="bg-white hover:bg-gray-50 py-5 px-20 rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center mx-5"
+          data-aos="fade-right"
+          data-aos-duration="1000"
         >
           <FaImages size={30} />
           <span>Galeri</span>
@@ -17,7 +19,10 @@ const Other = () => {
 
         <Link
           href={"/ekskul"}
-          className="bg-white hover:bg-gray-50  py-6 px-20 rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center mr-5"
+          className="bg-white hover:bg-gray-50 py-6 px-20 rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center mr-5"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-duration="1000"
         >
           <IoFootballSharp size={30} />
           <span>Ekskul</span>
@@ -25,7 +30,10 @@ const Other = () => {
 
         <Link
           href={"/teacher"}
-          className="bg-white hover:bg-gray-50  py-5 px-10   rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center col-span-2  md:col-span-1 mx-5"
+          className="bg-white hover:bg-gray-50 py-5 px-10 rounded-lg font-semibold shadow-xl hover:shadow-sm text-blue-900 space-x-2 flex flex-col items-center col-span-2 md:col-span-1 mx-5"
+          data-aos="fade-left"
+          data-aos-delay="400"
+          data-aos-duration="1000"
         >
           <FaUserGroup size={30} />
           <span>Tenaga Pendidikan</span>
@@ -34,4 +42,5 @@ const Other = () => {
     </div>
   );
 };
+
 export default Other;
