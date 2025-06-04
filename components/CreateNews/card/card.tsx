@@ -56,7 +56,7 @@ export default async function CardNews() {
                     alt={data.title}
                     width={80}
                     height={60}
-                    className="rounded-lg object-cover shadow-sm border border-gray-200 w-50 h-30"
+                    className="rounded-lg object-cover shadow-sm border border-gray-200 w-80 h-30"
                     priority={index < 3}
                   />
                 </td>

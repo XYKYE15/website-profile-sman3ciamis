@@ -18,7 +18,7 @@ const AdminAchievement = () => {
           <h1 className="text-3xl font-bold text-gray-800">Manajemen Prestasi</h1>
           <Link
             href="/admin/achievement/create"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-lg shadow transition"
+            className="inline-block bg-blue-500 hover:bg-blue-400 text-white font-medium px-5 py-2.5 rounded-lg shadow transition"
           >
             + Tambah Prestasi
           </Link>

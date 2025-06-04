@@ -19,7 +19,7 @@ const AdminNews = () => {
           <h1 className="text-3xl font-bold text-gray-800">Manajemen Berita</h1>
           <Link
             href="/admin/news/create"
-            className="bg-blue-500 hover:bg-blue-500 text-white px-5 py-2 rounded-md shadow transition-all"
+            className="bg-blue-500 hover:bg-blue-400 text-white px-5 py-2 rounded-md shadow transition-all"
           >
             + Tambah Berita
           </Link>

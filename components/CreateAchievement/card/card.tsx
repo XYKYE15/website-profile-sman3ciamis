@@ -71,11 +71,11 @@ export default async function CardAchievement(): Promise<JSX.Element> {
                   <div className="relative">
                     <Image
                       src={data.image}
-                      alt={`Gambar pencapaian: ${data.title}`}
+                      alt={`Gambar prestasi: ${data.title}`}
                       width={80}
                       height={60}
                       className="rounded-lg object-cover shadow-sm border border-gray-200 w-50 h-30"
-                      priority={index < 3} // Load first 3 images with priority
+                      priority={index < 3}
                     />
                   </div>
                 </td>
