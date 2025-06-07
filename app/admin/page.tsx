@@ -71,17 +71,17 @@ const PageAdmin = async (): Promise<JSX.Element> => {
       icon: <IoPersonAddSharp className="text-2xl text-blue-600" />,
     },
     {
-      label: "Upload Galeri",
+      label: "Tambah Galeri",
       href: "/admin/gallery/create",
       icon: <IoImagesSharp className="text-2xl text-green-600" />,
     },
     {
-      label: "Tulis Berita",
+      label: "Tambah Berita",
       href: "/admin/news/create",
       icon: <IoNewspaperSharp className="text-2xl text-purple-600" />,
     },
     {
-      label: "Input Prestasi",
+      label: "Tambah Prestasi",
       href: "/admin/achievement/create",
       icon: <IoTrophySharp className="text-2xl text-amber-600" />,
     },
