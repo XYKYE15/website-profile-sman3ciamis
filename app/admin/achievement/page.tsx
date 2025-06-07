@@ -13,7 +13,7 @@ const AdminAchievement = () => {
       <SideBar />
 
       {/* Main Content */}
-      <main className="flex-1 px-8 py-6 mt-20">
+      <main className="flex-1 p-8 mt-25">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Manajemen Prestasi</h1>
           <Link
@@ -24,7 +24,7 @@ const AdminAchievement = () => {
           </Link>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow-md">
+        <div className="bg-white p-6 rounded-md shadow-md">
           <CardAchievement />
         </div>
       </main>

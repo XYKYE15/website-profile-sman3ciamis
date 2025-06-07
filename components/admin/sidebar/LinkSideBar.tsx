@@ -51,7 +51,7 @@ const LinkSideBar = async () => {
       </nav>
 
       {/* User Section */}
-      <div className="mt-5 pt-6 border-t border-slate-200">
+      <div className="mt-1 pt-6 border-t border-slate-200">
         {session ? (
           <div className="space-y-3">
             {/* User Info */}

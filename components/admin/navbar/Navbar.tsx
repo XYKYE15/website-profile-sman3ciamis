@@ -6,7 +6,7 @@ const Navbar = async () => {
 
   return (
     <div className="fixed top-0 w-full bg-blue-500  z-50 flex">
-      <div className="text-white text-center text-2xl font-semibold  px-15 py-5 w-full flex">
+      <div className="text-white text-center text-2xl font-semibold  px-6 py-5 w-full flex">
          <Image
                     src="/assets/logoSmantic.png"
                     width={50}

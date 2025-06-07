@@ -7,6 +7,14 @@ export const getImages = async () => {
       orderBy: {
         createdAt: "desc",
       },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        image: true,
+        createdAt: true,
+        updateAt: true,
+      },
     });
     return result;
   } catch (error) {
@@ -42,6 +50,14 @@ export const getImagesAchievement = async () => {
     const result = await prisma.achievement.findMany({
       orderBy: {
         createdAt: "desc",
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        image: true,
+        createdAt: true,
+        updateAt: true,
       },
     });
     return result;
@@ -207,7 +223,7 @@ export const getSettingsById = async (id: string) => {
 };
 
 export async function getHero() {
-  const hero = await prisma.setting.findFirst(); 
+  const hero = await prisma.setting.findFirst();
   return hero;
 }
 
@@ -259,7 +275,6 @@ export async function getVisiMisiTujuan() {
   });
 }
 
-
 export async function getSocialMediaLinks() {
   return await prisma.setting.findFirst({
     select: {
@@ -271,7 +286,6 @@ export async function getSocialMediaLinks() {
     },
   });
 }
-
 
 export async function getEkskul() {
   return await prisma.ekskul.findMany({
