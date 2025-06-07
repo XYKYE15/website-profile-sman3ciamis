@@ -51,7 +51,7 @@ const EditForm = ({ data }: { data: Achievement }) => {
         </div>
       </div>
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" />
+        <SubmitButton label="Simpan" cancelHref="/admin/achievement"/>
       </div>
     </form>
   );

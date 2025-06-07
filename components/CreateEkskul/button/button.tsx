@@ -5,26 +5,42 @@ import { clsx } from "clsx";
 import Link from "next/link";
 import { deleteEkskul } from "@/lib/actions";
 
+interface SubmitButtonProps {
+  label: string;
+  cancelHref?: string; // Props opsional untuk tombol cancel
+}
+
 // Tombol Submit (untuk Simpan dan Ubah)
-export const SubmitButton = ({ label }: { label: string }) => {
+export const SubmitButton = ({ label, cancelHref }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   const isSaving = label === "Simpan";
   const buttonText = pending ? (isSaving ? "Menyimpan..." : "Mengubah...") : label;
 
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className={clsx(
-        "w-full py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150",
-        {
-          "opacity-50 cursor-progress": pending,
-        }
+    <div className="flex gap-4">
+      <button
+        type="submit"
+        disabled={pending}
+        className={clsx(
+          "flex-1 py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150",
+          {
+            "opacity-50 cursor-progress": pending,
+          }
+        )}
+      >
+        {buttonText}
+      </button>
+
+      {cancelHref && (
+        <Link
+          href={cancelHref}
+          className="flex-1 py-2.5 px-6 text-center text-base font-medium rounded-sm bg-gray-300 hover:bg-gray-400 transition duration-150"
+        >
+          Batal
+        </Link>
       )}
-    >
-      {buttonText}
-    </button>
+    </div>
   );
 };
 

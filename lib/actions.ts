@@ -478,7 +478,7 @@ export async function deleteEkskul(id: string) {
   });
 }
 
-export const uploadSettings = async (
+export const UploadSettings = async (
   prevState: unknown,
   formData: FormData
 ) => {

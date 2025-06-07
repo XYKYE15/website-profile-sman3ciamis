@@ -6,6 +6,7 @@ import { SubmitButton } from "@/components/CreateNews/button/button";
 
 const CreateForm = () => {
   const [state, formAction] = useActionState(uploadGallery, null);
+
   return (
     <form action={formAction}>
       <div className="mb-4 ">
@@ -20,8 +21,10 @@ const CreateForm = () => {
           <p className="text-sm text-red-500 mt-2">{state?.error?.image}</p>
         </div>
       </div>
+
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" />
+        {/* Tambahkan cancelHref untuk tombol Cancel */}
+        <SubmitButton label="Simpan" cancelHref="/admin/gallery" />
       </div>
     </form>
   );

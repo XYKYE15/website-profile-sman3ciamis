@@ -2,39 +2,40 @@
 
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/CreateEkskul/button/button";
-import { uploadSetting } from "@/lib/actions";
-
+import { UploadSettings } from "@/lib/actions";
 
 const CreateSettings = () => {
-  const [state, formAction] = useActionState(uploadSetting, null);
+  const [state, formAction] = useActionState(UploadSettings, null);
+
+  const errorClass = "text-sm text-red-500 break-words max-w-full";
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="max-w-4xl mx-auto px-4">
       {/* Hero Section */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2">Hero Section</h3>
         <input
           type="text"
-          name="name" // sesuai model: nama hero atau judul
+          name="name"
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Judul Hero"
         />
-        <p className="text-sm text-red-500">{state?.error?.name}</p>
+        <p className={errorClass}>{state?.error?.name}</p>
 
         <input
           type="text"
-          name="description" // sesuai model: deskripsi hero
+          name="description"
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mt-2"
           placeholder="Deskripsi Hero"
         />
-        <p className="text-sm text-red-500">{state?.error?.description}</p>
+        <p className={errorClass}>{state?.error?.description}</p>
 
         <input
           type="file"
-          name="imageHero" // sesuai model: imageHero
+          name="imageHero"
           className="file:py-2 file:px-4 file:mr-4 file:border-0 file:bg-blue-500 rounded-sm file:text-white hover:file:bg-blue-400 file:cursor-pointer border border-blue-900 w-full mt-2"
         />
-        <p className="text-sm text-red-500">{state?.error?.imageHero}</p>
+        <p className={errorClass}>{state?.error?.imageHero}</p>
       </div>
 
       {/* Kontak */}
@@ -46,7 +47,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Nomor Telepon"
         />
-        <p className="text-sm text-red-500">{state?.error?.phone}</p>
+        <p className={errorClass}>{state?.error?.phone}</p>
 
         <input
           type="email"
@@ -54,7 +55,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Email"
         />
-        <p className="text-sm text-red-500">{state?.error?.email}</p>
+        <p className={errorClass}>{state?.error?.email}</p>
 
         <input
           type="text"
@@ -62,7 +63,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Link Iframe Google Maps"
         />
-        <p className="text-sm text-red-500">{state?.error?.gmapsLink}</p>
+        <p className={errorClass}>{state?.error?.gmapsLink}</p>
       </div>
 
       {/* Media Sosial */}
@@ -74,7 +75,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Link Instagram"
         />
-        <p className="text-sm text-red-500">{state?.error?.instagram}</p>
+        <p className={errorClass}>{state?.error?.instagram}</p>
 
         <input
           type="text"
@@ -82,7 +83,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Link Youtube"
         />
-        <p className="text-sm text-red-500">{state?.error?.youtube}</p>
+        <p className={errorClass}>{state?.error?.youtube}</p>
 
         <input
           type="text"
@@ -90,7 +91,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Link Tiktok"
         />
-        <p className="text-sm text-red-500">{state?.error?.tiktok}</p>
+        <p className={errorClass}>{state?.error?.tiktok}</p>
       </div>
 
       {/* Video Link */}
@@ -102,7 +103,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Link Video Youtube atau lainnya"
         />
-        <p className="text-sm text-red-500">{state?.error?.videoUrl}</p>
+        <p className={errorClass}>{state?.error?.videoUrl}</p>
       </div>
 
       {/* Sejarah */}
@@ -114,7 +115,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-4"
           placeholder="Tuliskan sejarah di sini..."
         />
-        <p className="text-sm text-red-500">{state?.error?.sejarah}</p>
+        <p className={errorClass}>{state?.error?.sejarah}</p>
       </div>
 
       {/* Visi */}
@@ -126,7 +127,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-4"
           placeholder="Tuliskan visi di sini..."
         />
-        <p className="text-sm text-red-500">{state?.error?.visi}</p>
+        <p className={errorClass}>{state?.error?.visi}</p>
       </div>
 
       {/* Misi */}
@@ -138,7 +139,7 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-4"
           placeholder="Tuliskan misi di sini..."
         />
-        <p className="text-sm text-red-500">{state?.error?.misi}</p>
+        <p className={errorClass}>{state?.error?.misi}</p>
       </div>
 
       {/* Tujuan */}
@@ -150,12 +151,12 @@ const CreateSettings = () => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Tuliskan tujuan di sini..."
         />
-        <p className="text-sm text-red-500">{state?.error?.tujuan}</p>
+        <p className={errorClass}>{state?.error?.tujuan}</p>
       </div>
 
       {/* Submit Button */}
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" />
+        <SubmitButton label="Simpan" cancelHref="/admin/settings" />
       </div>
     </form>
   );

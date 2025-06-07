@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { updateSettings } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateEkskul/button/button"; // sesuaikan path jika perlu
+import { SubmitButton } from "@/components/CreateEkskul/button/button";
 import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,6 @@ const EditForm = ({ data }: { data: Setting }) => {
   const router = useRouter();
   const [state, formAction] = useActionState(updateSettings.bind(null, data.id), null);
 
-  // Redirect ke /admin/settings saat update berhasil
   useEffect(() => {
     if (state?.success) {
       router.push("/admin/settings");
@@ -149,7 +148,7 @@ const EditForm = ({ data }: { data: Setting }) => {
         </p>
       </div>
 
-      {/* Video */}
+      {/* Video URL */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2">Video URL</h3>
         <input
@@ -164,7 +163,7 @@ const EditForm = ({ data }: { data: Setting }) => {
         </p>
       </div>
 
-      {/* Sejarah - Visi - Misi - Tujuan */}
+      {/* Sejarah, Visi, Misi, Tujuan */}
       {[
         { name: "sejarah", label: "Sejarah", value: data.sejarah },
         { name: "visi", label: "Visi", value: data.visi },
@@ -181,13 +180,13 @@ const EditForm = ({ data }: { data: Setting }) => {
             placeholder={`Tuliskan ${label.toLowerCase()} di sini...`}
           />
           <p className="text-sm text-red-500">
-            {isFieldError(state?.error) ? state.error.name?.[0] : null}
+            {isFieldError(state?.error) ? state.error[name]?.[0] : null}
           </p>
         </div>
       ))}
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" />
+        <SubmitButton label="Simpan" cancelHref="/admin/settings"/>
       </div>
     </form>
   );
