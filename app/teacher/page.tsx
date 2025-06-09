@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Tenaga Kependidikan",
+  title: "Tenaga Kependidikan SMAN 3 Ciamis",
 };
 
 async function PageTeacher() {

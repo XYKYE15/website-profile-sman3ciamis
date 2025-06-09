@@ -1,4 +1,10 @@
 import Sejarah from "@/components/sejarah/Sejarah"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sejarah SMAN 3 Ciamis",
+};
+
 function PageSejarah() {
   return (
     <div className="py-25">

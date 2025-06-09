@@ -28,15 +28,15 @@ function Gallery({ imageUrl }: TeacherImageProps) {
     <>
       {/* Thumbnail image */}
       <div
-        className="border border-blue-500 md:h-40 w-full h-25 rounded-lg cursor-pointer overflow-hidden"
+        className="border border-blue-500 md:h-50 w-50 h-65 rounded-lg cursor-pointer overflow-hidden"
         onClick={() => setIsZoomed(true)}
       >
         <Image
           src={imageUrl}
-          width={300}
+          width={500}
           height={300}
           alt="card image"
-          className="w-full h-full rounded-lg object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
 
@@ -64,7 +64,7 @@ function Gallery({ imageUrl }: TeacherImageProps) {
               alt="Zoomed image"
               width={800}
               height={800}
-              className="rounded-lg object-contain max-w-full max-h-full"
+              className="rounded-lg object-contain max-w-full h-150"
             />
           </div>
         </div>

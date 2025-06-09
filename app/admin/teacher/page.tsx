@@ -2,6 +2,11 @@ import SideBar from "@/components/admin/sidebar/SideBar";
 import Navbar from "@/components/admin/navbar/Navbar";
 import TeacherTable from "@/components/CreateTeacher/Card/Card";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "SMAN 3 Ciamis | Manajemen Tenaga Pendidikan",
+};
 
 const AdminTeacherPage = () => {
   return (

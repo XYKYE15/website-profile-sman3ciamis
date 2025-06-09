@@ -3,6 +3,11 @@ import CardNews from "@/components/news/Card";
 import { getImages, getImagesAchievement } from "@/lib/data";
 import Pagination from "@/components/pagination/Pagination";
 import SideAchievement from "@/components/sideAchievement/SideAchievement";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Berita SMAN 3 Ciamis",
+};
 
 interface PageProps {
   searchParams?: { page?: string };

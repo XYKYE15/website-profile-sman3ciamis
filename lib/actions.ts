@@ -477,7 +477,6 @@ export async function deleteEkskul(id: string) {
     where: { id },
   });
 }
-
 export const UploadSettings = async (
   prevState: unknown,
   formData: FormData
@@ -505,12 +504,12 @@ export const UploadSettings = async (
     return { error: validatedFields.error.flatten().fieldErrors };
   }
 
-  // Upload gambar jika ada imageHero (file) di form
   let imageHeroUrl: string | null = null;
   if (rawData.imageHero instanceof File && rawData.imageHero.size > 0) {
     const { url } = await put(rawData.imageHero.name, rawData.imageHero, {
       access: "public",
       multipart: true,
+      allowOverwrite: true,
     });
     imageHeroUrl = url;
   }
@@ -611,3 +610,19 @@ export const updateSettings = async (
 
   redirect("/admin/settings");
 };
+
+export async function deleteSettingById(id: string) {
+
+  if (!id) throw new Error("ID tidak boleh kosong");
+
+  const setting = await prisma.setting.findUnique({ where: { id } });
+
+  if (!setting) {
+    console.warn("Data setting tidak ditemukan, tidak ada yang dihapus.");
+    return null;
+  }
+
+  await prisma.setting.delete({ where: { id } });
+
+  redirect("/admin/settings");
+}

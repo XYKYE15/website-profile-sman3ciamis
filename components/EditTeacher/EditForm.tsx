@@ -52,7 +52,7 @@ const EditForm = ({ data }: { data: Teacher }) => {
           type="text"
           name="note"
           className="py-2 px-4 rounded-sm border border-blue-900 w-full"
-          placeholder="Keterangan Jabatan (opsional)"
+          placeholder="Keterangan Jabatan"
           defaultValue={data.note ?? ""}
         />
         <p className="text-sm text-red-500 mt-2">{state?.error?.note}</p>

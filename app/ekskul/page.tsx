@@ -1,6 +1,11 @@
 // app/ekskul/page.tsx
 import { prisma } from "@/lib/prisma";
 import EkskulCard from "@/components/ekskul/Ekskul";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ekstrakurikuler SMAN 3 Ciamis",
+};
 
 const PageEkskul = async () => {
   const ekskullist = await prisma.ekskul.findMany();

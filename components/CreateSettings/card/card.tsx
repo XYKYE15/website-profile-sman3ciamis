@@ -142,7 +142,7 @@ const CardSettings = async () => {
       {/* Action Buttons */}
       <div className="flex justify-end gap-4 items-center">
         <EditButtonSettings id={data.id} />
-        <DeleteButton />
+        <DeleteButton id={data.id}/>
       </div>
     </div>
   );

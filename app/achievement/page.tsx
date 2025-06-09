@@ -1,9 +1,13 @@
 import Card from "../../components/achievement/card/Card";
 import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
-
 import { getImages, getImagesAchievement } from "@/lib/data";
 import Pagination from "@/components/pagination/Pagination";
 import SideNews from "@/components/sideNews/SideNews";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Prestasi SMAN 3 Ciamis",
+};
 
 interface PageAchievementProps {
   searchParams?: {

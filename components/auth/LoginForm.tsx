@@ -45,7 +45,7 @@ const LoginForm = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-400 mb-1"
             >
-              Email
+              Username
             </label>
             <input
               name="email"
@@ -53,7 +53,7 @@ const LoginForm = () => {
               autoComplete="email"
               required
               className="w-full bg-gray-100 border border-gray-700 text-blue-900 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="email@example.com"
+              placeholder="Username"
             />
             <div aria-live="polite" aria-atomic="true">
               <span className="text-sm text-red-500 mt-2">

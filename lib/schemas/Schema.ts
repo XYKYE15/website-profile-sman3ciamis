@@ -190,9 +190,9 @@ export const UploadFormSettings = z.object({
       message: "Gunakan link embed Google Maps (yang mengandung 'maps/embed')",
     }),
 
-  instagram: z.string().url({ message: "Link Instagram tidak valid" }),
-  youtube: z.string().url({ message: "Link YouTube tidak valid" }),
-  tiktok: z.string().url({ message: "Link TikTok tidak valid" }),
+  instagram: z.string().optional().or(z.literal("")),
+  youtube: z.string().optional().or(z.literal("")),
+  tiktok: z.string().optional().or(z.literal("")),
 
   videoUrl: z.string().url({ message: "Link video tidak valid" }),
 

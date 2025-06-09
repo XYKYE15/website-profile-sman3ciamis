@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
 import Link from "next/link";
-import { deleteAllSettings } from "@/lib/actions";
+import { deleteSettingById } from "@/lib/actions";
 
 // Tombol Submit (Simpan / Ubah)
 export const SubmitButton = ({ label }: { label: string }) => {
@@ -47,16 +47,18 @@ export const EditButtonSettings = ({
     </Link>
   );
 };
-// Tombol Delete Semua Settings
-export const DeleteButton = () => {
+
+
+export const DeleteButton = ({ id }: { id: string }) => {
+  const deleteSettingsWithId = deleteSettingById.bind(null, id);
+
   return (
-    <form action={deleteAllSettings}>
+    <form action={deleteSettingsWithId}>
       <DeleteBtn />
     </form>
   );
 };
 
-// Tombol Hapus Internal
 const DeleteBtn = () => {
   const { pending } = useFormStatus();
 
@@ -65,7 +67,7 @@ const DeleteBtn = () => {
       type="submit"
       disabled={pending}
       className={clsx(
-        "w- py-2.5 px-6 text-base font-medium rounded-sm transition duration-150",
+        "w-full py-2.5 px-6 text-base font-medium rounded-sm transition duration-150",
         {
           "bg-red-500 hover:bg-red-400 text-white": !pending,
           "bg-red-300 text-white cursor-progress opacity-50": pending,

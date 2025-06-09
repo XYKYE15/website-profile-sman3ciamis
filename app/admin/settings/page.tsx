@@ -3,6 +3,11 @@ import SideBar from "@/components/admin/sidebar/SideBar";
 import CardSettings from "@/components/CreateSettings/card/card";
 import Link from "next/link";
 import { getSettings } from "@/lib/data";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "SMAN 3 Ciamis | Manajemen Pengaturan",
+};
 
 export default async function AdminSettings() {
   const settings = await getSettings();

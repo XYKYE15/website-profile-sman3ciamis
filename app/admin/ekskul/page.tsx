@@ -1,7 +1,12 @@
 import Navbar from "@/components/admin/navbar/Navbar";
 import SideBar from "@/components/admin/sidebar/SideBar";
 import CardEkskul from "@/components/CreateEkskul/card/cardEkskul";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+    title: "SMAN 3 Ciamis | Manajemen Ekstrakurikuler",
+};
 
 const AdminEkskul = () => {
   return (

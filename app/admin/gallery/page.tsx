@@ -2,6 +2,11 @@ import SideBar from "@/components/admin/sidebar/SideBar";
 import CardGalleryAdmin from "@/components/CreateGallery/Card/Card";
 import Navbar from "@/components/admin/navbar/Navbar";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "SMAN 3 Ciamis | Manajemen Gallery",
+};
 
 const AdminGallery = () => {
   return (

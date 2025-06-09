@@ -23,8 +23,12 @@ const CardGalleryAdmin = async () => {
             />
           </svg>
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-1">Belum Ada Gambar Galeri</h3>
-        <p className="text-gray-500 text-sm">Tambahkan foto untuk mulai melihat galeri di sini</p>
+        <h3 className="text-lg font-medium text-gray-900 mb-1">
+          Belum Ada Gambar Galeri
+        </h3>
+        <p className="text-gray-500 text-sm">
+          Tambahkan foto untuk mulai melihat galeri di sini
+        </p>
       </div>
     );
   }
@@ -57,7 +61,7 @@ const CardGalleryAdmin = async () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Foto
+                Gambar
               </th>
               <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Tanggal Ditambahkan
@@ -76,15 +80,18 @@ const CardGalleryAdmin = async () => {
                 }`}
               >
                 <td className="px-6 py-4">
-                  <Image
-                    src={item.image}
-                    alt="Gallery"
-                    width={100}
-                    height={80}
-                    className="rounded-lg object-cover border border-gray-200 shadow-sm w-50 h-30"
-                    priority={index < 3}
-                  />
+                  <div className="relative w-[150px] h-[150px] border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt="Gallery"
+                      width={500}
+                      height={300}
+                      className="object-cover h-full"
+                      priority={index < 3}
+                    />
+                  </div>
                 </td>
+
                 <td className="px-6 py-4 text-xs text-gray-600 whitespace-nowrap">
                   {/* Tanggal */}
                   <p>

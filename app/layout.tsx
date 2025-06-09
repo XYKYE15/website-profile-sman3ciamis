@@ -11,7 +11,7 @@ const fontRoboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "",
+  title: "SMAN 3 Ciamis",
   description: "Profile SMAN 3 Ciamis",
   icons: {
     icon: "/favicon.png",
@@ -24,10 +24,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const setting = await getSocialMediaLinks();
-
-  if (!setting) {
-    throw new Error("Setting data not found");
-  }
 
   return (
     <html lang="en">

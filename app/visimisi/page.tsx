@@ -1,4 +1,9 @@
 import VisiMisi from "@/components/visiMisi/VisiMisi";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Visi & Misi SMAN 3 Ciamis",
+};
 
 function page() {
   return (
