@@ -1,7 +1,6 @@
 import { getImagesTeacher } from "@/lib/data";
 import Image from "next/image";
 import { DeleteButton, EditButton } from "../Button/button";
-;
 
 export default async function TeacherTable() {
   const images = await getImagesTeacher();
@@ -24,8 +23,12 @@ export default async function TeacherTable() {
             />
           </svg>
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-1">Belum Ada Data Guru</h3>
-        <p className="text-gray-500 text-sm">Tambahkan tenaga pendidik untuk mulai melihat data di sini</p>
+        <h3 className="text-lg font-medium text-gray-900 mb-1">
+          Belum Ada Data Guru
+        </h3>
+        <p className="text-gray-500 text-sm">
+          Tambahkan tenaga pendidik untuk mulai melihat data di sini
+        </p>
       </div>
     );
   }
@@ -35,7 +38,6 @@ export default async function TeacherTable() {
       {/* Header */}
       <div className="bg-gradient-to-r from-slate-800 to-slate-700 px-6 py-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-          {/* Optional icon */}
           <svg
             className="w-5 h-5"
             fill="none"
@@ -67,6 +69,12 @@ export default async function TeacherTable() {
               <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Jabatan
               </th>
+              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                NIP
+              </th>
+              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                NUPTK
+              </th>
               <th className="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Aksi
               </th>
@@ -86,19 +94,29 @@ export default async function TeacherTable() {
                     alt={item.title}
                     width={100}
                     height={80}
-                    className="rounded-lg object-cover border border-gray-200 shadow-sm w-50 h-30"
+                    className="rounded-lg object-cover border border-gray-200 shadow-sm w-30 h-35"
                     priority={index < 3}
                   />
                 </td>
-                <td className="px-6 py-4 text-sm font-medium text-gray-900">{item.title}</td>
+                <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                  {item.title}
+                </td>
                 <td className="px-6 py-4 text-sm text-gray-700 max-w-md">
                   <p className="font-medium">{item.description}</p>
                   {item.note && (
-                    <p className="text-xs text-gray-500 italic">({item.note})</p>
+                    <p className="text-xs text-gray-500 italic">
+                      ({item.note})
+                    </p>
                   )}
                 </td>
+                <td className="px-6 py-4 text-sm text-gray-700">
+                  {item.nip || <span className="text-gray-400 italic">-</span>}
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-700">
+                  {item.nuptk || <span className="text-gray-400 italic">-</span>}
+                </td>
                 <td className="px-6 py-4 text-center space-x-2">
-                  <div className="flex justify-center  items-center gap-2">
+                  <div className="flex flex-col gap-2">
                     <EditButton id={item.id} />
                     <DeleteButton id={item.id} />
                   </div>
@@ -112,7 +130,10 @@ export default async function TeacherTable() {
       {/* Footer */}
       <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex justify-between text-sm text-gray-600">
         <span>Total: {images.length} guru</span>
-        <span className="text-xs">Terakhir diperbarui: {new Date().toLocaleDateString("id-ID")}</span>
+        <span className="text-xs">
+          Terakhir diperbarui:{" "}
+          {new Date().toLocaleDateString("id-ID")}
+        </span>
       </div>
     </div>
   );

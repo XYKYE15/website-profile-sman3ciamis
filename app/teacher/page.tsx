@@ -1,5 +1,5 @@
 import TeacherImage from "@/components/teacherImage/Teacher";
-import { prisma } from "@/lib/prisma"; 
+import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,6 +9,15 @@ export const metadata: Metadata = {
 async function PageTeacher() {
   const data = await prisma.teacher.findMany({
     orderBy: { createdAt: "asc" },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      note: true,
+      image: true,
+      nip: true,
+      nuptk: true,
+    },
   });
 
   const groupByRole = (role: string) =>
@@ -39,10 +48,9 @@ async function PageTeacher() {
               </div>
               <div
                 className={
-                  section.title === "Kepala Sekolah" ||
-                  section.title === "Staff Wakasek"
-                    ? "flex gap-5 flex-col md:flex-row justify-center"
-                    : "grid md:grid-cols-4 grid-cols-1 gap-2"
+                  section.teachers.length === 1
+                    ? "flex justify-center"
+                    : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5"
                 }
               >
                 {section.teachers.map((teacher) => (
@@ -52,6 +60,8 @@ async function PageTeacher() {
                     position={teacher.description}
                     note={teacher.note}
                     imageUrl={teacher.image}
+                    nip={teacher.nip ?? undefined}
+                    nuptk={teacher.nuptk ?? undefined}
                   />
                 ))}
               </div>

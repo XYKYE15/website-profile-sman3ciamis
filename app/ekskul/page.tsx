@@ -11,7 +11,7 @@ const PageEkskul = async () => {
   const ekskullist = await prisma.ekskul.findMany();
 
   return (
-    <div className="pt-30 flex flex-col items-center min-h-screen">
+    <div className="pt-30 pb-15 flex flex-col items-center min-h-screen">
       <div className="md:mx-10 mx-3 my-5">
         <h1 className="md:text-2xl text-lg text-blue-900 font-semibold mb-10 text-center">
           Ekstrakurikuler SMAN 3 Ciamis

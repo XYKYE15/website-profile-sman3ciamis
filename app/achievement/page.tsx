@@ -19,7 +19,7 @@ export default async function PageAchievement({
   searchParams,
 }: PageAchievementProps) {
   const allNews = await getImages();
-  const page = parseInt(searchParams?.page ?? "1", 10); // halaman default 1
+  const page = parseInt(searchParams?.page ?? "1", 10); 
   const perPage = 3;
 
   const images = await getImagesAchievement();

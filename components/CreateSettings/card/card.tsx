@@ -88,9 +88,9 @@ const CardSettings = async () => {
             { label: "YouTube", value: data.youtube },
             { label: "TikTok", value: data.tiktok },
           ].map((item, idx) => (
-            <div key={idx} className="p-4 bg-gray-100 rounded-lg shadow-sm">
+            <div key={idx} className="p-4 bg-gray-100 rounded-lg shadow-sm ">
               <h3 className="font-medium text-gray-700">{item.label}</h3>
-              <p className="text-gray-600">{item.value}</p>
+              <p className="text-gray-600 break-words">{item.value}</p>
             </div>
           ))}
         </div>

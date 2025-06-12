@@ -8080,6 +8080,8 @@ export namespace Prisma {
     description: string | null
     note: string | null
     image: string | null
+    nip: string | null
+    nuptk: string | null
     createdAt: Date | null
     updateAt: Date | null
   }
@@ -8090,6 +8092,8 @@ export namespace Prisma {
     description: string | null
     note: string | null
     image: string | null
+    nip: string | null
+    nuptk: string | null
     createdAt: Date | null
     updateAt: Date | null
   }
@@ -8100,6 +8104,8 @@ export namespace Prisma {
     description: number
     note: number
     image: number
+    nip: number
+    nuptk: number
     createdAt: number
     updateAt: number
     _all: number
@@ -8112,6 +8118,8 @@ export namespace Prisma {
     description?: true
     note?: true
     image?: true
+    nip?: true
+    nuptk?: true
     createdAt?: true
     updateAt?: true
   }
@@ -8122,6 +8130,8 @@ export namespace Prisma {
     description?: true
     note?: true
     image?: true
+    nip?: true
+    nuptk?: true
     createdAt?: true
     updateAt?: true
   }
@@ -8132,6 +8142,8 @@ export namespace Prisma {
     description?: true
     note?: true
     image?: true
+    nip?: true
+    nuptk?: true
     createdAt?: true
     updateAt?: true
     _all?: true
@@ -8215,6 +8227,8 @@ export namespace Prisma {
     description: string
     note: string | null
     image: string
+    nip: string | null
+    nuptk: string | null
     createdAt: Date
     updateAt: Date
     _count: TeacherCountAggregateOutputType | null
@@ -8242,6 +8256,8 @@ export namespace Prisma {
     description?: boolean
     note?: boolean
     image?: boolean
+    nip?: boolean
+    nuptk?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }, ExtArgs["result"]["teacher"]>
@@ -8252,6 +8268,8 @@ export namespace Prisma {
     description?: boolean
     note?: boolean
     image?: boolean
+    nip?: boolean
+    nuptk?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }, ExtArgs["result"]["teacher"]>
@@ -8262,6 +8280,8 @@ export namespace Prisma {
     description?: boolean
     note?: boolean
     image?: boolean
+    nip?: boolean
+    nuptk?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }, ExtArgs["result"]["teacher"]>
@@ -8272,11 +8292,13 @@ export namespace Prisma {
     description?: boolean
     note?: boolean
     image?: boolean
+    nip?: boolean
+    nuptk?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }
 
-  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "note" | "image" | "createdAt" | "updateAt", ExtArgs["result"]["teacher"]>
+  export type TeacherOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "note" | "image" | "nip" | "nuptk" | "createdAt" | "updateAt", ExtArgs["result"]["teacher"]>
 
   export type $TeacherPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Teacher"
@@ -8287,6 +8309,8 @@ export namespace Prisma {
       description: string
       note: string | null
       image: string
+      nip: string | null
+      nuptk: string | null
       createdAt: Date
       updateAt: Date
     }, ExtArgs["result"]["teacher"]>
@@ -8717,6 +8741,8 @@ export namespace Prisma {
     readonly description: FieldRef<"Teacher", 'String'>
     readonly note: FieldRef<"Teacher", 'String'>
     readonly image: FieldRef<"Teacher", 'String'>
+    readonly nip: FieldRef<"Teacher", 'String'>
+    readonly nuptk: FieldRef<"Teacher", 'String'>
     readonly createdAt: FieldRef<"Teacher", 'DateTime'>
     readonly updateAt: FieldRef<"Teacher", 'DateTime'>
   }
@@ -12333,6 +12359,8 @@ export namespace Prisma {
     description: 'description',
     note: 'note',
     image: 'image',
+    nip: 'nip',
+    nuptk: 'nuptk',
     createdAt: 'createdAt',
     updateAt: 'updateAt'
   };
@@ -12851,6 +12879,8 @@ export namespace Prisma {
     description?: StringFilter<"Teacher"> | string
     note?: StringNullableFilter<"Teacher"> | string | null
     image?: StringFilter<"Teacher"> | string
+    nip?: StringNullableFilter<"Teacher"> | string | null
+    nuptk?: StringNullableFilter<"Teacher"> | string | null
     createdAt?: DateTimeFilter<"Teacher"> | Date | string
     updateAt?: DateTimeFilter<"Teacher"> | Date | string
   }
@@ -12861,12 +12891,16 @@ export namespace Prisma {
     description?: SortOrder
     note?: SortOrderInput | SortOrder
     image?: SortOrder
+    nip?: SortOrderInput | SortOrder
+    nuptk?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }
 
   export type TeacherWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    nip?: string
+    nuptk?: string
     AND?: TeacherWhereInput | TeacherWhereInput[]
     OR?: TeacherWhereInput[]
     NOT?: TeacherWhereInput | TeacherWhereInput[]
@@ -12876,7 +12910,7 @@ export namespace Prisma {
     image?: StringFilter<"Teacher"> | string
     createdAt?: DateTimeFilter<"Teacher"> | Date | string
     updateAt?: DateTimeFilter<"Teacher"> | Date | string
-  }, "id">
+  }, "id" | "nip" | "nuptk">
 
   export type TeacherOrderByWithAggregationInput = {
     id?: SortOrder
@@ -12884,6 +12918,8 @@ export namespace Prisma {
     description?: SortOrder
     note?: SortOrderInput | SortOrder
     image?: SortOrder
+    nip?: SortOrderInput | SortOrder
+    nuptk?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
     _count?: TeacherCountOrderByAggregateInput
@@ -12900,6 +12936,8 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Teacher"> | string
     note?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     image?: StringWithAggregatesFilter<"Teacher"> | string
+    nip?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
+    nuptk?: StringNullableWithAggregatesFilter<"Teacher"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Teacher"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"Teacher"> | Date | string
   }
@@ -13529,6 +13567,8 @@ export namespace Prisma {
     description: string
     note?: string | null
     image: string
+    nip?: string | null
+    nuptk?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
   }
@@ -13539,6 +13579,8 @@ export namespace Prisma {
     description: string
     note?: string | null
     image: string
+    nip?: string | null
+    nuptk?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
   }
@@ -13549,6 +13591,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
+    nip?: NullableStringFieldUpdateOperationsInput | string | null
+    nuptk?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13559,6 +13603,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
+    nip?: NullableStringFieldUpdateOperationsInput | string | null
+    nuptk?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13569,6 +13615,8 @@ export namespace Prisma {
     description: string
     note?: string | null
     image: string
+    nip?: string | null
+    nuptk?: string | null
     createdAt?: Date | string
     updateAt?: Date | string
   }
@@ -13579,6 +13627,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
+    nip?: NullableStringFieldUpdateOperationsInput | string | null
+    nuptk?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13589,6 +13639,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     note?: NullableStringFieldUpdateOperationsInput | string | null
     image?: StringFieldUpdateOperationsInput | string
+    nip?: NullableStringFieldUpdateOperationsInput | string | null
+    nuptk?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14217,6 +14269,8 @@ export namespace Prisma {
     description?: SortOrder
     note?: SortOrder
     image?: SortOrder
+    nip?: SortOrder
+    nuptk?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -14227,6 +14281,8 @@ export namespace Prisma {
     description?: SortOrder
     note?: SortOrder
     image?: SortOrder
+    nip?: SortOrder
+    nuptk?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -14237,6 +14293,8 @@ export namespace Prisma {
     description?: SortOrder
     note?: SortOrder
     image?: SortOrder
+    nip?: SortOrder
+    nuptk?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }

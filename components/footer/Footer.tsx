@@ -1,4 +1,3 @@
-// components/footer/Footer.tsx
 "use client";
 
 import Link from "next/link";
@@ -85,30 +84,38 @@ export default function Footer({ setting }: { setting: SettingType }) {
                 Hubungi Kami :
               </h2>
               <div className="border-3 border-blue-500 mt-5 rounded-2xl h-65 w-75 md:w-95 mx-auto flex flex-col justify-center gap-5">
-                <Link
-                  href={setting?.instagram || "/"}
-                  target="_blank"
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
-                >
-                  <AiFillInstagram size={22} />
-                  Instagram
-                </Link>
-                <Link
-                  href={setting?.youtube || "/"}
-                  target="_blank"
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
-                >
-                  <FaYoutube size={22} />
-                  Youtube
-                </Link>
-                <Link
-                  href={setting?.tiktok || "/"}
-                  target="_blank"
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
-                >
-                  <FaTiktok size={22} />
-                  Tiktok
-                </Link>
+                {setting.instagram && (
+                  <Link
+                    href={setting.instagram}
+                    target="_blank"
+                    className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
+                  >
+                    <AiFillInstagram size={22} />
+                    Instagram
+                  </Link>
+                )}
+
+                {setting.youtube && (
+                  <Link
+                    href={setting.youtube}
+                    target="_blank"
+                    className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
+                  >
+                    <FaYoutube size={22} />
+                    Youtube
+                  </Link>
+                )}
+
+                {setting.tiktok && (
+                  <Link
+                    href={setting.tiktok}
+                    target="_blank"
+                    className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
+                  >
+                    <FaTiktok size={22} />
+                    Tiktok
+                  </Link>
+                )}
               </div>
             </div>
           </div>

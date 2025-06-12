@@ -95,6 +95,15 @@ export const getImagesTeacher = async () => {
       orderBy: {
         createdAt: "desc",
       },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        note: true,
+        image: true,
+        nip: true,
+        nuptk: true,
+      },
     });
     return result;
   } catch (error) {
@@ -110,8 +119,15 @@ export const getImagesTeacher = async () => {
 export const getImagesTeacherById = async (id: string) => {
   try {
     const result = await prisma.teacher.findUnique({
-      where: {
-        id,
+      where: { id },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        note: true,
+        image: true,
+        nip: true,
+        nuptk: true,
       },
     });
     return result;

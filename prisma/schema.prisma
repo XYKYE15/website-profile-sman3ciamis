@@ -62,7 +62,7 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-//model News
+//model Berita
 model News {
   id          String   @id @default(cuid())
   title       String
@@ -72,6 +72,7 @@ model News {
   updateAt    DateTime @updatedAt
 }
 
+//model Prestasi
 model Achievement {
   id          String   @id @default(cuid())
   title       String
@@ -81,16 +82,21 @@ model Achievement {
   updateAt    DateTime @updatedAt
 }
 
+//model data tenaga pendidikan
 model Teacher {
   id          String   @id @default(cuid())
   title       String
   description String
   note        String?
   image       String
+  nip         String?  @unique
+  nuptk       String?  @unique
   createdAt   DateTime @default(now())
   updateAt    DateTime @updatedAt
 }
 
+
+//model galeri
 model Gallery {
   id        String   @id @default(cuid())
   image     String
@@ -98,6 +104,7 @@ model Gallery {
   updateAt  DateTime @updatedAt
 }
 
+//model ekskul
 model Ekskul {
   id        String   @id @default(cuid())
   name      String
@@ -108,6 +115,7 @@ model Ekskul {
   updateAt  DateTime @updatedAt
 }
 
+//model pengaturan
 model Setting {
   id            String   @id @default(cuid())
   name          String

@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { FaTiktok } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
-import { DeleteButton } from "@/components/CreateEkskul/button/button";
+import {
+  DeleteButton,
+  EditButton,
+} from "@/components/CreateEkskul/button/button";
 import { getImagesEkskul } from "@/lib/data";
 import Link from "next/link";
 
@@ -119,9 +122,11 @@ const CardEkskul = async () => {
                     )}
                   </div>
                 </td>
-                <td className="px-6 py-3 text-center">
-                  
-                  <DeleteButton id={data.id} />
+                <td className="px-6 py-6 text-center space-x-2">
+                  <div className="flex flex-col items-center">
+                    <EditButton id={data.id} />
+                    <DeleteButton id={data.id} />
+                  </div>
                 </td>
               </tr>
             ))}

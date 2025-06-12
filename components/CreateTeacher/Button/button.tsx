@@ -33,7 +33,7 @@ export const EditButton = ({ id }: { id: string }) => {
   return (
     <Link
       href={`/admin/teacher/edit/${id}`}
-      className="w-25 block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+      className="w-full block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       Edit
     </Link>

@@ -309,7 +309,7 @@ export const updateTeacher = async (
   const data = await getImagesTeacherById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
 
-  const { title, description, note, image } = validatedFields.data;
+  const { title, description, note, image, nip, nuptk } = validatedFields.data;
   let imagePath = data.image;
 
   try {
@@ -324,7 +324,14 @@ export const updateTeacher = async (
 
     await prisma.teacher.update({
       where: { id },
-      data: { title, description, note, image: imagePath },
+      data: {
+        title,
+        description,
+        note,
+        image: imagePath,
+        nip: nip || null,
+        nuptk: nuptk || null, 
+      },
     });
   } catch (error) {
     console.error("Update error:", error);
@@ -472,11 +479,21 @@ export const updateEkskul = async (
   redirect("/admin/ekskul");
 };
 
-export async function deleteEkskul(id: string) {
-  await prisma.ekskul.delete({
-    where: { id },
-  });
-}
+export const deleteEkskul = async (id: string) => {
+  const data = await getImagesEkskulById(id);
+  if (!data) return { message: "Tidak ada data ditemukan" };
+
+  try {
+    await del(data.image);
+    await prisma.ekskul.delete({ where: { id } });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return { message: "Gagal menghapus data ekskul" };
+  }
+
+  redirect("/admin/ekskul");
+};
+
 export const UploadSettings = async (
   prevState: unknown,
   formData: FormData
@@ -612,7 +629,6 @@ export const updateSettings = async (
 };
 
 export async function deleteSettingById(id: string) {
-
   if (!id) throw new Error("ID tidak boleh kosong");
 
   const setting = await prisma.setting.findUnique({ where: { id } });

@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { getImages } from "@/lib/data";
-import { DeleteButton, EditButton } from "@/components/CreateNews/button/button";
+import {
+  DeleteButton,
+  EditButton,
+} from "@/components/CreateNews/button/button";
 import { JSX } from "react";
 
 interface NewsData {
@@ -19,7 +22,12 @@ export default async function CardNews(): Promise<JSX.Element> {
     return (
       <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-12 text-center">
         <div className="text-gray-400 mb-2">
-          <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            className="w-16 h-16 mx-auto mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -28,8 +36,12 @@ export default async function CardNews(): Promise<JSX.Element> {
             />
           </svg>
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-1">Belum Ada Berita</h3>
-        <p className="text-gray-500 text-sm">Tambahkan berita untuk mulai melihat data di sini</p>
+        <h3 className="text-lg font-medium text-gray-900 mb-1">
+          Belum Ada Berita
+        </h3>
+        <p className="text-gray-500 text-sm">
+          Tambahkan berita untuk mulai melihat data di sini
+        </p>
       </div>
     );
   }
@@ -39,8 +51,18 @@ export default async function CardNews(): Promise<JSX.Element> {
       {/* Header */}
       <div className="bg-gradient-to-r from-slate-800 to-slate-700 px-6 py-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m6 4h6m-6 4h6m-6 4h6m-6 4h6" />
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 5h12M9 3v2m6 4h6m-6 4h6m-6 4h6m-6 4h6"
+            />
           </svg>
           Data Berita
         </h2>
@@ -51,11 +73,21 @@ export default async function CardNews(): Promise<JSX.Element> {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gambar</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-              <th className="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Gambar
+              </th>
+              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Judul
+              </th>
+              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Deskripsi
+              </th>
+              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Tanggal
+              </th>
+              <th className="px-6 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Aksi
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -80,25 +112,38 @@ export default async function CardNews(): Promise<JSX.Element> {
 
                 {/* Title */}
                 <td className="px-6 py-4">
-                  <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-5">{data.title}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-5">
+                    {data.title}
+                  </h3>
                 </td>
 
                 {/* Description */}
                 <td className="px-6 py-4 max-w-md">
-                  <p className="text-sm text-gray-700 line-clamp-5 overflow-y-auto">{data.description}</p>
+                  <p className="text-sm text-gray-700 line-clamp-5 overflow-y-auto">
+                    {data.description}
+                  </p>
                 </td>
 
                 {/* Date Info */}
                 <td className="px-6 py-4 text-xs text-gray-600 whitespace-nowrap">
-                  <p>Ditambahkan: {new Date(data.createdAt).toLocaleDateString("id-ID", { dateStyle: "medium" })}</p>
+                  <p>
+                    Ditambahkan:{" "}
+                    {new Date(data.createdAt).toLocaleDateString("id-ID", {
+                      dateStyle: "medium",
+                    })}
+                  </p>
                   <p className="text-[10px] text-gray-500">
-                    Jam: {new Date(data.createdAt).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}
+                    Jam:{" "}
+                    {new Date(data.createdAt).toLocaleTimeString("id-ID", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </p>
                 </td>
 
                 {/* Actions */}
-                <td className="px-6 py-4 text-center whitespace-nowrap">
-                  <div className="flex items-center justify-center space-x-3">
+                <td className="px-6 py-4 text-center space-x-2">
+                  <div className="flex flex-col gap-2">
                     <EditButton id={data.id} />
                     <DeleteButton id={data.id} />
                   </div>
@@ -113,7 +158,9 @@ export default async function CardNews(): Promise<JSX.Element> {
       <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
         <div className="flex items-center justify-between text-sm text-gray-600">
           <span>Total: {images.length} berita</span>
-          <span className="text-xs">Terakhir diperbarui: {new Date().toLocaleDateString("id-ID")}</span>
+          <span className="text-xs">
+            Terakhir diperbarui: {new Date().toLocaleDateString("id-ID")}
+          </span>
         </div>
       </div>
     </div>

@@ -88,11 +88,13 @@ export const EditFormNews = z.object({
     .optional(),
 });
 
-//Upload Data guru
+// Upload Data guru
 export const UploadFormTeacher = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
   note: z.string().min(1, { message: "Catatan wajib diisi." }),
+  nip: z.string().optional().or(z.literal("")),
+  nuptk: z.string().optional().or(z.literal("")),
   image: z
     .instanceof(File)
     .refine((file) => file.size > 0, {
@@ -106,11 +108,13 @@ export const UploadFormTeacher = z.object({
     }),
 });
 
-//Edit Data Guru
+// Edit Data Guru
 export const EditFormTeacher = z.object({
   title: z.string().min(1, { message: "Judul wajib diisi." }),
   description: z.string().min(1, { message: "Deskripsi wajib diisi." }),
   note: z.string().min(1, { message: "Catatan wajib diisi." }),
+  nip: z.string().optional().or(z.literal("")),
+  nuptk: z.string().optional().or(z.literal("")),
   image: z
     .instanceof(File)
     .refine((file) => file.size === 0 || file.type.startsWith("image/"), {
@@ -155,23 +159,18 @@ export const UploadFormEkskul = z.object({
 });
 
 export const EditFormEkskul = z.object({
-  name: z.string().min(1, { message: "Nama ekskul wajib diisi" }),
-  instagram: z.string().optional(),
-  tiktok: z.string().optional(),
-  image: z.union([
-    z
-      .instanceof(File)
-      .refine((file) => file.size > 0, {
-        message: "Gambar tidak boleh kosong",
-      })
-      .refine((file) => file.type.startsWith("image/"), {
-        message: "Tipe file harus gambar",
-      })
-      .refine((file) => file.size < 4000000, {
-        message: "Gambar tidak boleh lebih dari 4MB",
-      }),
-    z.string().url(),
-  ]),
+  name: z.string().min(1, { message: "Nama ekskul wajib diisi." }),
+  instagram: z.string().optional().or(z.literal("")),
+  tiktok: z.string().optional().or(z.literal("")),
+  image: z
+    .instanceof(File)
+    .refine((file) => file.size === 0 || file.type.startsWith("image/"), {
+      message: "Tipe file harus gambar",
+    })
+    .refine((file) => file.size < 4000000, {
+      message: "Gambar tidak boleh lebih dari 4MB",
+    })
+    .optional(),
 });
 
 export const UploadFormSettings = z.object({
@@ -190,11 +189,27 @@ export const UploadFormSettings = z.object({
       message: "Gunakan link embed Google Maps (yang mengandung 'maps/embed')",
     }),
 
-  instagram: z.string().optional().or(z.literal("")),
-  youtube: z.string().optional().or(z.literal("")),
-  tiktok: z.string().optional().or(z.literal("")),
+  instagram: z
+    .string()
+    .url({ message: "Link Instagram tidak valid" })
+    .optional()
+    .or(z.literal("")),
+  youtube: z
+    .string()
+    .url({ message: "Link YouTube tidak valid" })
+    .optional()
+    .or(z.literal("")),
+  tiktok: z
+    .string()
+    .url({ message: "Link TikTok tidak valid" })
+    .optional()
+    .or(z.literal("")),
 
-  videoUrl: z.string().url({ message: "Link video tidak valid" }),
+  videoUrl: z
+    .string()
+    .url({ message: "Link video tidak valid" })
+    .optional()
+    .or(z.literal("")),
 
   sejarah: z.string().min(1, { message: "Sejarah wajib diisi" }),
   visi: z.string().min(1, { message: "Visi wajib diisi" }),
@@ -213,20 +228,41 @@ export const EditFormSettings = z.object({
     .refine((val) => val.includes("maps/embed"), {
       message: "Gunakan link embed Google Maps (yang mengandung 'maps/embed')",
     }),
-  instagram: z.string().url({ message: "Link Instagram tidak valid" }),
-  youtube: z.string().url({ message: "Link YouTube tidak valid" }),
-  tiktok: z.string().url({ message: "Link TikTok tidak valid" }),
-  videoUrl: z.string().url({ message: "Link video tidak valid" }).optional(),
+
+  instagram: z
+    .string()
+    .url({ message: "Link Instagram tidak valid" })
+    .optional()
+    .or(z.literal("")),
+  youtube: z
+    .string()
+    .url({ message: "Link YouTube tidak valid" })
+    .optional()
+    .or(z.literal("")),
+  tiktok: z
+    .string()
+    .url({ message: "Link TikTok tidak valid" })
+    .optional()
+    .or(z.literal("")),
+
+  videoUrl: z
+    .string()
+    .url({ message: "Link video tidak valid" })
+    .optional()
+    .or(z.literal("")),
+
   sejarah: z.string().min(1, { message: "Sejarah wajib diisi" }),
   visi: z.string().min(1, { message: "Visi wajib diisi" }),
   misi: z.string().min(1, { message: "Misi wajib diisi" }),
   tujuan: z.string().min(1, { message: "Tujuan wajib diisi" }),
+
   imageHero: z
-    .union([
-      z.string().url(), // URL string jika gambar lama dipakai
-      z.custom<File>((file) => file instanceof File, {
-        message: "File tidak valid",
-      }),
-    ])
+    .instanceof(File)
+    .refine((file) => file.size === 0 || file.type.startsWith("image/"), {
+      message: "Tipe file harus gambar",
+    })
+    .refine((file) => file.size < 4000000, {
+      message: "Gambar tidak boleh lebih dari 4MB",
+    })
     .optional(),
 });
