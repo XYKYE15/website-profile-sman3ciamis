@@ -39,7 +39,7 @@ const Contact = async () => {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <h3 className="md:text-2xl text-lg font-semibold">
+              <h3 className="md:text-lg text-lg font-semibold">
                 Jl. Bojonghuni No.87, Maleber, Kec. Ciamis, Kabupaten Ciamis,
                 Jawa Barat 46214
               </h3>

@@ -23,7 +23,7 @@ export default function SideLinkClient({
 }) {
   const [selectedEkskul, setSelectedEkskul] = useState<Ekskul | null>(null);
 
-  // ✅ Mencegah scroll dengan class overflow-hidden pada <html>
+
   useEffect(() => {
     const html = document.documentElement;
 
@@ -58,9 +58,9 @@ export default function SideLinkClient({
                     <button
                       key={ekskul.id}
                       onClick={() => setSelectedEkskul(ekskul)}
-                      className="bg-blue-500   py-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
+                      className="bg-blue-500 h-15 py-3 rounded-lg text-white font-semibold shadow-lg hover:shadow-sm hover:bg-blue-400"
                     >
-                      <h2>{ekskul.name}</h2>
+                      <h2 className="text-sm flex items-center justify-center w-full h-full">{ekskul.name}</h2>
                     </button>
                   ))}
                 </div>
