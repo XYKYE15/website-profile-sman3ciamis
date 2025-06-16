@@ -36,7 +36,7 @@ function Gallery({ imageUrl }: TeacherImageProps) {
           width={500}
           height={300}
           alt="card image"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-center"
         />
       </div>
 

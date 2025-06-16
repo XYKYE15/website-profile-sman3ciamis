@@ -45,17 +45,17 @@ const Contact = async () => {
               </h3>
             </div>
             <div
-              className="mx-auto md:w-100 mt-5 min-w-full md:min-w-0 md:ml-10 ml-10"
+              className="mx-auto md:w-100 mt-3 min-w-full md:min-w-0 md:ml-5 ml-10 font-semibold"
               data-aos="fade-right"
               data-aos-delay="300"
             >
               <p className="flex items-center gap-2">
                 <FaPhone />
-                <span className="text-lg md:text-2xl">{setting.phone}</span>
+                <span className="text-lg">{setting.phone}</span>
               </p>
               <p className="flex items-center gap-2">
                 <MdEmail />
-                <span className="text-lg md:text-2xl break-words">{setting.email}</span>
+                <span className="text-lg break-words">{setting.email}</span>
               </p>
             </div>
           </div>

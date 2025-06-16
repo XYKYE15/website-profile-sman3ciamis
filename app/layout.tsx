@@ -27,7 +27,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${fontRoboto.className} antialiased bg-amber-600`}>
+      <body className={`${fontRoboto.className} antialiased`}>
         <AOSProvider>
           <LayoutWrapper setting={setting}>{children}</LayoutWrapper>
         </AOSProvider>

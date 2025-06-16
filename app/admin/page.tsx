@@ -29,7 +29,7 @@ const PageAdmin = async (): Promise<JSX.Element> => {
     {
       label: "Guru",
       value: stats.jumlahGuru,
-      href: "/admin/Teacher",
+      href: "/admin/teacher",
       color: "blue",
     },
     {
@@ -104,7 +104,7 @@ const PageAdmin = async (): Promise<JSX.Element> => {
               <Link
                 key={idx}
                 href={item.href}
-                className={`p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:bg-${item.color}-50 transition-all`}
+                className={`p-4 bg-white border border-gray-200 rounded-xl shadow-sm  transition-all`}
               >
                 <p className="text-sm text-gray-600">{item.label}</p>
                 <p className={`text-2xl font-bold text-${item.color}-600`}>

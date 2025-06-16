@@ -37,13 +37,13 @@ export default function Footer({ setting }: { setting: SettingType }) {
                   SMAN 3<span>Ciamis</span>
                 </h2>
               </Link>
-              <div className="md:w-90 mx-auto border-b-3 border-blue-900 p-2 md:text-lg mt-5 text-lg text-center w-75">
+              <div className="md:w-90 mx-auto border-b-3 border-blue-900 p-2 text-sm mt-5 text-center w-75">
                 <h3 className="text-blue-900 font-medium">
                   Jl. Bojonghuni No.87, Maleber, Kec. Ciamis, Kabupaten Ciamis,
                   Jawa Barat 46214
                 </h3>
               </div>
-              <div className="mx-auto md:w-100 w-60 mt-5 px-10 min-w-full md:min-w-0">
+              <div className="mx-auto md:w-100 w-60 mt-3 px-8 min-w-full md:min-w-0">
                 <p className="flex items-center gap-2 text-blue-900 font-medium">
                   <FaPhone size={20} />
                   <span>{setting?.phone || "0812-3456-7890"}</span>
@@ -81,7 +81,7 @@ export default function Footer({ setting }: { setting: SettingType }) {
             {/* Kolom 3 */}
             <div className="border-3 border-blue-500 h-90 w-85 md:w-100 rounded-2xl flex flex-col items-center gap-5 md:gap-0 mx-auto">
               <h2 className="my-2 text-center font-semibold text-2xl text-blue-900">
-                Hubungi Kami :
+                Media Sosial
               </h2>
               <div className="border-3 border-blue-500 mt-5 rounded-2xl h-65 w-75 md:w-95 mx-auto flex flex-col justify-center gap-5">
                 {setting.instagram && (
@@ -122,7 +122,7 @@ export default function Footer({ setting }: { setting: SettingType }) {
         </div>
       </div>
       <div className="max-w-screen-2xl py-5 text-center text-base font-bold bg-white text-blue-900 items-center">
-        &copy;Copyright 2025 | SMAN 3 Ciamis
+        &copy;Copyright 2025 | SMAN 3 Ciamis | By Rizki Rinaldi
       </div>
     </footer>
   );
