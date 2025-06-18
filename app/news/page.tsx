@@ -10,19 +10,22 @@ export const metadata: Metadata = {
 };
 
 interface PageProps {
-  searchParams?: { page?: string };
+  searchParams: Promise<{
+    page?: string;
+  }>;
 }
 
 export default async function PageNews({ searchParams }: PageProps) {
-  // Pastikan searchParams aman diakses
-  const page = parseInt(searchParams?.page || "1", 10);
+
+  const { page: pageStr = "1" } = await searchParams;
+  const page = parseInt(pageStr, 10);
   const perPage = 3;
 
-  // Ambil semua data
+
   const allNews = await getImages();
   const allAchievement = await getImagesAchievement();
 
-  // Paginasi
+
   const totalPages = Math.ceil(allNews.length / perPage);
   const paginatedNews = allNews.slice((page - 1) * perPage, page * perPage);
 
@@ -45,7 +48,7 @@ export default async function PageNews({ searchParams }: PageProps) {
         />
       </div>
 
-      {/* Bagian Kanan - SideEkskul dan Prestasi */}
+    
       <div className="mx-5 text-center md:w-85 p-5">
         <SideEkskul />
 

@@ -3,10 +3,22 @@ import SideAchievement from "@/components/sideAchievement/SideAchievement";
 import Image from "next/image";
 import { getImagesAchievement, getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-const Details = async ({ params }: { params: { id: string } }) => {
+export const metadata: Metadata = {
+  title: "Detail Berita SMAN 3 Ciamis",
+};
+
+interface PageDetailProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function PageDetail({ params }: PageDetailProps) {
   const allAchievement = await getImagesAchievement();
-  const data = await getImagesById(params.id);
+  const { id } = await params;
+  const data = await getImagesById(id);
   if (!data) return notFound();
   return (
     <div className="flex flex-col pt-30 md:flex-row justify-center">
@@ -41,5 +53,3 @@ const Details = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
-
-export default Details;

@@ -10,16 +10,17 @@ export const metadata: Metadata = {
 };
 
 interface PageAchievementProps {
-  searchParams?: {
+  searchParams: Promise<{
     page?: string;
-  };
+  }>;
 }
 
 export default async function PageAchievement({
   searchParams,
 }: PageAchievementProps) {
   const allNews = await getImages();
-  const page = parseInt(searchParams?.page ?? "1", 10); 
+  const { page: pageStr = "1" } = await searchParams;
+  const page = parseInt(pageStr, 10);
   const perPage = 3;
 
   const images = await getImagesAchievement();

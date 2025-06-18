@@ -4,8 +4,15 @@ import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
 import Image from "next/image";
 import SideNews from "@/components/sideNews/SideNews";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const data = await getImagesAchievementById(params.id);
+interface PageDetailProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function PageDetail({ params }: PageDetailProps) {
+  const { id } = await params;
+  const data = await getImagesAchievementById(id);
   const allNews = await getImages();
 
   if (!data) return notFound();
@@ -17,7 +24,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           {data.title}
         </h1>
 
-        <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500">
+        <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500 ">
           <div className="border-2 border-blue-500 md:w-full md:h-150">
             <Image
               src={data.image}
