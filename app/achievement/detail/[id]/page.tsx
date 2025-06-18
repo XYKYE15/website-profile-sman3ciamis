@@ -4,13 +4,13 @@ import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
 import Image from "next/image";
 import SideNews from "@/components/sideNews/SideNews";
 
-interface Props {
+interface PageProps {
   params: {
     id: string;
   };
 }
 
-export default async function Details({ params }: Props) {
+export default async function Page({ params }: PageProps) {
   const data = await getImagesAchievementById(params.id);
   const allNews = await getImages();
 
