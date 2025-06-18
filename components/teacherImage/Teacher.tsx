@@ -12,7 +12,7 @@ interface TeacherImageProps {
 function TeacherImage({ name, imageUrl, note, nip, nuptk }: TeacherImageProps) {
   return (
     <div className="flex flex-col items-center bg-blue-500 shadow-2xl rounded-xl p-5 gap-3 w-full">
-      <div className="rounded-xl w-55 h-50 overflow-hidden bg-white flex items-center justify-center">
+      <div className="rounded-xl w-55 h-55 overflow-hidden bg-white flex items-center justify-center">
         <Image
           src={imageUrl}
           alt={name}

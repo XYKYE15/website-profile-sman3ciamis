@@ -36,18 +36,18 @@ const CardSlider = ({ data }: { data: Achievement[] }) => {
           <SwiperSlide key={item.id}>
             <Link
               href={`/achievement/detail/${item.id}`}
-              className="flex justify-center rounded-2xl shadow-xl hover:shadow-sm bg-amber-300"
+              className="flex justify-center rounded-2xl shadow-xl hover:shadow-sm"
               data-aos="zoom-in"
               data-aos-delay={i * 100}
               data-aos-duration="900"
             >
-              <div className="w-full">
+              <div className="">
                 <Image
                   src={item.image || "/images/achievement.jpg"}
                   alt={item.title}
                   width={500}
                   height={300}
-                  className="h-65 rounded-2xl shadow-lg"
+                  className="h-65 w-150 rounded-2xl shadow-lg object-center"
                 />
               </div>
               <div className="absolute rounded-3xl top-50 max-w-[400px] md:max-w-[500px] md:w-100 bg-white p-1 px-5 text-ellipsis overflow-hidden shadow-lg md:min-h-25 h-25 flex items-center justify-center">

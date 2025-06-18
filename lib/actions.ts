@@ -274,7 +274,7 @@ export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
     return { error: validatedFields.error.flatten().fieldErrors };
   }
 
-  const { title, description, note, image } = validatedFields.data;
+  const { title, description, note, image, nip, nuptk } = validatedFields.data;
 
   try {
     const { url } = await put(image.name, image, {
@@ -283,7 +283,14 @@ export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
     });
 
     await prisma.teacher.create({
-      data: { title, description, note, image: url },
+      data: {
+        title,
+        description,
+        note,
+        image: url,
+        nip: nip || null,
+        nuptk: nuptk || null,
+      },
     });
   } catch (error) {
     console.error("Upload error:", error);
@@ -292,6 +299,7 @@ export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
 
   redirect("/admin/teacher");
 };
+
 
 export const updateTeacher = async (
   id: string,

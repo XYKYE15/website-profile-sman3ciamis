@@ -5,10 +5,10 @@ import { clsx } from "clsx";
 import Link from "next/link";
 import { deleteNews } from "@/lib/actions";
 
-// Tombol Submit (untuk Simpan dan Ubah) + tombol Cancel
+
 export const SubmitButton = ({
   label,
-  cancelHref = "/admin/news", // default tujuan tombol cancel
+  cancelHref = "/admin/news", 
 }: {
   label: string;
   cancelHref?: string;
