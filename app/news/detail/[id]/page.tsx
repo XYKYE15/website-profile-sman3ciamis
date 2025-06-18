@@ -5,14 +5,15 @@ import { getImagesAchievement, getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 interface PageDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function PageDetail({ params }: PageDetailProps) {
+  const { id } = await params;
   const allAchievement = await getImagesAchievement();
-  const data = await getImagesById(params.id);
+  const data = await getImagesById(id);
   if (!data) return notFound();
   return (
     <div className="flex flex-col pt-30 md:flex-row justify-center">

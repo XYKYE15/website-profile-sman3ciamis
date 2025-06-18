@@ -5,13 +5,14 @@ import Image from "next/image";
 import SideNews from "@/components/sideNews/SideNews";
 
 interface PageDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function PageDetail({ params }: PageDetailProps) {
-  const data = await getImagesAchievementById(params.id);
+  const { id } = await params;
+  const data = await getImagesAchievementById(id);
   const allNews = await getImages();
 
   if (!data) return notFound();
