@@ -4,17 +4,12 @@ import Image from "next/image";
 import { getImagesAchievement, getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-interface PageDetailProps {
-  params: Promise<{
-    id: string;
-  }>;
-}
-
-export default async function PageDetail({ params }: PageDetailProps) {
-  const { id } = await params;
+export default async function PageDetail({ params }: { params: { id: string } }) {
+  const { id } = params;
   const allAchievement = await getImagesAchievement();
   const data = await getImagesById(id);
   if (!data) return notFound();
+
   return (
     <div className="flex flex-col pt-30 md:flex-row justify-center">
       <div className="md:mx-10 mx-5">
@@ -47,4 +42,4 @@ export default async function PageDetail({ params }: PageDetailProps) {
       </div>
     </div>
   );
-};
+}
