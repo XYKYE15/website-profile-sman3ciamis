@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 };
 
 interface PageGalleryProps {
-  searchParams?: {
+  searchParams: {
     page?: string;
   };
 }
 
 async function PageGallery({ searchParams }: PageGalleryProps) {
-  const page = parseInt(searchParams?.page ?? "1", 10); // default page 1
+  const page = parseInt(searchParams.page ?? "1", 10); 
   const perPage = 12;
 
   const allNews = await getImages();

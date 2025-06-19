@@ -1,4 +1,4 @@
-import Card from "../../components/achievement/card/Card";
+import Card from "@/components/achievement/card/Card";
 import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
 import { getImages, getImagesAchievement } from "@/lib/data";
 import Pagination from "@/components/pagination/Pagination";
@@ -10,28 +10,26 @@ export const metadata: Metadata = {
 };
 
 interface PageAchievementProps {
-  searchParams: Promise<{
+  searchParams?: {
     page?: string;
-  }>;
+  };
 }
 
 export default async function PageAchievement({
   searchParams,
 }: PageAchievementProps) {
   const allNews = await getImages();
-  const { page: pageStr = "1" } = await searchParams;
-  const page = parseInt(pageStr, 10);
+  const page = parseInt(searchParams?.page ?? "1", 10); 
   const perPage = 3;
 
   const images = await getImagesAchievement();
-
   const totalPages = Math.ceil(images.length / perPage);
   const paginatedImages = images.slice((page - 1) * perPage, page * perPage);
 
   return (
     <div className="flex flex-col md:flex-row justify-center py-30">
       <div className="mx-10">
-        <h1 className="md:text-2xl text-lg text-blue-900 font-semibold mb-7 text-center ">
+        <h1 className="md:text-2xl text-lg text-blue-900 font-semibold mb-7 text-center">
           Prestasi SMAN 3 Ciamis
         </h1>
 
