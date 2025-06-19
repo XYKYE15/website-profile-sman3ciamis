@@ -7,7 +7,7 @@ import { deleteEkskul } from "@/lib/actions";
 
 interface SubmitButtonProps {
   label: string;
-  cancelHref?: string; // Props opsional untuk tombol cancel
+  cancelHref?: string;
 }
 
 // Tombol Submit (untuk Simpan dan Ubah)

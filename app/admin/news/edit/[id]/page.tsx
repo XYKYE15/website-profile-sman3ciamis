@@ -1,10 +1,7 @@
-// app/admin/news/edit/[id]/page.tsx
-
 import EditForm from "@/components/EditNews/EditForm";
 import { getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-// Tipe parameter dari route dynamic
 type EditPageProps = {
   params: {
     id: string;

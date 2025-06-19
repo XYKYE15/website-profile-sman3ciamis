@@ -2,7 +2,7 @@ import SideLinkClient from "./SideEkskulLink";
 import { getEkskul } from "@/lib/data";
 
 async function SideEkskul() {
-  const ekskulList = await getEkskul(); // Fetch data dari database
+  const ekskulList = await getEkskul();
 
   return (
     <div className="min-h-35 mt-10 flex flex-col items-center">

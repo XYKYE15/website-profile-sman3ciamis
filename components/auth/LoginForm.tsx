@@ -15,7 +15,6 @@ const LoginForm = () => {
     {
       AccessDenied: "Akses ditolak. Anda bukan admin.",
       CredentialsSignin: "Email atau password salah.",
-      // bisa tambahkan pesan lain sesuai error NextAuth
     }[error || ""] || null;
 
   return (

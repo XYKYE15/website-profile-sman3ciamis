@@ -1,4 +1,3 @@
-// components/ekskul/Ekskul.tsx
 import Image from "next/image";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaTiktok } from "react-icons/fa6";
