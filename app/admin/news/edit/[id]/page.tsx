@@ -8,12 +8,11 @@ export const metadata: Metadata = {
 };
 
 interface EditPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditPage({ params }: EditPageProps) {
-  
-  const { id } = params;
+  const { id } = await params; 
 
   const data = await getImagesById(id);
 

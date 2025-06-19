@@ -3,13 +3,11 @@ import { getSettingsById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 type EditPageProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 const EditPage = async ({ params }: EditPageProps) => {
-  const { id } = params;
+  const { id } = await params;
 
   const data = await getSettingsById(id);
 

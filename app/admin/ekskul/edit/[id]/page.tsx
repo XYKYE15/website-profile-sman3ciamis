@@ -3,13 +3,12 @@ import { getImagesEkskulById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 type EditPageProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;  // Ubah jadi Promise
 };
 
 const EditPage = async ({ params }: EditPageProps) => {
-  const { id } = params;
+  const { id } = await params;       // Jangan lupa await
+
   const data = await getImagesEkskulById(id);
 
   if (!data) return notFound();
