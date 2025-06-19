@@ -577,20 +577,20 @@ export const UploadSettings = async (
   formData: FormData
 ) => {
   const rawData = {
-    name: formData.get("name"),
-    description: formData.get("description"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    gmapsLink: formData.get("gmapsLink"),
-    instagram: formData.get("instagram"),
-    youtube: formData.get("youtube"),
-    tiktok: formData.get("tiktok"),
-    videoUrl: formData.get("videoUrl"),
+    name: formData.get("name") ?? "",
+    description: formData.get("description") ?? "",
+    phone: formData.get("phone") ?? "",
+    email: formData.get("email") ?? "",
+    gmapsLink: formData.get("gmapsLink") ?? "",
+    instagram: formData.get("instagram") ?? "",
+    youtube: formData.get("youtube") ?? "",
+    tiktok: formData.get("tiktok") ?? "",
+    videoUrl: formData.get("videoUrl") ?? null,
     imageHero: formData.get("imageHero"),
-    sejarah: formData.get("sejarah"),
-    visi: formData.get("visi"),
-    misi: formData.get("misi"),
-    tujuan: formData.get("tujuan"),
+    sejarah: formData.get("sejarah") ?? "",
+    visi: formData.get("visi") ?? "",
+    misi: formData.get("misi") ?? "",
+    tujuan: formData.get("tujuan") ?? "",
   };
 
   const validatedFields = UploadFormSettings.safeParse(rawData);
@@ -600,6 +600,7 @@ export const UploadSettings = async (
   }
 
   let imageHeroUrl: string | null = null;
+
   if (rawData.imageHero instanceof File && rawData.imageHero.size > 0) {
     const { url } = await put(rawData.imageHero.name, rawData.imageHero, {
       access: "public",
@@ -617,9 +618,9 @@ export const UploadSettings = async (
         phone: validatedFields.data.phone,
         email: validatedFields.data.email,
         gmapsLink: validatedFields.data.gmapsLink,
-        instagram: validatedFields.data.instagram,
-        youtube: validatedFields.data.youtube,
-        tiktok: validatedFields.data.tiktok,
+        instagram: validatedFields.data.instagram ?? "",
+        youtube: validatedFields.data.youtube ?? "",
+        tiktok: validatedFields.data.tiktok ?? "",
         videoUrl: validatedFields.data.videoUrl ?? null,
         imageHero: imageHeroUrl,
         sejarah: validatedFields.data.sejarah,
@@ -661,11 +662,15 @@ export const updateSettings = async (
   const validatedFields = EditFormSettings.safeParse(rawData);
 
   if (!validatedFields.success) {
-    return { error: validatedFields.error.flatten().fieldErrors };
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
   }
 
   const data = await prisma.setting.findUnique({ where: { id } });
-  if (!data) return { message: "Tidak ada data ditemukan" };
+  if (!data) {
+    return { message: "Tidak ada data ditemukan" };
+  }
 
   let imageHeroUrl = data.imageHero;
 
@@ -687,9 +692,9 @@ export const updateSettings = async (
         phone: validatedFields.data.phone,
         email: validatedFields.data.email,
         gmapsLink: validatedFields.data.gmapsLink,
-        instagram: validatedFields.data.instagram,
-        youtube: validatedFields.data.youtube,
-        tiktok: validatedFields.data.tiktok,
+        instagram: validatedFields.data.instagram ?? "",
+        youtube: validatedFields.data.youtube ?? "",
+        tiktok: validatedFields.data.tiktok ?? "",
         videoUrl: validatedFields.data.videoUrl ?? null,
         imageHero: imageHeroUrl,
         sejarah: validatedFields.data.sejarah,
@@ -699,12 +704,11 @@ export const updateSettings = async (
       },
     });
 
-    return { success: true };
+    redirect("/admin/settings");
   } catch (error) {
     console.error("Update error:", error);
     return { message: "Gagal mengupdate pengaturan" };
   }
-  redirect("/admin/settings");
 };
 
 // Fungsi utama delete setting by ID
