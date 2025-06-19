@@ -3,7 +3,7 @@
 import React from "react";
 import { uploadNews } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
+import { SubmitNewsButton } from "@/components/CreateNews/button/button";
 
 const CreateForm = () => {
   const [state, formAction] = useActionState(uploadNews, null);
@@ -46,7 +46,7 @@ const CreateForm = () => {
         </div>
       </div>
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/news"/>
+        <SubmitNewsButton label="Simpan" cancelHref="/admin/news"/>
       </div>
     </form>
   );

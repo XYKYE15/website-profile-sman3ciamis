@@ -2,7 +2,7 @@
 
 import { uploadGallery } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
+import { SubmitGalleryButton } from "./button/button";
 
 const CreateForm = () => {
   const [state, formAction] = useActionState(uploadGallery, null);
@@ -23,8 +23,7 @@ const CreateForm = () => {
       </div>
 
       <div className="mb-4 pt-4">
-        {/* Tambahkan cancelHref untuk tombol Cancel */}
-        <SubmitButton label="Simpan" cancelHref="/admin/gallery" />
+        <SubmitGalleryButton label="Simpan" cancelHref="/admin/gallery" />
       </div>
     </form>
   );

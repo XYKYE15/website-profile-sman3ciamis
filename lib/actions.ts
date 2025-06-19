@@ -161,6 +161,7 @@ export const updateNews = async (
   redirect("/admin/news");
 };
 
+// Fungsi utama menghapus berita
 export const deleteNews = async (id: string) => {
   const data = await getImagesById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -175,6 +176,19 @@ export const deleteNews = async (id: string) => {
 
   redirect("/admin/news");
 };
+
+// Handler agar bisa digunakan oleh <form action={handleDeleteNews}>
+export const handleDeleteNews = async (formData: FormData) => {
+  const id = formData.get("id");
+
+  if (!id || typeof id !== "string") {
+    console.error("ID tidak valid");
+    return;
+  }
+
+  await deleteNews(id);
+};
+
 
 // ACHIEVEMENT
 export const uploadAchievement = async (
@@ -364,6 +378,7 @@ export const updateTeacher = async (
   redirect("/admin/teacher");
 };
 
+// Fungsi utama untuk menghapus guru berdasarkan ID
 export const deleteTeacher = async (id: string) => {
   const data = await getImagesTeacherById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -378,6 +393,19 @@ export const deleteTeacher = async (id: string) => {
 
   redirect("/admin/teacher");
 };
+
+// Handler untuk digunakan pada <form action={...}>
+export const handleDeleteTeacher = async (formData: FormData) => {
+  const id = formData.get("id");
+
+  if (!id || typeof id !== "string") {
+    console.error("ID guru tidak valid");
+    return;
+  }
+
+  await deleteTeacher(id);
+};
+
 
 // GALLERY
 export const uploadGallery = async (prevState: unknown, formData: FormData) => {
@@ -678,6 +706,7 @@ export const updateSettings = async (
   redirect("/admin/settings");
 };
 
+// Fungsi utama delete setting by ID
 export async function deleteSettingById(id: string) {
   if (!id) throw new Error("ID tidak boleh kosong");
 
@@ -692,3 +721,16 @@ export async function deleteSettingById(id: string) {
 
   redirect("/admin/settings");
 }
+
+// Handler untuk dipakai di form <form action={...}>
+export async function handleDeleteSetting(formData: FormData) {
+  const id = formData.get("id");
+
+  if (!id || typeof id !== "string") {
+    console.error("ID setting tidak valid");
+    return;
+  }
+
+  await deleteSettingById(id);
+}
+

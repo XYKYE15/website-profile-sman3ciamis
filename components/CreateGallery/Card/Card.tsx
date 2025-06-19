@@ -1,6 +1,6 @@
 import { getImagesGallery } from "@/lib/data";
 import Image from "next/image";
-import { DeleteButton } from "../button/button";
+import { DeleteGalleryButton } from "../button/button";
 
 const CardGalleryAdmin = async () => {
   const images = await getImagesGallery();
@@ -109,7 +109,7 @@ const CardGalleryAdmin = async () => {
                 </td>
                 <td className="px-6 py-4 text-center">
                   <div className="flex justify-center">
-                    <DeleteButton id={item.id} />
+                    <DeleteGalleryButton id={item.id} />
                   </div>
                 </td>
               </tr>

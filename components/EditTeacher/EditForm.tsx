@@ -3,9 +3,9 @@
 import React from "react";
 import { updateTeacher } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
 import type { Teacher } from "@/lib/generated/prisma";
 import Image from "next/image";
+import { SubmitTeacherButton } from "../CreateTeacher/Button/button";
 
 const EditForm = ({ data }: { data: Teacher }) => {
   const [state, formAction] = useActionState(
@@ -113,7 +113,7 @@ const EditForm = ({ data }: { data: Teacher }) => {
       </div>
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/teacher" />
+        <SubmitTeacherButton label="Simpan" cancelHref="/admin/teacher" />
       </div>
     </form>
   );

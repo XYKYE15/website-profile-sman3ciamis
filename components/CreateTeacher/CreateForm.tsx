@@ -2,8 +2,8 @@
 
 import React from "react";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
 import { uploadTeacher } from "@/lib/actions";
+import { SubmitTeacherButton } from "./Button/button";
 
 const CreateForm = () => {
   const [state, formAction] = useActionState(uploadTeacher, null);
@@ -78,7 +78,7 @@ const CreateForm = () => {
       </div>
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/teacher" />
+        <SubmitTeacherButton label="Simpan" cancelHref="/admin/teacher" />
       </div>
     </form>
   );

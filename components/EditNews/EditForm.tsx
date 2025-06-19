@@ -3,8 +3,8 @@
 import React from "react";
 import { updateNews } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
 import type { News } from "@/lib/generated/prisma";
+import { SubmitNewsButton } from "../CreateNews/button/button";
 
 const EditForm = ({ data }: { data: News }) => {
   const [state, formAction] = useActionState(
@@ -51,7 +51,7 @@ const EditForm = ({ data }: { data: News }) => {
         </div>
       </div>
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" />
+        <SubmitNewsButton label="Simpan" cancelHref="/admin/achievement"/>
       </div>
     </form>
   );

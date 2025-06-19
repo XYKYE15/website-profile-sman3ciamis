@@ -1,10 +1,63 @@
 "use client";
 
+import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
 import { handleDeleteGallery } from "@/lib/actions";
 
-export const DeleteButton = ({ id }: { id: string }) => {
+interface SubmitButtonProps {
+  label: string;
+  cancelHref?: string;
+}
+
+// Tombol Submit (Simpan/Ubah)
+export const SubmitGalleryButton = ({ label, cancelHref }: SubmitButtonProps) => {
+  const { pending } = useFormStatus();
+
+  const isSaving = label.toLowerCase().includes("simpan");
+  const buttonText = pending ? (isSaving ? "Menyimpan..." : "Mengubah...") : label;
+
+  return (
+    <div className="flex gap-4">
+      <button
+        type="submit"
+        disabled={pending}
+        className={clsx(
+          "flex-1 py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150",
+          {
+            "opacity-50 cursor-progress": pending,
+          }
+        )}
+      >
+        {buttonText}
+      </button>
+
+      {cancelHref && (
+        <Link
+          href={cancelHref}
+          className="flex-1 py-2.5 px-6 text-center text-base font-medium rounded-sm bg-gray-300 hover:bg-gray-400 transition duration-150"
+        >
+          Batal
+        </Link>
+      )}
+    </div>
+  );
+};
+
+// Tombol Edit
+export const EditGalleryButton = ({ id }: { id: string }) => {
+  return (
+    <Link
+      href={`/admin/gallery/edit/${id}`}
+      className="w-20 text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+    >
+      Edit
+    </Link>
+  );
+};
+
+// Tombol Delete
+export const DeleteGalleryButton = ({ id }: { id: string }) => {
   return (
     <form action={handleDeleteGallery}>
       <input type="hidden" name="id" value={id} />
@@ -13,6 +66,7 @@ export const DeleteButton = ({ id }: { id: string }) => {
   );
 };
 
+// Tombol internal hapus
 const DeleteBtn = () => {
   const { pending } = useFormStatus();
 

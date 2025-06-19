@@ -1,10 +1,8 @@
 import Image from "next/image";
 import { getImages } from "@/lib/data";
-import {
-  DeleteButton,
-  EditButton,
-} from "@/components/CreateNews/button/button";
+
 import { JSX } from "react";
+import { DeleteNewsButton, EditNewsButton } from "../button/button";
 
 interface NewsData {
   id: string;
@@ -144,8 +142,8 @@ export default async function CardNews(): Promise<JSX.Element> {
                 {/* Actions */}
                 <td className="px-6 py-4 text-center space-x-2">
                   <div className="flex flex-col gap-2">
-                    <EditButton id={data.id} />
-                    <DeleteButton id={data.id} />
+                    <EditNewsButton id={data.id} />
+                    <DeleteNewsButton id={data.id} />
                   </div>
                 </td>
               </tr>

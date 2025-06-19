@@ -1,25 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
-import Link from "next/link";
-import { deleteNews } from "@/lib/actions";
+import { handleDeleteNews } from "@/lib/actions";
 
-
-export const SubmitButton = ({
-  label,
-  cancelHref = "/admin/news", 
-}: {
+interface SubmitButtonProps {
   label: string;
   cancelHref?: string;
-}) => {
+}
+
+// Tombol Submit (Simpan/Ubah)
+export const SubmitNewsButton = ({ label, cancelHref }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
-  const isSaving = label === "Simpan";
-  const buttonText = pending ? (isSaving ? "Menyimpan..." : "simpan") : label;
+  const isSaving = label.toLowerCase().includes("simpan");
+  const buttonText = pending ? (isSaving ? "Menyimpan..." : "Mengubah...") : label;
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-4">
       <button
         type="submit"
         disabled={pending}
@@ -33,40 +32,41 @@ export const SubmitButton = ({
         {buttonText}
       </button>
 
-      <Link
-        href={cancelHref}
-        className="flex-1 py-2.5 px-6 text-base font-medium rounded-sm text-gray-700 bg-gray-200 hover:bg-gray-300 transition duration-150 text-center"
-      >
-        Batal
-      </Link>
+      {cancelHref && (
+        <Link
+          href={cancelHref}
+          className="flex-1 py-2.5 px-6 text-center text-base font-medium rounded-sm bg-gray-300 hover:bg-gray-400 transition duration-150"
+        >
+          Batal
+        </Link>
+      )}
     </div>
   );
 };
 
 // Tombol Edit
-export const EditButton = ({ id }: { id: string }) => {
+export const EditNewsButton = ({ id }: { id: string }) => {
   return (
     <Link
       href={`/admin/news/edit/${id}`}
-      className="w-full block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+      className="w-20 text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       Edit
     </Link>
   );
 };
 
-// Tombol Delete (menggunakan server action)
-export const DeleteButton = ({ id }: { id: string }) => {
-  const deleteNewsWithId = deleteNews.bind(null, id);
-
+// Tombol Delete
+export const DeleteNewsButton = ({ id }: { id: string }) => {
   return (
-    <form action={deleteNewsWithId}>
+    <form action={handleDeleteNews}>
+      <input type="hidden" name="id" value={id} />
       <DeleteBtn />
     </form>
   );
 };
 
-// Tombol Hapus (internal)
+// Tombol internal hapus
 const DeleteBtn = () => {
   const { pending } = useFormStatus();
 
@@ -75,7 +75,7 @@ const DeleteBtn = () => {
       type="submit"
       disabled={pending}
       className={clsx(
-        "w-full py-2.5 px-6 text-base font-medium rounded-sm transition duration-150",
+        "w-20 py-2.5 text-base font-medium rounded-sm mt-5 transition duration-150",
         {
           "bg-red-500 hover:bg-red-400 text-white": !pending,
           "bg-red-300 text-white cursor-progress opacity-50": pending,

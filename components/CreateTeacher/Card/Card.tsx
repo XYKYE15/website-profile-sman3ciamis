@@ -1,6 +1,6 @@
 import { getImagesTeacher } from "@/lib/data";
 import Image from "next/image";
-import { DeleteButton, EditButton } from "../Button/button";
+import { DeleteTeacherButton, EditTeacherButton,  } from "../Button/button";
 
 export default async function TeacherTable() {
   const images = await getImagesTeacher();
@@ -117,8 +117,8 @@ export default async function TeacherTable() {
                 </td>
                 <td className="px-6 py-4 text-center space-x-2">
                   <div className="flex flex-col gap-2">
-                    <EditButton id={item.id} />
-                    <DeleteButton id={item.id} />
+                    <EditTeacherButton id={item.id} />
+                    <DeleteTeacherButton id={item.id} />
                   </div>
                 </td>
               </tr>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
-import { DeleteButton, EditButtonSettings } from "../button/button";
+import { DeleteSettingButton, EditButtonSettings } from "../button/button";
+
 
 function extractYouTubeVideoID(url: string) {
   try {
@@ -142,7 +143,7 @@ const CardSettings = async () => {
       {/* Action Buttons */}
       <div className="flex justify-end gap-4 items-center">
         <EditButtonSettings id={data.id} />
-        <DeleteButton id={data.id}/>
+        <DeleteSettingButton id={data.id}/>
       </div>
     </div>
   );

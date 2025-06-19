@@ -3,8 +3,9 @@
 import React from "react";
 import { updateAchievement } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateNews/button/button";
 import type { Achievement } from "@/lib/generated/prisma";
+import { SubmitAchievementButton } from "../CreateAchievement/button/button";
+
 
 const EditForm = ({ data }: { data: Achievement }) => {
   const [state, formAction] = useActionState(
@@ -51,7 +52,7 @@ const EditForm = ({ data }: { data: Achievement }) => {
         </div>
       </div>
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/achievement"/>
+        <SubmitAchievementButton label="Simpan" cancelHref="/admin/achievement"/>
       </div>
     </form>
   );
