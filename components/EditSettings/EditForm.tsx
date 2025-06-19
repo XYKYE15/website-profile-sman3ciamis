@@ -8,7 +8,25 @@ import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const isFieldError = (error: unknown): error is Record<string, string[]> => {
+const isFieldError = (
+  error: unknown
+): error is Record<
+  | "name"
+  | "description"
+  | "phone"
+  | "email"
+  | "gmapsLink"
+  | "instagram"
+  | "youtube"
+  | "tiktok"
+  | "videoUrl"
+  | "imageHero"
+  | "sejarah"
+  | "visi"
+  | "misi"
+  | "tujuan",
+  string[]
+> => {
   return typeof error === "object" && error !== null && !("message" in error);
 };
 
@@ -20,7 +38,7 @@ const EditForm = ({ data }: { data: Setting }) => {
     if (state?.success) {
       router.push("/admin/settings");
     }
-  }, [state?.success, router]);
+  }, [state, router]);
 
   return (
     <form action={formAction}>
@@ -164,12 +182,14 @@ const EditForm = ({ data }: { data: Setting }) => {
       </div>
 
       {/* Sejarah, Visi, Misi, Tujuan */}
-      {[
-        { name: "sejarah", label: "Sejarah", value: data.sejarah },
-        { name: "visi", label: "Visi", value: data.visi },
-        { name: "misi", label: "Misi", value: data.misi },
-        { name: "tujuan", label: "Tujuan", value: data.tujuan },
-      ].map(({ name, label, value }) => (
+      {(
+        [
+          { name: "sejarah", label: "Sejarah", value: data.sejarah },
+          { name: "visi", label: "Visi", value: data.visi },
+          { name: "misi", label: "Misi", value: data.misi },
+          { name: "tujuan", label: "Tujuan", value: data.tujuan },
+        ] as const
+      ).map(({ name, label, value }) => (
         <div className="mb-6" key={name}>
           <h3 className="text-lg font-semibold mb-2">{label}</h3>
           <textarea
@@ -186,7 +206,7 @@ const EditForm = ({ data }: { data: Setting }) => {
       ))}
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/settings"/>
+        <SubmitButton label="Simpan" cancelHref="/admin/settings" />
       </div>
     </form>
   );
