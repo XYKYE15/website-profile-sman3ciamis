@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/CreateEkskul/button/button";
-import { updateSettings } from "@/lib/actions";
+import { updateSettings, type EditState } from "@/lib/actions";
 import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -24,37 +24,24 @@ type FieldKey =
   | "misi"
   | "tujuan";
 
-type EditState =
-  | {
-      success: false;
-      error: Partial<Record<FieldKey, string[]>>;
-      message?: string;
-    }
-  | { success: true }
-  | null;
-
 const EditForm = ({ data }: { data: Setting }) => {
   const router = useRouter();
 
-  // Perbaikan: anotasi eksplisit untuk function di dalam useActionState
   const [state, formAction] = useActionState<EditState, FormData>(
-    async function action(prevState: EditState, formData: FormData): Promise<EditState> {
+    async (prevState, formData) => {
       return await updateSettings(prevState, formData);
     },
-    null
+    { success: false } 
   );
 
   useEffect(() => {
-    if (state?.success) {
+    if (state.success) {
       router.push("/admin/settings");
     }
   }, [state, router]);
 
   const getError = (key: FieldKey): string | null => {
-    if (state && "error" in state) {
-      return state.error?.[key]?.[0] ?? null;
-    }
-    return null;
+    return state.success === false && state.error?.[key]?.[0] || null;
   };
 
   return (

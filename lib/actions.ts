@@ -636,26 +636,24 @@ export const UploadSettings = async (
 
   redirect("/admin/settings");
 };
-
 export type EditState =
   | {
       success: false;
-      error?: {
-        name?: string[];
-        description?: string[];
-        phone?: string[];
-        email?: string[];
-        gmapsLink?: string[];
-        instagram?: string[];
-        youtube?: string[];
-        tiktok?: string[];
-        videoUrl?: string[];
-        imageHero?: string[];
-        sejarah?: string[];
-        visi?: string[];
-        misi?: string[];
-        tujuan?: string[];
-      };
+      error?: Partial<Record<
+        | "name"
+        | "description"
+        | "phone"
+        | "email"
+        | "gmapsLink"
+        | "instagram"
+        | "youtube"
+        | "tiktok"
+        | "videoUrl"
+        | "imageHero"
+        | "sejarah"
+        | "visi"
+        | "misi"
+        | "tujuan", string[]>>;
       message?: string;
     }
   | {
@@ -666,8 +664,8 @@ export const updateSettings = async (
   prevState: EditState,
   formData: FormData
 ): Promise<EditState> => {
-  const id = formData.get("id") as string;
-  if (!id) {
+  const id = formData.get("id");
+  if (!id || typeof id !== "string") {
     return { success: false, message: "ID tidak ditemukan." };
   }
 
@@ -697,20 +695,24 @@ export const updateSettings = async (
     };
   }
 
-  const data = await prisma.setting.findUnique({ where: { id } });
-  if (!data) {
-    return { success: false, message: "Data tidak ditemukan" };
+  const existing = await prisma.setting.findUnique({ where: { id } });
+  if (!existing) {
+    return { success: false, message: "Data tidak ditemukan." };
   }
 
-  let imageHeroUrl = data.imageHero;
+  let imageHeroUrl = existing.imageHero;
 
   try {
     if (rawData.imageHero instanceof File && rawData.imageHero.size > 0) {
-      if (data.imageHero) await del(data.imageHero);
+      if (existing.imageHero) {
+        await del(existing.imageHero);
+      }
+
       const { url } = await put(rawData.imageHero.name, rawData.imageHero, {
         access: "public",
         multipart: true,
       });
+
       imageHeroUrl = url;
     }
 
@@ -736,10 +738,14 @@ export const updateSettings = async (
 
     return { success: true };
   } catch (error) {
-    console.error("Update error:", error);
-    return { success: false, message: "Gagal mengupdate pengaturan" };
+    console.error("Update Settings Error:", error);
+    return {
+      success: false,
+      message: "Terjadi kesalahan saat mengupdate data.",
+    };
   }
 };
+
 
 // Fungsi utama delete setting by ID
 export async function deleteSettingById(id: string) {
