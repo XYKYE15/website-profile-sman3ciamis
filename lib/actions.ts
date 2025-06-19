@@ -698,11 +698,12 @@ export const updateSettings = async (
         tujuan: validatedFields.data.tujuan,
       },
     });
+
+    return { success: true };
   } catch (error) {
     console.error("Update error:", error);
     return { message: "Gagal mengupdate pengaturan" };
   }
-
   redirect("/admin/settings");
 };
 
