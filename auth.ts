@@ -7,6 +7,9 @@ import { LoginForm } from "./lib/schemas/Schema";
 import { compareSync } from "bcrypt-ts";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+
+  secret: process.env.AUTH_SECRET,
+
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
 
@@ -20,6 +23,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+
     Credentials({
       credentials: {
         email: { label: "Email", type: "text" },
@@ -60,10 +64,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 
   callbacks: {
-    async signIn({ user, account, profile}) {
+    async signIn({ user, account }) {
       if (account?.provider === "google") {
-        console.log(profile)
-        console.log(account)
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
           select: { role: true },
@@ -79,9 +81,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user, profile }) {
       if (user) {
         token.role = user.role;
-         token.image = user.image ?? profile?.picture;
+        token.image = user.image ?? profile?.picture;
       }
-
       return token;
     },
 

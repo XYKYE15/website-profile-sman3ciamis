@@ -11,14 +11,20 @@ import {
 } from "react-icons/io5";
 import { auth } from "@/auth";
 
-
 const PageAdmin = async (): Promise<JSX.Element> => {
   const stats = await getStatistics();
-   const session = await auth(); 
+  const session = await auth();
   const userName = session?.user?.name || "Administrator";
 
   const greeting = (() => {
-    const hour = new Date().getHours();
+    const hour = parseInt(
+      new Date().toLocaleString("id-ID", {
+        timeZone: "Asia/Jakarta",
+        hour: "numeric",
+        hour12: false,
+      })
+    );
+
     if (hour < 12) return "Selamat Pagi";
     if (hour < 15) return "Selamat Siang";
     if (hour < 18) return "Selamat Sore";
