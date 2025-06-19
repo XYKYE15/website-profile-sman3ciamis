@@ -1,17 +1,18 @@
-import EditForm from "@/components/EditNews/EditForm";
-import { getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
+import { getImagesById } from "@/lib/data";
+import EditForm from "@/components/EditNews/EditForm";
+import type { Metadata } from "next";
 
-type EditPageProps = {
-  params: {
-    id: string;
-  };
+export const metadata: Metadata = {
+  title: "Edit Berita",
 };
 
-// Komponen halaman edit berita
-const EditPage = async ({ params }: EditPageProps) => {
-  const { id } = params;
+interface EditPageProps {
+  params: { id: string };
+}
 
+export default async function EditPage({ params }: EditPageProps) {
+  const { id } = params;
   const data = await getImagesById(id);
 
   if (!data) return notFound();
@@ -24,6 +25,4 @@ const EditPage = async ({ params }: EditPageProps) => {
       </div>
     </div>
   );
-};
-
-export default EditPage;
+}

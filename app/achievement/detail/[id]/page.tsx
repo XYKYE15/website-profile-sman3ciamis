@@ -4,13 +4,12 @@ import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
 import Image from "next/image";
 import SideNews from "@/components/sideNews/SideNews";
 
-interface PageDetailProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function PageDetail({ params }: PageDetailProps) {
+// ✅ Ubah di sini: langsung gunakan destructuring props dengan typing object
+export default async function PageDetail({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
 
   const data = await getImagesAchievementById(id);
@@ -25,7 +24,7 @@ export default async function PageDetail({ params }: PageDetailProps) {
           {data.title}
         </h1>
 
-        <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500 ">
+        <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500">
           <div className="border-2 border-blue-500 md:w-full md:h-150">
             <Image
               src={data.image}
