@@ -406,6 +406,7 @@ export const uploadGallery = async (prevState: unknown, formData: FormData) => {
   redirect("/admin/gallery");
 };
 
+// Fungsi utama untuk hapus berdasarkan ID
 export const deleteGallery = async (id: string) => {
   const data = await getImagesGalleryById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -420,6 +421,19 @@ export const deleteGallery = async (id: string) => {
 
   redirect("/admin/gallery");
 };
+
+// Handler agar bisa digunakan oleh form action
+export const handleDeleteGallery = async (formData: FormData) => {
+  const id = formData.get("id");
+
+  if (!id || typeof id !== "string") {
+    console.error("ID tidak valid");
+    return;
+  }
+
+  await deleteGallery(id); // panggil fungsi utama
+};
+
 
 // Ekskul
 export const uploadEkskul = async (prevState: unknown, formData: FormData) => {
@@ -502,6 +516,7 @@ export const updateEkskul = async (
   redirect("/admin/ekskul");
 };
 
+// Fungsi utama untuk menghapus ekskul berdasarkan ID
 export const deleteEkskul = async (id: string) => {
   const data = await getImagesEkskulById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -515,6 +530,18 @@ export const deleteEkskul = async (id: string) => {
   }
 
   redirect("/admin/ekskul");
+};
+
+// Handler untuk form agar menerima FormData
+export const handleDeleteEkskul = async (formData: FormData) => {
+  const id = formData.get("id");
+
+  if (!id || typeof id !== "string") {
+    console.error("ID tidak valid");
+    return;
+  }
+
+  await deleteEkskul(id);
 };
 
 export const UploadSettings = async (

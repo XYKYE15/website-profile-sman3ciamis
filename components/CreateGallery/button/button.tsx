@@ -2,56 +2,17 @@
 
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
-import Link from "next/link";
-import { deleteGallery } from "@/lib/actions";
+import { handleDeleteGallery } from "@/lib/actions";
 
-// Tombol Submit (untuk Simpan dan Ubah)
-export const SubmitButton = ({ label }: { label: string }) => {
-  const { pending } = useFormStatus();
-
-  const isSaving = label === "Simpan";
-  const buttonText = pending ? (isSaving ? "Menyimpan..." : "simpan") : label;
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className={clsx(
-        "w-full py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150",
-        {
-          "opacity-50 cursor-progress": pending,
-        }
-      )}
-    >
-      {buttonText}
-    </button>
-  );
-};
-
-// Tombol Edit
-export const EditButton = ({ id }: { id: string }) => {
-  return (
-    <Link
-      href={`/admin/gallery/edit/${id}`}
-      className="w-23 block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
-    >
-      Edit
-    </Link>
-  );
-};
-
-// Tombol Delete (menggunakan server action)
 export const DeleteButton = ({ id }: { id: string }) => {
-  const deleteNewsWithId = deleteGallery.bind(null, id);
-
   return (
-    <form action={deleteNewsWithId}>
+    <form action={handleDeleteGallery}>
+      <input type="hidden" name="id" value={id} />
       <DeleteBtn />
     </form>
   );
 };
 
-// Tombol Hapus (internal)
 const DeleteBtn = () => {
   const { pending } = useFormStatus();
 
@@ -60,7 +21,7 @@ const DeleteBtn = () => {
       type="submit"
       disabled={pending}
       className={clsx(
-        "w-full py-2.5 px-6 text-base font-medium rounded-sm transition duration-150",
+        "w-20 py-2.5 text-base font-medium rounded-sm mt-5 transition duration-150",
         {
           "bg-red-500 hover:bg-red-400 text-white": !pending,
           "bg-red-300 text-white cursor-progress opacity-50": pending,

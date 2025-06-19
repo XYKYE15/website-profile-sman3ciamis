@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
 import Link from "next/link";
-import { deleteEkskul } from "@/lib/actions";
+import { handleDeleteEkskul } from "@/lib/actions"; // Pastikan impor handler, bukan fungsi utama
 
 interface SubmitButtonProps {
   label: string;
@@ -57,11 +57,10 @@ export const EditButton = ({ id }: { id: string }) => {
 };
 
 // Tombol Delete (menggunakan server action)
-export const DeleteButton = ({ id } : { id: string }) => {
-  const deleteEkskulWithId = deleteEkskul.bind(null, id);
-
+export const DeleteButton = ({ id }: { id: string }) => {
   return (
-    <form action={deleteEkskulWithId}>
+    <form action={handleDeleteEkskul}>
+      <input type="hidden" name="id" value={id} />
       <DeleteBtn />
     </form>
   );
