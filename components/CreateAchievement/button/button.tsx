@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
 import Link from "next/link";
-import { deleteAchievement } from "@/lib/actions";
+import { handleDeleteAchievement } from "@/lib/actions";
 
 // Tombol Submit (untuk Simpan dan Ubah)
 export const SubmitButton = ({ label }: { label: string }) => {
@@ -41,11 +41,10 @@ export const EditButton = ({ id }: { id: string }) => {
 };
 
 // Tombol Delete (menggunakan server action)
-export const DeleteButton = ({ id } : { id: string }) => {
-  const deleteAchievementWithId = deleteAchievement.bind(null, id);
-
+export const DeleteButton = ({ id }: { id: string }) => {
   return (
-    <form action={deleteAchievementWithId}>
+    <form action={handleDeleteAchievement}>
+      <input type="hidden" name="id" value={id} />
       <DeleteBtn />
     </form>
   );

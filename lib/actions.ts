@@ -249,6 +249,7 @@ export const updateAchievement = async (
   redirect("/admin/achievement");
 };
 
+
 export const deleteAchievement = async (id: string) => {
   const data = await getImagesAchievementById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -263,6 +264,20 @@ export const deleteAchievement = async (id: string) => {
 
   redirect("/admin/achievement");
 };
+
+
+export const handleDeleteAchievement = async (formData: FormData) => {
+  const id = formData.get("id");
+
+  if (!id || typeof id !== "string") {
+    console.error("ID tidak valid");
+    return;
+  }
+
+  await deleteAchievement(id);
+};
+
+
 
 // TEACHER
 export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
