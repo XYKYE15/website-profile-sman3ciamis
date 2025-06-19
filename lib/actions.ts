@@ -637,11 +637,39 @@ export const UploadSettings = async (
   redirect("/admin/settings");
 };
 
+export type EditState =
+  | {
+      success: false;
+      error?: {
+        name?: string[];
+        description?: string[];
+        phone?: string[];
+        email?: string[];
+        gmapsLink?: string[];
+        instagram?: string[];
+        youtube?: string[];
+        tiktok?: string[];
+        videoUrl?: string[];
+        imageHero?: string[];
+        sejarah?: string[];
+        visi?: string[];
+        misi?: string[];
+        tujuan?: string[];
+      };
+      message?: string;
+    }
+  | {
+      success: true;
+    };
+
 export const updateSettings = async (
-  prevState: unknown,
+  prevState: EditState,
   formData: FormData
-) => {
+): Promise<EditState> => {
   const id = formData.get("id") as string;
+  if (!id) {
+    return { success: false, message: "ID tidak ditemukan." };
+  }
 
   const rawData = {
     name: formData.get("name"),
@@ -671,7 +699,7 @@ export const updateSettings = async (
 
   const data = await prisma.setting.findUnique({ where: { id } });
   if (!data) {
-    return { success: false, message: "Tidak ada data ditemukan" };
+    return { success: false, message: "Data tidak ditemukan" };
   }
 
   let imageHeroUrl = data.imageHero;
@@ -712,7 +740,6 @@ export const updateSettings = async (
     return { success: false, message: "Gagal mengupdate pengaturan" };
   }
 };
-
 
 // Fungsi utama delete setting by ID
 export async function deleteSettingById(id: string) {

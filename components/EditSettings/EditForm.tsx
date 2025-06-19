@@ -1,29 +1,66 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { updateSettings } from "@/lib/actions";
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/CreateEkskul/button/button";
+import { updateSettings } from "@/lib/actions";
 import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const isFieldError = (error: unknown): error is Record<string, string[]> => {
-  return typeof error === "object" && error !== null && !("message" in error);
-};
+type FieldKey =
+  | "name"
+  | "description"
+  | "phone"
+  | "email"
+  | "gmapsLink"
+  | "instagram"
+  | "youtube"
+  | "tiktok"
+  | "videoUrl"
+  | "imageHero"
+  | "sejarah"
+  | "visi"
+  | "misi"
+  | "tujuan";
+
+type EditState =
+  | {
+      success: false;
+      error: Partial<Record<FieldKey, string[]>>;
+      message?: string;
+    }
+  | { success: true }
+  | null;
 
 const EditForm = ({ data }: { data: Setting }) => {
   const router = useRouter();
-  const [state, formAction] = useActionState(updateSettings.bind(null, data.id), null);
+
+  // Perbaikan: anotasi eksplisit untuk function di dalam useActionState
+  const [state, formAction] = useActionState<EditState, FormData>(
+    async function action(prevState: EditState, formData: FormData): Promise<EditState> {
+      return await updateSettings(prevState, formData);
+    },
+    null
+  );
 
   useEffect(() => {
     if (state?.success) {
       router.push("/admin/settings");
     }
-  }, [state?.success, router]);
+  }, [state, router]);
+
+  const getError = (key: FieldKey): string | null => {
+    if (state && "error" in state) {
+      return state.error?.[key]?.[0] ?? null;
+    }
+    return null;
+  };
 
   return (
     <form action={formAction}>
+      <input type="hidden" name="id" value={data.id} />
+
       {/* Hero Section */}
       <div className="mb-6">
         <h3 className="text-lg font-semibold mb-2">Hero Section</h3>
@@ -35,9 +72,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           placeholder="Judul Hero"
           required
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.name?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("name")}</p>
 
         <input
           type="text"
@@ -47,9 +82,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           placeholder="Deskripsi Hero"
           required
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.description?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("description")}</p>
 
         {data.imageHero && (
           <Image
@@ -68,9 +101,7 @@ const EditForm = ({ data }: { data: Setting }) => {
             name="imageHero"
             className="file:py-2 file:px-4 file:mr-4 file:border-0 file:bg-blue-500 rounded-sm file:text-white hover:file:bg-blue-400 file:cursor-pointer border border-blue-900 w-full"
           />
-          <p className="text-sm text-red-500 mt-2">
-            {isFieldError(state?.error) ? state.error.imageHero?.[0] : null}
-          </p>
+          <p className="text-sm text-red-500 mt-2">{getError("imageHero")}</p>
         </div>
       </div>
 
@@ -84,9 +115,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Nomor Telepon"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.phone?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("phone")}</p>
 
         <input
           type="email"
@@ -95,9 +124,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Email"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.email?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("email")}</p>
 
         <input
           type="text"
@@ -106,9 +133,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Link Google Maps"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.gmapsLink?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("gmapsLink")}</p>
       </div>
 
       {/* Media Sosial */}
@@ -121,9 +146,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="Instagram"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.instagram?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("instagram")}</p>
 
         <input
           type="text"
@@ -132,9 +155,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm mb-2"
           placeholder="YouTube"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.youtube?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("youtube")}</p>
 
         <input
           type="text"
@@ -143,9 +164,7 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="Tiktok"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.tiktok?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("tiktok")}</p>
       </div>
 
       {/* Video URL */}
@@ -158,35 +177,26 @@ const EditForm = ({ data }: { data: Setting }) => {
           className="py-2 px-4 border border-blue-900 w-full rounded-sm"
           placeholder="URL Video"
         />
-        <p className="text-sm text-red-500">
-          {isFieldError(state?.error) ? state.error.videoUrl?.[0] : null}
-        </p>
+        <p className="text-sm text-red-500">{getError("videoUrl")}</p>
       </div>
 
       {/* Sejarah, Visi, Misi, Tujuan */}
-      {[
-        { name: "sejarah", label: "Sejarah", value: data.sejarah },
-        { name: "visi", label: "Visi", value: data.visi },
-        { name: "misi", label: "Misi", value: data.misi },
-        { name: "tujuan", label: "Tujuan", value: data.tujuan },
-      ].map(({ name, label, value }) => (
-        <div className="mb-6" key={name}>
-          <h3 className="text-lg font-semibold mb-2">{label}</h3>
+      {(["sejarah", "visi", "misi", "tujuan"] as FieldKey[]).map((key) => (
+        <div className="mb-6" key={key}>
+          <h3 className="text-lg font-semibold mb-2">{key.toUpperCase()}</h3>
           <textarea
-            name={name}
+            name={key}
             rows={4}
-            defaultValue={value}
+            defaultValue={data[key] ?? ""}
             className="py-2 px-4 border border-blue-900 w-full rounded-sm"
-            placeholder={`Tuliskan ${label.toLowerCase()} di sini...`}
+            placeholder={`Tuliskan ${key} di sini...`}
           />
-          <p className="text-sm text-red-500">
-            {isFieldError(state?.error) ? state.error[name]?.[0] : null}
-          </p>
+          <p className="text-sm text-red-500">{getError(key)}</p>
         </div>
       ))}
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/settings"/>
+        <SubmitButton label="Simpan" cancelHref="/admin/settings" />
       </div>
     </form>
   );
