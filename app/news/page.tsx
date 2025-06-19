@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 };
 
 interface PageProps {
-  searchParams: Promise<{
+  searchParams: {
     page?: string;
-  }>;
+  };
 }
 
 export default async function PageNews({ searchParams }: PageProps) {
+  const { page: pageStr = "1" } = searchParams;
 
-  const { page: pageStr = "1" } = await searchParams;
   const page = parseInt(pageStr, 10);
   const perPage = 3;
 
