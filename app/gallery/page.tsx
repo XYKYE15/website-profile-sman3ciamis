@@ -10,13 +10,12 @@ export const metadata: Metadata = {
 };
 
 interface PageGalleryProps {
-  searchParams: {
-    page?: string;
-  };
+  searchParams: Promise<{ page?: string }>;
 }
 
 async function PageGallery({ searchParams }: PageGalleryProps) {
-  const page = parseInt(searchParams.page ?? "1", 10); 
+  const sp = await searchParams; // await karena searchParams Promise
+  const page = parseInt(sp.page ?? "1", 10);
   const perPage = 12;
 
   const allNews = await getImages();
