@@ -1,9 +1,9 @@
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { prisma } from "@/lib/prisma";
+import { getContactSetting } from "@/lib/data";
 
 const Contact = async () => {
-  const setting = await prisma.setting.findFirst();
+  const setting = await getContactSetting();
 
   if (!setting) {
     return (

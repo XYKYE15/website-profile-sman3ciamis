@@ -310,3 +310,14 @@ export async function getEkskul() {
     orderBy: { name: "asc" }, // opsional
   });
 }
+
+
+export const getContactSetting = async () => {
+  return await prisma.setting.findFirst({
+    select: {
+      phone: true,
+      email: true,
+      gmapsLink: true,
+    },
+  });
+};
