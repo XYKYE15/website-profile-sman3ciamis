@@ -8,49 +8,19 @@ import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-
-type EditState =
-  | { success: true }
-  | {
-      error: {
-        name?: string[];
-        description?: string[];
-        phone?: string[];
-        email?: string[];
-        gmapsLink?: string[];
-        instagram?: string[];
-        youtube?: string[];
-        tiktok?: string[];
-        videoUrl?: string[];
-        imageHero?: string[];
-        sejarah?: string[];
-        visi?: string[];
-        misi?: string[];
-        tujuan?: string[];
-      };
-      message?: string;
-    };
-
-// ✅ Fungsi pengecekan apakah bentuk error valid
-const isFieldError = (
-  error: unknown
-): error is EditState extends { error: infer E } ? E : never => {
-  return typeof error === "object" && error !== null && !("success" in error);
+const isFieldError = (error: unknown): error is Record<string, string[]> => {
+  return typeof error === "object" && error !== null && !("message" in error);
 };
 
 const EditForm = ({ data }: { data: Setting }) => {
   const router = useRouter();
-  const [state, formAction] = useActionState<EditState>(
-    updateSettings.bind(null, data.id),
-    null
-  );
+  const [state, formAction] = useActionState(updateSettings.bind(null, data.id), null);
 
-  // ✅ Hindari error akses ke .success
   useEffect(() => {
-    if (state && "success" in state && state.success) {
+    if (state?.success) {
       router.push("/admin/settings");
     }
-  }, [state, router]);
+  }, [state?.success, router]);
 
   return (
     <form action={formAction}>
@@ -194,14 +164,12 @@ const EditForm = ({ data }: { data: Setting }) => {
       </div>
 
       {/* Sejarah, Visi, Misi, Tujuan */}
-      {(
-        [
-          { name: "sejarah", label: "Sejarah", value: data.sejarah },
-          { name: "visi", label: "Visi", value: data.visi },
-          { name: "misi", label: "Misi", value: data.misi },
-          { name: "tujuan", label: "Tujuan", value: data.tujuan },
-        ] as const
-      ).map(({ name, label, value }) => (
+      {[
+        { name: "sejarah", label: "Sejarah", value: data.sejarah },
+        { name: "visi", label: "Visi", value: data.visi },
+        { name: "misi", label: "Misi", value: data.misi },
+        { name: "tujuan", label: "Tujuan", value: data.tujuan },
+      ].map(({ name, label, value }) => (
         <div className="mb-6" key={name}>
           <h3 className="text-lg font-semibold mb-2">{label}</h3>
           <textarea
@@ -218,7 +186,7 @@ const EditForm = ({ data }: { data: Setting }) => {
       ))}
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/settings" />
+        <SubmitButton label="Simpan" cancelHref="/admin/settings"/>
       </div>
     </form>
   );
