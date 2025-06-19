@@ -4,10 +4,16 @@ import Image from "next/image";
 import { getImagesAchievement, getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-export default async function PageDetail({ params }: { params: { id: string } }) {
-  const { id } = params;
+interface PageDetailProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function PageDetail({ params }: PageDetailProps) {
+  const { id } = await params; 
+
   const allAchievement = await getImagesAchievement();
   const data = await getImagesById(id);
+
   if (!data) return notFound();
 
   return (
