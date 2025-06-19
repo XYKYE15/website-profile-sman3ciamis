@@ -3,13 +3,13 @@ import { getImagesAchievementById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
 interface EditPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
 const EditPage = async ({ params }: EditPageProps) => {
-  const { id } = params;
+  // Tunggu resolve params dulu baru ambil id
+  const { id } = await params;
+
   const data = await getImagesAchievementById(id);
 
   if (!data) return notFound();
