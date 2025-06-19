@@ -12,7 +12,9 @@ interface EditPageProps {
 }
 
 export default async function EditPage({ params }: EditPageProps) {
+  
   const { id } = params;
+
   const data = await getImagesById(id);
 
   if (!data) return notFound();

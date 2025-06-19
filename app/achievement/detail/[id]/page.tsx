@@ -1,16 +1,16 @@
-import { getImages, getImagesAchievementById } from "@/lib/data";
+import { getImagesAchievementById, getImages } from "@/lib/data";
 import { notFound } from "next/navigation";
 import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
 import Image from "next/image";
 import SideNews from "@/components/sideNews/SideNews";
 
-// ✅ Ubah di sini: langsung gunakan destructuring props dengan typing object
-export default async function PageDetail({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const { id } = params;
+interface PageDetailProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function PageDetail({ params }: PageDetailProps) {
+  // HARUS await params dulu
+  const { id } = await params;
 
   const data = await getImagesAchievementById(id);
   const allNews = await getImages();
@@ -24,7 +24,7 @@ export default async function PageDetail({
           {data.title}
         </h1>
 
-        <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500">
+        <div className="bg-white mb-5 gap-5 flex mx-auto flex-col p-5 rounded-2xl md:w-211 w-full shadow-lg border border-blue-500 ">
           <div className="border-2 border-blue-500 md:w-full md:h-150">
             <Image
               src={data.image}
