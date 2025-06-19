@@ -8,34 +8,46 @@ import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+
+type EditState =
+  | { success: true }
+  | {
+      error: {
+        name?: string[];
+        description?: string[];
+        phone?: string[];
+        email?: string[];
+        gmapsLink?: string[];
+        instagram?: string[];
+        youtube?: string[];
+        tiktok?: string[];
+        videoUrl?: string[];
+        imageHero?: string[];
+        sejarah?: string[];
+        visi?: string[];
+        misi?: string[];
+        tujuan?: string[];
+      };
+      message?: string;
+    };
+
+// ✅ Fungsi pengecekan apakah bentuk error valid
 const isFieldError = (
   error: unknown
-): error is Record<
-  | "name"
-  | "description"
-  | "phone"
-  | "email"
-  | "gmapsLink"
-  | "instagram"
-  | "youtube"
-  | "tiktok"
-  | "videoUrl"
-  | "imageHero"
-  | "sejarah"
-  | "visi"
-  | "misi"
-  | "tujuan",
-  string[]
-> => {
-  return typeof error === "object" && error !== null && !("message" in error);
+): error is EditState extends { error: infer E } ? E : never => {
+  return typeof error === "object" && error !== null && !("success" in error);
 };
 
 const EditForm = ({ data }: { data: Setting }) => {
   const router = useRouter();
-  const [state, formAction] = useActionState(updateSettings.bind(null, data.id), null);
+  const [state, formAction] = useActionState<EditState>(
+    updateSettings.bind(null, data.id),
+    null
+  );
 
+  // ✅ Hindari error akses ke .success
   useEffect(() => {
-    if (state?.success) {
+    if (state && "success" in state && state.success) {
       router.push("/admin/settings");
     }
   }, [state, router]);
