@@ -128,6 +128,8 @@ export const getImagesTeacherById = async (id: string) => {
         image: true,
         nip: true,
         nuptk: true,
+        createdAt: true,
+        updateAt: true,
       },
     });
     return result;
