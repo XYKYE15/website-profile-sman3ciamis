@@ -2,7 +2,11 @@ import EditForm from "@/components/EditAchievement/EditForm";
 import { getImagesAchievementById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
-const EditPage = async ({ params }: { params: { id: string } }) => {
+export default async function EditPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
   const data = await getImagesAchievementById(id);
 
@@ -16,6 +20,4 @@ const EditPage = async ({ params }: { params: { id: string } }) => {
       </div>
     </div>
   );
-};
-
-export default EditPage;
+}
