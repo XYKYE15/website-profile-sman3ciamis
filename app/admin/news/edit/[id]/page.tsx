@@ -1,15 +1,20 @@
+// app/admin/news/edit/[id]/page.tsx
+
 import EditForm from "@/components/EditNews/EditForm";
 import { getImagesById } from "@/lib/data";
 import { notFound } from "next/navigation";
 
+// Tipe parameter dari route dynamic
 type EditPageProps = {
   params: {
     id: string;
   };
 };
 
+// Komponen halaman edit berita
 const EditPage = async ({ params }: EditPageProps) => {
-  const { id } = await Promise.resolve(params);
+  const { id } = params;
+
   const data = await getImagesById(id);
 
   if (!data) return notFound();

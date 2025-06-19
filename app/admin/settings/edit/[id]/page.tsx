@@ -9,7 +9,8 @@ type EditPageProps = {
 };
 
 const EditPage = async ({ params }: EditPageProps) => {
-  const { id } = await Promise.resolve(params);
+  const { id } = params;
+
   const data = await getSettingsById(id);
 
   if (!data) return notFound();
