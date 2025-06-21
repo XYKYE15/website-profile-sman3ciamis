@@ -45,7 +45,7 @@ export default async function PageAchievement({ searchParams }: PageAchievementP
 
       <div className="mx-5 text-center md:w-85 p-5">
         <SideEkskul />
-        <div className="bg-white py-2 w-65 border-t-5 border-blue-500 rounded-b-xl shadow-2xl mb-7 mx-auto">
+        <div className="bg-white py-2 md:w-65 w-80 border-t-5 border-blue-500 rounded-b-xl shadow-2xl mb-7 mx-auto">
           <h3 className="text-blue-900 text-xl font-semibold">Berita</h3>
         </div>
 

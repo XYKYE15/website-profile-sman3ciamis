@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import { FaPhone } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 import { TfiReload } from "react-icons/tfi";
 import { FaEye, FaYoutube, FaTiktok } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
-import Image from "next/image";
-import { MdEmail } from "react-icons/md";
 
 type SettingType = {
   phone: string;
@@ -18,111 +18,101 @@ type SettingType = {
 
 export default function Footer({ setting }: { setting: SettingType }) {
   return (
-    <footer>
-      <div className="bg-blue-500 shadow-lg py-5">
-        <div className="md:max-w-screen-xl py-5 mx-auto bg-white md:rounded-lg shadow-2xl">
-          <div className="grid md:grid-cols-3 grid-cols-1 mx-auto gap-10 md:gap-0">
-            {/* Kolom 1 */}
-            <div className="border-3 border-blue-500 h-90 w-85 md:min-w-100 rounded-2xl flex flex-col items-center py-10 mx-auto">
-              <Link href="/" className="flex justify-center items-center">
-                <Image
-                  src="/assets/logoSmantic.png"
-                  width={75}
-                  height={75}
-                  alt="Logo"
-                  className="mr-1"
-                  priority
-                />
-                <h2 className="flex flex-col items-center text-2xl uppercase font-semibold text-blue-900 leading-6">
-                  SMAN 3<span>Ciamis</span>
-                </h2>
+    <footer className="w-full bg-blue-500 text-white">
+      <div className="max-w-screen-xl mx-auto px-6 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Kolom 1 */}
+          <div className="flex flex-col items-center text-center gap-4">
+            <Link href="/" className="flex flex-col items-center gap-2">
+              <Image
+                src="/assets/logoSmantic.png"
+                width={75}
+                height={75}
+                alt="Logo"
+                priority
+              />
+              <h2 className="text-xl font-bold uppercase text-white">
+                SMAN 3 Ciamis
+              </h2>
+            </Link>
+            <p className="text-sm">
+              Jl. Bojonghuni No.87, Maleber, Kec. Ciamis, Kabupaten Ciamis,
+              Jawa Barat 46214
+            </p>
+            <div className="flex flex-col gap-2 mt-2 text-sm">
+              <div className="flex items-center justify-center gap-2">
+                <FaPhone />
+                <span>{setting.phone}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MdEmail />
+                <span>{setting.email}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Kolom 2 */}
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-xl font-semibold">Tentang Kami</h2>
+            <div className="flex flex-col gap-3 w-full max-w-xs">
+              <Link
+                href="/sejarah"
+                className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
+              >
+                <TfiReload />
+                Sejarah
               </Link>
-              <div className="md:w-90 mx-auto border-b-3 border-blue-900 p-2 text-sm mt-5 text-center w-75">
-                <h3 className="text-blue-900 font-medium">
-                  Jl. Bojonghuni No.87, Maleber, Kec. Ciamis, Kabupaten Ciamis,
-                  Jawa Barat 46214
-                </h3>
-              </div>
-              <div className="mx-auto md:w-100 w-60 mt-3 px-8 min-w-full md:min-w-0">
-                <p className="flex items-center gap-2 text-blue-900 font-medium">
-                  <FaPhone size={20} />
-                  <span>{setting?.phone || "0812-3456-7890"}</span>
-                </p>
-                <p className="flex items-center gap-2 text-blue-900 font-medium">
-                  <MdEmail size={20} />
-                  <span>{setting?.email || "smaan3Ciamis@gmail.com"}</span>
-                </p>
-              </div>
+              <Link
+                href="/visimisi"
+                className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
+              >
+                <FaEye />
+                Visi & Misi
+              </Link>
             </div>
+          </div>
 
-            {/* Kolom 2 */}
-            <div className="border-3 border-blue-500 h-90 w-85 md:min-w-100 rounded-2xl flex flex-col items-center gap-5 md:gap-0 mx-auto">
-              <h2 className="my-2 text-center font-semibold text-2xl text-blue-900">
-                Tentang Kami
-              </h2>
-              <div className="border-3 border-blue-500 mt-5 rounded-2xl h-65 w-75 md:w-95 mx-auto flex flex-col justify-center gap-5">
+          {/* Kolom 3 */}
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-xl font-semibold">Media Sosial</h2>
+            <div className="flex flex-col gap-3 w-full max-w-xs">
+              {setting.instagram && (
                 <Link
-                  href="/sejarah"
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
+                  href={setting.instagram}
+                  target="_blank"
+                  className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
                 >
-                  <TfiReload />
-                  <span>Sejarah</span>
+                  <AiFillInstagram size={20} />
+                  Instagram
                 </Link>
+              )}
+              {setting.youtube && (
                 <Link
-                  href="/visimisi"
-                  className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
+                  href={setting.youtube}
+                  target="_blank"
+                  className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
                 >
-                  <FaEye />
-                  <span>Visi & Misi</span>
+                  <FaYoutube size={20} />
+                  YouTube
                 </Link>
-              </div>
-            </div>
-
-            {/* Kolom 3 */}
-            <div className="border-3 border-blue-500 h-90 w-85 md:w-100 rounded-2xl flex flex-col items-center gap-5 md:gap-0 mx-auto">
-              <h2 className="my-2 text-center font-semibold text-2xl text-blue-900">
-                Media Sosial
-              </h2>
-              <div className="border-3 border-blue-500 mt-5 rounded-2xl h-65 w-75 md:w-95 mx-auto flex flex-col justify-center gap-5">
-                {setting.instagram && (
-                  <Link
-                    href={setting.instagram}
-                    target="_blank"
-                    className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
-                  >
-                    <AiFillInstagram size={22} />
-                    Instagram
-                  </Link>
-                )}
-
-                {setting.youtube && (
-                  <Link
-                    href={setting.youtube}
-                    target="_blank"
-                    className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
-                  >
-                    <FaYoutube size={22} />
-                    Youtube
-                  </Link>
-                )}
-
-                {setting.tiktok && (
-                  <Link
-                    href={setting.tiktok}
-                    target="_blank"
-                    className="bg-blue-500 hover:bg-blue-400 w-50 h-10 mx-auto rounded-2xl text-white flex justify-center items-center gap-2"
-                  >
-                    <FaTiktok size={22} />
-                    Tiktok
-                  </Link>
-                )}
-              </div>
+              )}
+              {setting.tiktok && (
+                <Link
+                  href={setting.tiktok}
+                  target="_blank"
+                  className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
+                >
+                  <FaTiktok size={20} />
+                  TikTok
+                </Link>
+              )}
             </div>
           </div>
         </div>
       </div>
-      <div className="max-w-screen-2xl py-5 text-center text-base font-bold bg-white text-blue-900 items-center">
-        &copy;Copyright 2025 | SMAN 3 Ciamis | By Rizki Rinaldi
+
+      <div className="text-center py-4 bg-white text-sm text-blue-600 font-bold">
+        &copy; 2025 SMAN 3 Ciamis | By Rizki Rinaldi
       </div>
     </footer>
   );

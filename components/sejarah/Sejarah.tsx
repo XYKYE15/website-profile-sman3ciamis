@@ -6,7 +6,7 @@ const Sejarah = async () => {
   const setting = await getSejarahSetting();
 
   return (
-    <div className="bg-white my-5 mx-auto md:w-250 p-5 rounded-xl flex flex-col items-center justify-center border border-blue-500">
+    <div className="bg-white my-5 mx-auto md:w-250 w-110 p-5 rounded-xl flex flex-col items-center justify-center border border-blue-500">
       <div className="mb-10 shadow-2xl h-80 rounded-2xl">
         <Image
           src={setting?.imageHero || "/hero.jpg"}
@@ -17,7 +17,7 @@ const Sejarah = async () => {
         />
       </div>
 
-      <div className="border border-blue-500 rounded-2xl w-200 p-2">
+      <div className="border border-blue-500 rounded-2xl md:w-200 w-100 p-2">
         <p className=" leading-relaxed text-base text-blue-900 whitespace-pre-line text-center">
           {setting?.sejarah || "Sejarah belum tersedia."}
         </p>

@@ -17,7 +17,7 @@ const Contact = async () => {
     <div className="md:my-40 w-full">
       <div className="flex items-center justify-center md:shadow-xl text-xl md:h-80 border-t-20 border-b-20 border-blue-500 bg-blue-500 md:bg-gray-100">
         <div
-          className="grid md:grid-cols-2 grid-cols-1 mx-auto gap-5 md:gap-1 text-center md:w-300 w-92 md:h-120 h-200 rounded-3xl text-blue-900 bg-white"
+          className="grid md:grid-cols-2 grid-cols-1 mx-auto gap-5 md:gap-1 text-center md:w-300 w-110 md:h-120 h-200 rounded-3xl text-blue-900 bg-white"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
@@ -35,7 +35,7 @@ const Contact = async () => {
               SMAN 3 CIAMIS
             </h1>
             <div
-              className="mx-auto border-b-3 border-blue-900 border-w-10 p-2 w-70 md:w-full"
+              className="mx-auto border-b-3 border-blue-900 border-w-10 p-2 w-100 md:w-full"
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -45,7 +45,7 @@ const Contact = async () => {
               </h3>
             </div>
             <div
-              className="mx-auto md:w-100 mt-3 min-w-full md:min-w-0 md:ml-5 ml-10 font-semibold"
+              className="flex flex-col justify-center items-center mx-auto md:w-100 mt-3 min-w-full md:min-w-0  font-semibold"
               data-aos="fade-right"
               data-aos-delay="300"
             >
@@ -69,7 +69,7 @@ const Contact = async () => {
           >
             <h1 className="text-2xl font-semibold">Peta Lokasi</h1>
             <div
-              className="mx-auto md:w-100"
+              className="mx-auto w-100 "
               data-aos="zoom-in-up"
               data-aos-delay="300"
               data-aos-duration="1000"
