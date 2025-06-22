@@ -2,7 +2,7 @@
 
 import { uploadEkskul } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateEkskul/button/button";
+import { SubmitEkskulButton } from "@/components/CreateEkskul/button/button";
 
 
 const CreateFormEkskul = () => {
@@ -55,7 +55,7 @@ const CreateFormEkskul = () => {
         </div>
       </div>
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/ekskul"/>
+        <SubmitEkskulButton label="Simpan" cancelHref="/admin/ekskul"/>
       </div>
     </form>
   );

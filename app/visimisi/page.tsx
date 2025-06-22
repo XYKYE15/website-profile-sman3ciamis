@@ -9,7 +9,7 @@ function page() {
   return (
     <div className="py-25 flex justify-center items-center w-full">
       <div className=" w-300 my-10">
-        <h1 className="text-center text-xl font-semibold mb-7">Visi & Misi</h1>
+        <h1 className="text-center text-blue-900 text-xl font-semibold mb-7">Visi & Misi</h1>
         <VisiMisi />
       </div>
     </div>

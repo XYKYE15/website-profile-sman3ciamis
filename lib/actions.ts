@@ -751,16 +751,19 @@ export const updateSettings = async (
 export async function deleteSettingById(id: string) {
   if (!id) throw new Error("ID tidak boleh kosong");
 
-  const setting = await prisma.setting.findUnique({ where: { id } });
+  try {
+    const setting = await prisma.setting.findUnique({ where: { id } });
+    
+    if (!setting) {
+      return { error: "Data setting tidak ditemukan" };
+    }
 
-  if (!setting) {
-    console.warn("Data setting tidak ditemukan, tidak ada yang dihapus.");
-    return null;
+    await prisma.setting.delete({ where: { id } });
+    return { success: true };
+  } catch (error) {
+    console.error("Gagal menghapus setting:", error);
+    return { error: "Gagal menghapus data settings" };
   }
-
-  await prisma.setting.delete({ where: { id } });
-
-  redirect("/admin/settings");
 }
 
 // Handler untuk dipakai di form <form action={...}>
@@ -772,6 +775,12 @@ export async function handleDeleteSetting(formData: FormData) {
     return;
   }
 
-  await deleteSettingById(id);
+  const result = await deleteSettingById(id);
+  
+  if (result.error) {
+    return result;
+  }
+  
+  redirect("/admin/settings");
 }
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateEkskul/button/button";
 import { UploadSettings } from "@/lib/actions";
+import { SubmitSettingButton } from "./button/button";
+
 
 const CreateSettings = () => {
   const [state, formAction] = useActionState(UploadSettings, null);
@@ -156,7 +157,7 @@ const CreateSettings = () => {
 
       {/* Submit Button */}
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/settings" />
+        <SubmitSettingButton label="Simpan" cancelHref="/admin/settings" />
       </div>
     </form>
   );

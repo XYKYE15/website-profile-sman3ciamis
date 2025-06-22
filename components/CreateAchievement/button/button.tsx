@@ -1,24 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
-import Link from "next/link";
+import { handleDeleteAchievement } from "@/lib/actions";
 
 interface SubmitButtonProps {
   label: string;
   cancelHref?: string;
 }
 
-// Tombol Submit (untuk Simpan dan Ubah)
+// Tombol Submit (Simpan/Ubah)
 export const SubmitAchievementButton = ({ label, cancelHref }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   const isSaving = label.toLowerCase().includes("simpan");
-  const buttonText = pending
-    ? isSaving
-      ? "Menyimpan..."
-      : "Mengubah..."
-    : label;
+  const buttonText = pending ? (isSaving ? "Menyimpan..." : "Mengubah...") : label;
 
   return (
     <div className="flex gap-4">
@@ -52,25 +49,24 @@ export const EditButton = ({ id }: { id: string }) => {
   return (
     <Link
       href={`/admin/achievement/edit/${id}`}
-      className="w-full block text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+      className="w-25 text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       Edit
     </Link>
   );
 };
 
-// Tombol Delete (menggunakan server action)
-import { handleDeleteAchievement } from "@/lib/actions";
+// Tombol Delete
 export const DeleteButton = ({ id }: { id: string }) => {
   return (
-    <form action={handleDeleteAchievement}>
+    <form action={handleDeleteAchievement} className="inline-block">
       <input type="hidden" name="id" value={id} />
       <DeleteBtn />
     </form>
   );
 };
 
-// Tombol Hapus (internal)
+// Tombol internal hapus
 const DeleteBtn = () => {
   const { pending } = useFormStatus();
 
@@ -79,7 +75,7 @@ const DeleteBtn = () => {
       type="submit"
       disabled={pending}
       className={clsx(
-        "w-full py-2.5 px-6 text-base font-medium rounded-sm  transition duration-150",
+        "w-25 py-2.5 text-sm font-medium rounded-sm transition duration-150",
         {
           "bg-red-500 hover:bg-red-400 text-white": !pending,
           "bg-red-300 text-white cursor-progress opacity-50": pending,

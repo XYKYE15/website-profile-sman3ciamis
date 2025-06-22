@@ -49,7 +49,7 @@ export const EditGalleryButton = ({ id }: { id: string }) => {
   return (
     <Link
       href={`/admin/gallery/edit/${id}`}
-      className="w-20 text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
+      className="w-25 text-center py-2.5 px-6 text-base font-medium rounded-sm text-white bg-blue-500 hover:bg-blue-400 transition duration-150"
     >
       Edit
     </Link>
@@ -59,7 +59,7 @@ export const EditGalleryButton = ({ id }: { id: string }) => {
 // Tombol Delete
 export const DeleteGalleryButton = ({ id }: { id: string }) => {
   return (
-    <form action={handleDeleteGallery}>
+    <form action={handleDeleteGallery} className="inline-block">
       <input type="hidden" name="id" value={id} />
       <DeleteBtn />
     </form>
@@ -75,7 +75,7 @@ const DeleteBtn = () => {
       type="submit"
       disabled={pending}
       className={clsx(
-        "w-20 py-2.5 text-base font-medium rounded-sm mt-5 transition duration-150",
+        "w-25 py-2.5 text-sm font-medium rounded-sm transition duration-150",
         {
           "bg-red-500 hover:bg-red-400 text-white": !pending,
           "bg-red-300 text-white cursor-progress opacity-50": pending,

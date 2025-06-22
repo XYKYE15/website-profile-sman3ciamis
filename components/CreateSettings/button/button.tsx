@@ -11,7 +11,7 @@ interface SubmitButtonProps {
 }
 
 // Tombol Simpan/Ubah
-export const SubmitButton = ({ label, cancelHref }: SubmitButtonProps) => {
+export const SubmitSettingButton = ({ label, cancelHref }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   const isSaving = label === "Simpan";

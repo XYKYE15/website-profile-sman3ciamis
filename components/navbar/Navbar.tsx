@@ -3,8 +3,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { HiMenu, HiX } from "react-icons/hi";
-import { IoChevronDown } from "react-icons/io5";
+import {
+  IoMenuSharp,
+  IoCloseSharp,
+  IoChevronDownSharp,
+  IoHomeSharp,
+  IoTrophySharp,
+  IoNewspaperSharp,
+  IoImagesSharp,
+  IoInformationCircleSharp,
+  IoTimeSharp,
+  IoBulbSharp,
+} from "react-icons/io5";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,68 +54,74 @@ export default function Navbar() {
           className="md:hidden text-white focus:outline-none"
           aria-label="Toggle Menu"
         >
-          {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+          {isOpen ? <IoCloseSharp size={28} /> : <IoMenuSharp size={28} />}
         </button>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-6 relative">
           <Link
             href="/"
-            className="text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
+            className="flex items-center gap-2 text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
           >
+            <IoHomeSharp className="text-inherit" />
             Beranda
           </Link>
 
           <Link
             href="/achievement"
-            className="text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
+            className="flex items-center gap-2 text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
           >
+            <IoTrophySharp className="text-inherit" />
             Prestasi
           </Link>
 
           <Link
             href="/news"
-            className="text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
+            className="flex items-center gap-2 text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
           >
+            <IoNewspaperSharp className="text-inherit" />
             Berita
           </Link>
 
           <Link
             href="/gallery"
-            className="text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
+            className="flex items-center gap-2 text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
           >
+            <IoImagesSharp className="text-inherit" />
             Galeri
           </Link>
 
-          {/* Dropdown Tentang Kami - Klik untuk buka */}
+          {/* Dropdown Tentang Kami */}
           <div className="relative">
             <button
               onClick={() => setShowDropdown((prev) => !prev)}
-              className="flex items-center text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
+              className="flex items-center gap-2 text-white hover:bg-blue-400 hover:text-blue-100 px-3 py-1 rounded-md transition"
             >
+              <IoInformationCircleSharp className="text-inherit" />
               Tentang Kami
-              <IoChevronDown
-                className="ml-1 transform transition duration-200"
-                style={{
-                  transform: showDropdown ? "rotate(180deg)" : "rotate(0deg)",
-                }}
+              <IoChevronDownSharp
+                className={`ml-1 transform transition duration-200 ${
+                  showDropdown ? "rotate-180" : "rotate-0"
+                }`}
               />
             </button>
 
             {showDropdown && (
-              <div className="absolute top-full left-0 bg-white shadow-md rounded-md mt-2 py-2 min-w-[160px] z-50">
+              <div className="absolute top-full left-0 bg-white shadow-md rounded-md mt-2 py-2 min-w-[180px] z-50">
                 <Link
                   href="/sejarah"
                   onClick={handleClose}
-                  className="block px-4 py-2 text-blue-500 hover:bg-blue-100 transition"
+                  className="flex items-center gap-2 px-4 py-2 text-blue-500 hover:bg-blue-100 transition"
                 >
+                  <IoTimeSharp className="text-inherit" />
                   Sejarah
                 </Link>
                 <Link
                   href="/visimisi"
                   onClick={handleClose}
-                  className="block px-4 py-2 text-blue-500 hover:bg-blue-100 transition"
+                  className="flex items-center gap-2 px-4 py-2 text-blue-500 hover:bg-blue-100 transition"
                 >
+                  <IoBulbSharp className="text-inherit" />
                   Visi & Misi
                 </Link>
               </div>
@@ -121,39 +137,46 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={handleClose}
-              className="text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
+              className="flex items-center gap-2 text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
             >
+              <IoHomeSharp className="text-inherit" />
               Beranda
             </Link>
             <Link
               href="/achievement"
               onClick={handleClose}
-              className="text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
+              className="flex items-center gap-2 text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
             >
+              <IoTrophySharp className="text-inherit" />
               Prestasi
             </Link>
             <Link
               href="/news"
               onClick={handleClose}
-              className="text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
+              className="flex items-center gap-2 text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
             >
+              <IoNewspaperSharp className="text-inherit" />
               Berita
             </Link>
             <Link
               href="/gallery"
               onClick={handleClose}
-              className="text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
+              className="flex items-center gap-2 text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
             >
+              <IoImagesSharp className="text-inherit" />
               Galeri
             </Link>
 
             {/* Mobile Dropdown: Tentang Kami */}
             <button
               onClick={() => setShowMobileSubmenu(!showMobileSubmenu)}
-              className="text-white w-full py-2 px-3 rounded-md flex justify-between items-center hover:bg-blue-400 transition"
+              className="flex justify-between items-center gap-2 text-white w-full py-2 px-3 rounded-md hover:bg-blue-400 transition"
             >
-              Tentang Kami
-              <IoChevronDown
+              <span className="flex items-center gap-2">
+                <IoInformationCircleSharp className="text-inherit" />
+                Tentang Kami
+              </span>
+              <IoChevronDownSharp
                 className={`ml-2 transform transition ${
                   showMobileSubmenu ? "rotate-180" : "rotate-0"
                 }`}
@@ -161,19 +184,21 @@ export default function Navbar() {
             </button>
 
             {showMobileSubmenu && (
-              <div className="pl-4 flex flex-col gap-1">
+              <div className="pl-6 flex flex-col gap-1">
                 <Link
                   href="/sejarah"
                   onClick={handleClose}
-                  className="text-white py-1 px-3 rounded hover:bg-blue-400 transition"
+                  className="flex items-center gap-2 text-white py-1 px-3 rounded hover:bg-blue-400 transition"
                 >
+                  <IoTimeSharp className="text-inherit" />
                   Sejarah
                 </Link>
                 <Link
                   href="/visimisi"
                   onClick={handleClose}
-                  className="text-white py-1 px-3 rounded hover:bg-blue-400 transition"
+                  className="flex items-center gap-2 text-white py-1 px-3 rounded hover:bg-blue-400 transition"
                 >
+                  <IoBulbSharp className="text-inherit" />
                   Visi & Misi
                 </Link>
               </div>

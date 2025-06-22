@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FaPhone } from "react-icons/fa6";
-import { MdEmail } from "react-icons/md";
-import { TfiReload } from "react-icons/tfi";
-import { FaEye, FaYoutube, FaTiktok } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
+import {
+  IoCallSharp,
+  IoMailSharp,
+  IoTimeSharp,         // 🔁 Icon Jam untuk Sejarah
+  IoEyeSharp,
+  IoLogoInstagram,
+  IoLogoYoutube,
+  IoLogoTiktok,
+} from "react-icons/io5";
 
 type SettingType = {
   phone: string;
@@ -41,11 +45,11 @@ export default function Footer({ setting }: { setting: SettingType }) {
             </p>
             <div className="flex flex-col gap-2 mt-2 text-sm">
               <div className="flex items-center justify-center gap-2">
-                <FaPhone />
+                <IoCallSharp size={16} />
                 <span>{setting.phone}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <MdEmail />
+              <div className="flex items-center justify-center gap-2">
+                <IoMailSharp size={16} />
                 <span>{setting.email}</span>
               </div>
             </div>
@@ -59,14 +63,14 @@ export default function Footer({ setting }: { setting: SettingType }) {
                 href="/sejarah"
                 className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
               >
-                <TfiReload />
+                <IoTimeSharp size={18} />
                 Sejarah
               </Link>
               <Link
                 href="/visimisi"
                 className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
               >
-                <FaEye />
+                <IoEyeSharp size={18} />
                 Visi & Misi
               </Link>
             </div>
@@ -82,7 +86,7 @@ export default function Footer({ setting }: { setting: SettingType }) {
                   target="_blank"
                   className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
                 >
-                  <AiFillInstagram size={20} />
+                  <IoLogoInstagram size={20} />
                   Instagram
                 </Link>
               )}
@@ -92,7 +96,7 @@ export default function Footer({ setting }: { setting: SettingType }) {
                   target="_blank"
                   className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
                 >
-                  <FaYoutube size={20} />
+                  <IoLogoYoutube size={20} />
                   YouTube
                 </Link>
               )}
@@ -102,7 +106,7 @@ export default function Footer({ setting }: { setting: SettingType }) {
                   target="_blank"
                   className="bg-white text-blue-600 hover:bg-blue-100 font-medium py-2 px-4 rounded-xl flex items-center justify-center gap-2 transition duration-300"
                 >
-                  <FaTiktok size={20} />
+                  <IoLogoTiktok size={20} />
                   TikTok
                 </Link>
               )}

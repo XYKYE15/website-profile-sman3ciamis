@@ -2,7 +2,6 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { DeleteSettingButton, EditButtonSettings } from "../button/button";
 
-
 function extractYouTubeVideoID(url: string) {
   try {
     const u = new URL(url);
@@ -134,7 +133,7 @@ const CardSettings = async () => {
           className="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition-shadow"
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-4">{item.title}</h2>
-          <div className="bg-gray-100 rounded-md p-4 h-40 overflow-y-auto text-gray-700 leading-relaxed">
+          <div className="prose prose-sm max-w-none bg-gray-100 rounded-md p-6 text-gray-700 leading-relaxed whitespace-pre-line">
             {item.value}
           </div>
         </section>

@@ -2,7 +2,7 @@
 
 import { updateEkskul } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateEkskul/button/button";
+import { SubmitEkskulButton } from "@/components/CreateEkskul/button/button";
 import Image from "next/image";
 import type { Ekskul } from "@/lib/generated/prisma";
 
@@ -84,7 +84,7 @@ const EditForm = ({ data }: { data: Ekskul }) => {
 
       {/* Tombol Submit + Batal */}
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/ekskul" />
+        <SubmitEkskulButton label="Simpan" cancelHref="/admin/ekskul" />
       </div>
     </form>
   );

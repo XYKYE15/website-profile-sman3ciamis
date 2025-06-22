@@ -2,11 +2,12 @@
 
 import React, { useEffect } from "react";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateEkskul/button/button";
+
 import { updateSettings, type EditState } from "@/lib/actions";
 import type { Setting } from "@/lib/generated/prisma";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { SubmitSettingButton } from "../CreateSettings/button/button";
 
 type FieldKey =
   | "name"
@@ -183,7 +184,7 @@ const EditForm = ({ data }: { data: Setting }) => {
       ))}
 
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/settings" />
+        <SubmitSettingButton label="Simpan" cancelHref="/admin/settings" />
       </div>
     </form>
   );

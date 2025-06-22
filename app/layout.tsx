@@ -25,30 +25,17 @@ export default async function RootLayout({
 }) {
   const setting = await getSocialMediaLinks();
 
-  if (!setting) {
-    return (
-      <html lang="en">
-        <body className={`${fontRoboto.className} antialiased`}>
-          <div className="min-h-screen flex items-center justify-center bg-white">
-            <div className="text-center">
-              <h1 className="text-xl font-bold text-red-600 mb-2">
-                Data pengaturan sosial media tidak ditemukan.
-              </h1>
-              <p className="text-gray-700">
-                Silakan tambahkan data sosial media di halaman admin.
-              </p>
-            </div>
-          </div>
-        </body>
-      </html>
-    );
-  }
-
   return (
     <html lang="en">
       <body className={`${fontRoboto.className} antialiased`}>
         <AOSProvider>
-          <LayoutWrapper setting={setting}>{children}</LayoutWrapper>
+          <LayoutWrapper setting={setting || {
+            phone: "",
+            email: "",
+            instagram: "",
+            youtube: "",
+            tiktok: ""
+          }}>{children}</LayoutWrapper>
         </AOSProvider>
       </body>
     </html>
