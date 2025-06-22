@@ -5,6 +5,7 @@ import { useFormStatus } from "react-dom";
 import { clsx } from "clsx";
 import { handleDeleteEkskul } from "@/lib/actions";
 
+
 interface SubmitButtonProps {
   label: string;
   cancelHref?: string;
