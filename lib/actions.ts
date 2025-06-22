@@ -767,7 +767,7 @@ export async function deleteSettingById(id: string) {
 }
 
 // Handler untuk dipakai di form <form action={...}>
-export async function handleDeleteSetting(formData: FormData) {
+export async function handleDeleteSetting(formData: FormData): Promise<void> {
   const id = formData.get("id");
 
   if (!id || typeof id !== "string") {
@@ -775,12 +775,14 @@ export async function handleDeleteSetting(formData: FormData) {
     return;
   }
 
-  const result = await deleteSettingById(id);
-  
-  if (result.error) {
-    return result;
+  const setting = await prisma.setting.findUnique({ where: { id } });
+
+  if (!setting) {
+    console.error("Data setting tidak ditemukan");
+    return;
   }
-  
+
+  await prisma.setting.delete({ where: { id } });
+
   redirect("/admin/settings");
 }
-
