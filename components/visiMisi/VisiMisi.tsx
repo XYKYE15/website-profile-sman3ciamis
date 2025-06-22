@@ -5,7 +5,7 @@ const VisiMisi = async () => {
   const setting = await getVisiMisiTujuan();
 
   return (
-    <div className="bg-white my-8 mx-auto w-full max-w-5xl p-6 rounded-xl border border-blue-500">
+    <div className="bg-white my-8 mx-auto w-110 max-w-5xl p-6 rounded-xl border border-blue-500">
       {/* Gambar Hero */}
       <div className="mb-10 shadow-2xl h-80 rounded-2xl overflow-hidden border border-blue-500">
         <Image
