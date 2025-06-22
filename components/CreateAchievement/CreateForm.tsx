@@ -2,7 +2,8 @@
 
 import { uploadAchievement } from "@/lib/actions";
 import { useActionState } from "react";
-import { SubmitButton } from "@/components/CreateEkskul/button/button";
+import { SubmitAchievementButton } from "./button/button";
+
 
 const CreateForm = () => {
   const [state, formAction] = useActionState(uploadAchievement, null);
@@ -45,7 +46,7 @@ const CreateForm = () => {
         </div>
       </div>
       <div className="mb-4 pt-4">
-        <SubmitButton label="Simpan" cancelHref="/admin/achievement"/>
+        <SubmitAchievementButton label="Simpan" cancelHref="/admin/achievement"/>
       </div>
     </form>
   );
