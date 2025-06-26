@@ -1,7 +1,7 @@
 import SideEkskul from "@/components/achievement/sideEkskul/SideEkskul";
-import SideNews from "@/components/sideAchievement/SideAchievement";
 import Gallery from "@/components/gallery/Gallery";
 import Pagination from "@/components/pagination/Pagination";
+import SideNews from "@/components/sideNews/SideNews";
 import { getImages, getImagesGallery } from "@/lib/data";
 import { Metadata } from "next";
 
