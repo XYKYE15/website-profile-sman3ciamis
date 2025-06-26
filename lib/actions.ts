@@ -86,7 +86,7 @@ export const signInCredentials = async (
   }
 };
 
-// NEWS
+//Upload News
 export const uploadNews = async (prevState: unknown, formData: FormData) => {
   const rawData = {
     title: formData.get("title"),
@@ -115,6 +115,9 @@ export const uploadNews = async (prevState: unknown, formData: FormData) => {
     await prisma.news.create({
       data: { title, description, image: url },
     });
+
+    revalidatePath("/");
+    revalidatePath("/news");
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload berita" };
@@ -123,6 +126,7 @@ export const uploadNews = async (prevState: unknown, formData: FormData) => {
   redirect("/admin/news");
 };
 
+//Update News
 export const updateNews = async (
   id: string,
   prevState: unknown,
@@ -142,7 +146,7 @@ export const updateNews = async (
 
   try {
     if (image instanceof File && image.size > 0) {
-      await del(data.image); // hapus gambar lama
+      await del(data.image); 
       const { url } = await put(image.name, image, {
         access: "public",
         multipart: true,
@@ -154,6 +158,10 @@ export const updateNews = async (
       where: { id },
       data: { title, description, image: imagePath },
     });
+
+
+    revalidatePath("/");
+    revalidatePath("/news");
   } catch (error) {
     console.error("Update error:", error);
     return { message: "Gagal mengupdate berita" };
@@ -170,6 +178,10 @@ export const deleteNews = async (id: string) => {
   try {
     await del(data.image);
     await prisma.news.delete({ where: { id } });
+
+
+    revalidatePath("/");
+    revalidatePath("/news");
   } catch (error) {
     console.error("Delete error:", error);
     return { message: "Gagal menghapus berita" };
@@ -190,8 +202,7 @@ export const handleDeleteNews = async (formData: FormData) => {
   await deleteNews(id);
 };
 
-
-// ACHIEVEMENT
+//Upload Prestasi
 export const uploadAchievement = async (
   prevState: unknown,
   formData: FormData
@@ -215,6 +226,10 @@ export const uploadAchievement = async (
     await prisma.achievement.create({
       data: { title, description, image: url },
     });
+
+
+    revalidatePath("/");
+    revalidatePath("/achievement");
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload prestasi" };
@@ -223,6 +238,7 @@ export const uploadAchievement = async (
   redirect("/admin/achievement");
 };
 
+//Update Prestasi
 export const updateAchievement = async (
   id: string,
   prevState: unknown,
@@ -256,6 +272,9 @@ export const updateAchievement = async (
       where: { id },
       data: { title, description, image: imagePath },
     });
+
+    revalidatePath("/");
+    revalidatePath("/achievement");
   } catch (error) {
     console.error("Update error:", error);
     return { message: "Gagal mengupdate prestasi" };
@@ -264,7 +283,7 @@ export const updateAchievement = async (
   redirect("/admin/achievement");
 };
 
-
+// Fungsi utama menghapus prestasi
 export const deleteAchievement = async (id: string) => {
   const data = await getImagesAchievementById(id);
   if (!data) return { message: "Tidak ada data ditemukan" };
@@ -272,6 +291,9 @@ export const deleteAchievement = async (id: string) => {
   try {
     await del(data.image);
     await prisma.achievement.delete({ where: { id } });
+
+    revalidatePath("/");
+    revalidatePath("/achivement");
   } catch (error) {
     console.error("Delete error:", error);
     return { message: "Gagal menghapus prestasi" };
@@ -279,7 +301,6 @@ export const deleteAchievement = async (id: string) => {
 
   redirect("/admin/achievement");
 };
-
 
 export const handleDeleteAchievement = async (formData: FormData) => {
   const id = formData.get("id");
@@ -291,8 +312,6 @@ export const handleDeleteAchievement = async (formData: FormData) => {
 
   await deleteAchievement(id);
 };
-
-
 
 // TEACHER
 export const uploadTeacher = async (prevState: unknown, formData: FormData) => {
@@ -573,6 +592,7 @@ export const handleDeleteEkskul = async (formData: FormData) => {
   await deleteEkskul(id);
 };
 
+//Upload pengaturan
 export const UploadSettings = async (
   prevState: unknown,
   formData: FormData
@@ -595,13 +615,11 @@ export const UploadSettings = async (
   };
 
   const validatedFields = UploadFormSettings.safeParse(rawData);
-
   if (!validatedFields.success) {
     return { error: validatedFields.error.flatten().fieldErrors };
   }
 
   let imageHeroUrl: string | null = null;
-
   if (rawData.imageHero instanceof File && rawData.imageHero.size > 0) {
     const { url } = await put(rawData.imageHero.name, rawData.imageHero, {
       access: "public",
@@ -612,24 +630,30 @@ export const UploadSettings = async (
   }
 
   try {
-    await prisma.setting.create({
-      data: {
-        name: validatedFields.data.name,
-        description: validatedFields.data.description,
-        phone: validatedFields.data.phone,
-        email: validatedFields.data.email,
-        gmapsLink: validatedFields.data.gmapsLink,
-        instagram: validatedFields.data.instagram ?? "",
-        youtube: validatedFields.data.youtube ?? "",
-        tiktok: validatedFields.data.tiktok ?? "",
-        videoUrl: validatedFields.data.videoUrl ?? null,
-        imageHero: imageHeroUrl,
-        sejarah: validatedFields.data.sejarah,
-        visi: validatedFields.data.visi,
-        misi: validatedFields.data.misi,
-        tujuan: validatedFields.data.tujuan,
-      },
-    });
+   await prisma.setting.create({
+  data: {
+    name: validatedFields.data.name,
+    description: validatedFields.data.description,
+    phone: validatedFields.data.phone,
+    email: validatedFields.data.email,
+    gmapsLink: validatedFields.data.gmapsLink,
+    sejarah: validatedFields.data.sejarah,
+    visi: validatedFields.data.visi,
+    misi: validatedFields.data.misi,
+    tujuan: validatedFields.data.tujuan,
+    instagram: validatedFields.data.instagram ?? "",
+    youtube: validatedFields.data.youtube ?? "",
+    tiktok: validatedFields.data.tiktok ?? "",
+    videoUrl: validatedFields.data.videoUrl ?? "",
+    imageHero: imageHeroUrl,
+  },
+});
+
+
+    revalidatePath("/");
+    revalidatePath("/visimisi");
+    revalidatePath("/profile");
+    revalidatePath("/contact");
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload pengaturan" };
@@ -637,6 +661,7 @@ export const UploadSettings = async (
 
   redirect("/admin/settings");
 };
+
 export type EditState =
   | {
       success: false;
@@ -688,7 +713,6 @@ export const updateSettings = async (
   };
 
   const validatedFields = EditFormSettings.safeParse(rawData);
-
   if (!validatedFields.success) {
     return {
       success: false,
@@ -708,36 +732,26 @@ export const updateSettings = async (
       if (existing.imageHero) {
         await del(existing.imageHero);
       }
-
       const { url } = await put(rawData.imageHero.name, rawData.imageHero, {
         access: "public",
         multipart: true,
       });
-
       imageHeroUrl = url;
     }
 
     await prisma.setting.update({
       where: { id },
       data: {
-        name: validatedFields.data.name,
-        description: validatedFields.data.description,
-        phone: validatedFields.data.phone,
-        email: validatedFields.data.email,
-        gmapsLink: validatedFields.data.gmapsLink,
-        instagram: validatedFields.data.instagram ?? "",
-        youtube: validatedFields.data.youtube ?? "",
-        tiktok: validatedFields.data.tiktok ?? "",
-        videoUrl: validatedFields.data.videoUrl ?? null,
+        ...validatedFields.data,
         imageHero: imageHeroUrl,
-        sejarah: validatedFields.data.sejarah,
-        visi: validatedFields.data.visi,
-        misi: validatedFields.data.misi,
-        tujuan: validatedFields.data.tujuan,
       },
     });
 
-    revalidatePath('/visimisi');
+    revalidatePath("/");
+    revalidatePath("/visimisi");
+    revalidatePath("/profile");
+    revalidatePath("/contact");
+
     return { success: true };
   } catch (error) {
     console.error("Update Settings Error:", error);
@@ -749,18 +763,26 @@ export const updateSettings = async (
 };
 
 
+
 // Fungsi utama delete setting by ID
 export async function deleteSettingById(id: string) {
   if (!id) throw new Error("ID tidak boleh kosong");
 
   try {
     const setting = await prisma.setting.findUnique({ where: { id } });
-    
-    if (!setting) {
-      return { error: "Data setting tidak ditemukan" };
+    if (!setting) return { error: "Data setting tidak ditemukan" };
+
+    if (setting.imageHero) {
+      await del(setting.imageHero);
     }
 
     await prisma.setting.delete({ where: { id } });
+
+    revalidatePath("/");
+    revalidatePath("/visimisi");
+    revalidatePath("/profile");
+    revalidatePath("/contact");
+
     return { success: true };
   } catch (error) {
     console.error("Gagal menghapus setting:", error);
@@ -768,23 +790,31 @@ export async function deleteSettingById(id: string) {
   }
 }
 
+
 // Handler untuk dipakai di form <form action={...}>
 export async function handleDeleteSetting(formData: FormData): Promise<void> {
   const id = formData.get("id");
-
   if (!id || typeof id !== "string") {
     console.error("ID setting tidak valid");
     return;
   }
 
   const setting = await prisma.setting.findUnique({ where: { id } });
-
   if (!setting) {
     console.error("Data setting tidak ditemukan");
     return;
   }
 
+  if (setting.imageHero) {
+    await del(setting.imageHero);
+  }
+
   await prisma.setting.delete({ where: { id } });
+
+  revalidatePath("/");
+  revalidatePath("/visimisi");
+  revalidatePath("/profile");
+  revalidatePath("/contact");
 
   redirect("/admin/settings");
 }
