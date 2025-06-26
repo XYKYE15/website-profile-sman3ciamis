@@ -1,6 +1,7 @@
 "use server";
 
 import { put, del } from "@vercel/blob";
+import { revalidatePath } from "next/cache";
 import {
   EditFormAchievement,
   UploadFormAchievement,
@@ -736,6 +737,7 @@ export const updateSettings = async (
       },
     });
 
+    revalidatePath('/visimisi');
     return { success: true };
   } catch (error) {
     console.error("Update Settings Error:", error);
