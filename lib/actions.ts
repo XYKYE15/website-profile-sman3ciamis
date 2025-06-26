@@ -654,6 +654,7 @@ export const UploadSettings = async (
     revalidatePath("/visimisi");
     revalidatePath("/profile");
     revalidatePath("/contact");
+    revalidatePath("/sejarah")
   } catch (error) {
     console.error("Upload error:", error);
     return { message: "Gagal mengupload pengaturan" };
