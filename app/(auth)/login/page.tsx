@@ -1,13 +1,10 @@
-import { Suspense } from "react";
 import AuthLayout from "@/components/auth/AuthLayout";
-import LoginForm from "@/components/auth/LoginForm";
+import LoginClient from "./LoginClient";
 
 const LoginPage = () => {
   return (
     <AuthLayout title="" showOr={true}>
-      <Suspense fallback={<div>Loading login form...</div>}>
-        <LoginForm />
-      </Suspense>
+      <LoginClient />
     </AuthLayout>
   );
 };
