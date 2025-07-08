@@ -10,6 +10,7 @@ import {
   IoTrophySharp,
 } from "react-icons/io5";
 import { auth } from "@/auth";
+import LoginNotification from "@/components/admin/LoginNotif";
 
 const PageAdmin = async (): Promise<JSX.Element> => {
   const stats = await getStatistics();
@@ -99,6 +100,8 @@ const PageAdmin = async (): Promise<JSX.Element> => {
       <div className="flex flex-1">
         <SideBar />
         <main className="flex-1 p-6 mt-25">
+          <LoginNotification /> {/* ✅ Notifikasi login berhasil */}
+
           <h1 className="text-2xl font-bold mb-2">Dashboard Admin</h1>
           <p className="text-gray-600 mb-6">
             {greeting}, {userName} 👋
@@ -110,7 +113,7 @@ const PageAdmin = async (): Promise<JSX.Element> => {
               <Link
                 key={idx}
                 href={item.href}
-                className={`p-4 bg-white border border-gray-200 rounded-xl shadow-sm  transition-all`}
+                className="p-4 bg-white border border-gray-200 rounded-xl shadow-sm transition-all"
               >
                 <p className="text-sm text-gray-600">{item.label}</p>
                 <p className={`text-2xl font-bold text-${item.color}-600`}>

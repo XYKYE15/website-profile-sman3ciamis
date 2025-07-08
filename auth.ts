@@ -3,13 +3,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
-import { LoginForm } from "./lib/schemas/Schema";
+import { LoginForm } from "@/lib/schemas/Schema";
 import { compareSync } from "bcrypt-ts";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-
   secret: process.env.AUTH_SECRET,
-
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
 
@@ -23,7 +21,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-
     Credentials({
       credentials: {
         email: { label: "Email", type: "text" },
@@ -75,6 +72,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return false;
         }
       }
+
       return true;
     },
 
@@ -104,10 +102,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       if (isAdminRoute && auth?.user?.role !== "admin") {
         return Response.redirect(new URL("/", nextUrl));
-      }
-
-      if (isLoggedIn && pathname.startsWith("/login")) {
-        return Response.redirect(new URL("/admin", nextUrl));
       }
 
       return true;

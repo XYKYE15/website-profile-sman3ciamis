@@ -74,7 +74,12 @@ export const signInCredentials = async (
   const { email, password } = validatedFields.data;
 
   try {
-    await signIn("credentials", { email, password, redirectTo: "/admin" });
+    await signIn("credentials", {
+  email,
+  password,
+  redirectTo: "/admin?login=success",
+});
+
   } catch (error) {
     if (error instanceof AuthError) {
       if (error.type === "CredentialsSignin") {
