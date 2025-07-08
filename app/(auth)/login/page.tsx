@@ -1,16 +1,21 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import AuthLayout from "@/components/auth/AuthLayout";
-import LoginForm from "@/components/auth/LoginForm";
 import LogoutNotification from "@/components/admin/LogoutNotif";
+
+
+const LoginForm = dynamic(() => import("@/components/auth/LoginForm"), {
+  ssr: false,
+  loading: () => <div>Memuat formulir login...</div>,
+});
 
 const LoginPage = () => {
   return (
     <AuthLayout title="" showOr={true}>
-      {/* Tambahkan notifikasi logout */}
       <LogoutNotification />
-
-      {/* Suspense untuk form login */}
-      <Suspense fallback={<div>Loading login form...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <LoginForm />
       </Suspense>
     </AuthLayout>
