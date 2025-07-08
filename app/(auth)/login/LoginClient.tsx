@@ -7,7 +7,10 @@ import LoginForm from "@/components/auth/LoginForm";
 export default function LoginClient() {
   return (
     <>
-      <LogoutNotification />
+      <Suspense fallback={null}>
+        <LogoutNotification />
+      </Suspense>
+
       <Suspense fallback={<div>Loading login form...</div>}>
         <LoginForm />
       </Suspense>
